@@ -1,0 +1,1 @@
+export const DEFAULT_CLICK_OPTIONS = { delay: 1000 };

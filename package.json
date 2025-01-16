@@ -1,0 +1,17 @@
+{
+  "name": "hmpps-sentence-plan-ui-acceptance-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.1"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.2"
+  }
+}

@@ -7,15 +7,6 @@ let newTabGlobal: Page | null = null;
 export class StrengthsAndNeedsLandingPage {
     constructor(
         private page: Page,
-        private validationError: Locator = page.getByRole('alert'),
-        private settledAccomodationTickbox: Locator = page.locator('#current_accommodation'),
-        private homeownerTickbox: Locator = page.locator('#type_of_settled_accommodation'),
-        private familyTickbox: Locator = page.locator('#living_with'),
-        private yesSuitableLocationTickbox: Locator = page.locator('#suitable_housing_location'),
-        private yesSuitableAccomodationTickbox: Locator = page.locator('#suitable_housing'),
-        private iHaveMadeChangesToAccomodationTickbox: Locator = page.locator('#accommodation_changes'),
-        private saveAndContinueButton: Locator = page.getByRole('button', { name: 'Save and continue' }),
-        private practicionerAnalysisTab: Locator = page.locator('#tab_practitioner-analysis'),
     ) { }
 
     async checkPageTitle() {

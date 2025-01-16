@@ -21,11 +21,14 @@ Initially, the config is set to have tests run on the following browsers:
 These can be later expanded in the playwright.config file.
 
 ## Running the tests
-npx playwright test --project=chromium Runs the tests only on Desktop Chrome.
+npx playwright test --project=chromium
+Runs the tests only on Desktop Chrome.
 
-npx playwright test --project=chromium --debug tests/01.registration.spec.ts Runs only the specified test in debug mode.
+npx playwright test --project=chromium --debug tests/01.userCompletesS&NAssessment.spec.ts 
+Runs only the specified test in debug mode.
 
-npx playwright test --project=chromium --debug Runs the tests in debug mode.
+npx playwright test --project=chromium --debug 
+Runs the tests in debug mode.
 
 For other browsers available in the config, pass the desired browser in your command.
 

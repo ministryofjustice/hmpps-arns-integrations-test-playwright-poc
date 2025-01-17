@@ -47,6 +47,10 @@ export class SentencePlanPage {
         await newTabGlobal!.locator('#date-selection-radio').check();
     }
 
+    async tickFutureGoal() {
+        await newTabGlobal!.locator('#start-working-goal-radio-2').check();
+    }
+
     async clickAddSTeps() {
         await newTabGlobal!.getByRole('button', { name: 'Add steps' }).click();
     }
@@ -156,5 +160,28 @@ export class SentencePlanPage {
 
     async checkUserIsBAckOnSentencePlanLandingPage() {
         await expect(newTabGlobal!).toHaveTitle('Plan - Sentence plan');
+    }
+
+    async clickSaveWithoutStepsButton() {
+        await newTabGlobal!.getByRole('button', { name: 'Save without steps' }).click();
+    }
+
+    async checkAddStepsValidationErrorDisplays() {
+        await expect(newTabGlobal!.locator('div').filter({ hasText: 'There is a problem Add steps' }).nth(3))
+        .toBeVisible();
+    }
+
+    async checkUserIsNotifiedGoalHasBeenAdded() {
+        await expect(newTabGlobal!.getByLabel('Success')).toBeVisible();
+    }
+
+    async checkNumberOfGoalsToWorkOnNowIsCorrect() {
+        await expect(newTabGlobal!.getByRole('link', { name: 'Goals to work on now (2)' }))
+        .toBeVisible();
+    }
+
+    async checkNumberOfFutureGoalsIsCorrect() {
+        await expect(newTabGlobal!.getByRole('link', { name: 'Future goals (1)' }))
+        .toBeVisible();
     }
 }

@@ -81,4 +81,27 @@ test('user creates and updates a goal, adds, updates and removes steps and agree
   await sentencePlanPage.clickSaveButtonOnAgreePlanPage();
   await sentencePlanPage.checkUserIsBAckOnSentencePlanLandingPage();
   console.log('Plan agreed');
+
+  // Create a goal without steps
+  await sentencePlanPage.clickCreateGoalButton();
+  await sentencePlanPage.fillInGoalTitle();
+  await sentencePlanPage.tickGoalNotRelatedToAreaOfNeed();
+  await sentencePlanPage.tickCanStartWorkingOnGoalNow();
+  await sentencePlanPage.tickIn3Months();
+  await sentencePlanPage.clickSaveWithoutStepsButton();
+
+  await sentencePlanPage.checkAddStepsValidationErrorDisplays();
+  await sentencePlanPage.checkUserIsNotifiedGoalHasBeenAdded();
+  await sentencePlanPage.checkNumberOfGoalsToWorkOnNowIsCorrect();
+
+  // Create future goal
+  await sentencePlanPage.clickCreateGoalButton();
+  await sentencePlanPage.fillInGoalTitle();
+  await sentencePlanPage.tickGoalNotRelatedToAreaOfNeed();
+  await sentencePlanPage.tickFutureGoal();
+  await sentencePlanPage.clickSaveWithoutStepsButton();
+
+  await sentencePlanPage.checkAddStepsValidationErrorDisplays();
+  await sentencePlanPage.checkUserIsNotifiedGoalHasBeenAdded();
+  await sentencePlanPage.checkNumberOfFutureGoalsIsCorrect();
 });

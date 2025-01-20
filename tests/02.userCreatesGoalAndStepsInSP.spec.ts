@@ -93,6 +93,7 @@ test('user creates and updates a goal, adds, updates and removes steps and agree
   await sentencePlanPage.checkAddStepsValidationErrorDisplays();
   await sentencePlanPage.checkUserIsNotifiedGoalHasBeenAdded();
   await sentencePlanPage.checkNumberOfGoalsToWorkOnNowIsCorrect();
+  console.log('Goals without steps created');
 
   // Create future goal
   await sentencePlanPage.clickCreateGoalButton();
@@ -104,4 +105,5 @@ test('user creates and updates a goal, adds, updates and removes steps and agree
   await sentencePlanPage.checkAddStepsValidationErrorDisplays();
   await sentencePlanPage.checkUserIsNotifiedGoalHasBeenAdded();
   await sentencePlanPage.checkNumberOfFutureGoalsIsCorrect();
+  console.log('Future goal created');
 });

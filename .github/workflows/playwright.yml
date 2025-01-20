@@ -8,6 +8,8 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: self-hosted
+      group: ubuntu-runners
+      labels: ministryofjustice-org-runner-infrastructure-2qwfg-p6zbl
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4

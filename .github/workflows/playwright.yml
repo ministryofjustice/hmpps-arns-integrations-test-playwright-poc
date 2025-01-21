@@ -3,13 +3,13 @@ on:
   pull_request:
     branches: [ main, master ]
   schedule:
-    - cron: '0 6,12,18 * * 1-5'
+    - cron: '0 11,17 * * 1-5'
 jobs:
   test:
     timeout-minutes: 60
     runs-on:
-    - group: ubuntu-runners
-    - labels: ministryofjustice-org-runner-infrastructure-2qwfg-p6zbl
+    group: ubuntu-runners
+    labels: ministryofjustice-org-runner-infrastructure-2qwfg-p6zbl
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -27,4 +27,3 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
-        

@@ -7,7 +7,7 @@ on:
 jobs:
   test:
     timeout-minutes: 60
-    runs-on: self-hosted
+    runs-on:
     - group: ubuntu-runners
     - labels: ministryofjustice-org-runner-infrastructure-2qwfg-p6zbl
     steps:

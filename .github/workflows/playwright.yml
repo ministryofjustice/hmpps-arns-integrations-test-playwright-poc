@@ -8,8 +8,7 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on:
-    group: ubuntu-runners
-    labels: ministryofjustice-org-runner-infrastructure-2qwfg-p6zbl
+    - labels: hmpps-github-actions-runner-597459f889-qkpgv
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4

@@ -7,7 +7,7 @@ on:
 jobs:
   test:
     timeout-minutes: 60
-    runs-on:
+    runs-on: self-hosted
     labels: hmpps-github-actions-runner
     steps:
     - uses: actions/checkout@v4

@@ -18,7 +18,7 @@ jobs:
       run: npm ci
     - name: Install Playwright
       #run: npx playwright install
-      docker run -it --rm --ipc=host mcr.microsoft.com/playwright:v1.50.0-noble /bin/bash
+      run: docker run -it --rm --ipc=host mcr.microsoft.com/playwright:v1.50.0-noble /bin/bash
     - name: Run Playwright tests
       run: npx playwright test --project=chromium
     - uses: actions/upload-artifact@v4

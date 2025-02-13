@@ -122,22 +122,18 @@ export class SentencePlanPage {
         await expect (newTabGlobal!.getByRole('heading', { name: 'Test New Accomodation goal' })).toBeVisible();
     }
 
-    async clickViewStepsElement() {
-        await newTabGlobal!.locator('summary').click();
-    }
-
     async checkNewStepIsStoredCorrectly() {
-        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > details > div > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
+        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
         .toHaveText('Second step title');
     }
 
     async checkNewStepIsRemoved() {
-        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > details > div > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
+        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
         .toHaveCount(0);
     }
 
     async checkExistingStepHasNotBeenDeleted() {
-        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > details > div > table > tbody > tr > td:nth-child(2)'))
+        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > table > tbody > tr > td:nth-child(2)'))
         .toBeVisible();
     }
 

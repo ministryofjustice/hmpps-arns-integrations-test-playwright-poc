@@ -56,7 +56,6 @@ test('user creates and updates a goal, adds, updates and removes steps and agree
   await sentencePlanPage.selectProgrammeStaff();
   await sentencePlanPage.fillInSecondStepTitle();
   await sentencePlanPage.clickSaveAndContinueButton();
-  await sentencePlanPage.clickViewStepsElement();
   await sentencePlanPage.checkNewStepIsStoredCorrectly();
   console.log('Step added');
 
@@ -64,7 +63,6 @@ test('user creates and updates a goal, adds, updates and removes steps and agree
   await sentencePlanPage.clickAddOrChangeStepsLink();
   await sentencePlanPage.clickRemoveStepButton();
   await sentencePlanPage.clickSaveAndContinueButton();
-  await sentencePlanPage.clickViewStepsElement();
   await sentencePlanPage.checkNewStepIsRemoved();
   await sentencePlanPage.checkExistingStepHasNotBeenDeleted();
   console.log('Step removed');

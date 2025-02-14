@@ -7,6 +7,12 @@ export class StubHomePage {
     private targetServiceDropdown: Locator = page.getByLabel('Target service'),
     private createHandoverButton: Locator = page.getByRole('button', { name: 'Create handover link' }),
     private openbutton: Locator = page.getByRole('button', { name: 'Open' }),
+    private criminogenicNeedsTab: Locator = page.locator('#tab_criminogenicNeeds'),
+    private accLinkedToHarmDropdown: Locator = page.locator('#accLinkedToHarm'),
+    private accLinkedToReoffending: Locator = page.locator('#accLinkedToReoffending'),
+    private accStrengths: Locator = page.locator('#accStrengths'),
+    private accOtherWeightedScore: Locator = page.locator('#accOtherWeightedScore'),
+    private accThreshold: Locator = page.locator('#accThreshold'),
   ) {}
   
   async goto() {
@@ -31,5 +37,9 @@ export class StubHomePage {
 
   async clickOpenButton() {
     await this.openbutton.click(DEFAULT_CLICK_OPTIONS);
+  }
+
+  async clickCriminogenicNeedsTab() {
+    await this.criminogenicNeedsTab.click();
   }
 }

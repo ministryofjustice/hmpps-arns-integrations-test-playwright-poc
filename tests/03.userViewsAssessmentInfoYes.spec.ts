@@ -12,4 +12,10 @@ test('User views assessment info when creating a goal - Yes answers', async ({ p
 
   // Check the title of the page is correct
   await stubHomePage.checkPageTitle();
+
+  // Set up criminogenic needs
+  await stubHomePage.clickCriminogenicNeedsTab();
+  await stubHomePage.selectYesAccLinkedToHarmDropdown();
+  await stubHomePage.selectYesAccLinkedToReoffending();
+  await stubHomePage.selectYesAccStrengths();
 });

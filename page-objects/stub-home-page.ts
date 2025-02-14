@@ -12,7 +12,6 @@ export class StubHomePage {
     private accLinkedToReoffending: Locator = page.locator('#accLinkedToReoffending'),
     private accStrengths: Locator = page.locator('#accStrengths'),
     private accOtherWeightedScore: Locator = page.locator('#accOtherWeightedScore'),
-    private accThreshold: Locator = page.locator('#accThreshold'),
   ) {}
   
   async goto() {
@@ -41,5 +40,17 @@ export class StubHomePage {
 
   async clickCriminogenicNeedsTab() {
     await this.criminogenicNeedsTab.click();
+  }
+
+  async selectYesAccLinkedToHarmDropdown() {
+    await this.accLinkedToHarmDropdown.selectOption('Yes');
+  }
+
+  async selectYesAccLinkedToReoffending() {
+    await this.accLinkedToReoffending.selectOption('Yes');
+  }
+
+  async selectYesAccStrengths() {
+    await this.accStrengths.selectOption('Yes');
   }
 }

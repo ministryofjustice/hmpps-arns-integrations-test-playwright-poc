@@ -13,7 +13,7 @@ test('user creates and updates a goal, adds, updates and removes steps and agree
   // Check the title of the page is correct
   await stubHomePage.checkPageTitle();
 
-  // Select strenghts and needs reports assessment
+  // Select sentence plan
   await stubHomePage.selectSentencePlan();
 
   // Click create handover button

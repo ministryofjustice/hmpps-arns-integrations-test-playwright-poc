@@ -19,7 +19,7 @@ test('User views assessment info when creating a goal - Yes answers', async ({ p
   await stubHomePage.selectYesAccLinkedToReoffending();
   await stubHomePage.selectYesAccStrengths();
 
-  // Select strenghts and needs reports assessment
+  // Select sentence plan
   await stubHomePage.selectSentencePlan();
 
   // Click create handover button

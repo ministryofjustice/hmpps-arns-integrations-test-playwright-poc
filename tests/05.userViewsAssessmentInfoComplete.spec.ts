@@ -16,7 +16,7 @@ test('User views assessment info when they have completed that assessment', asyn
   // Set up accomodation criminogenic needs No answers
   await stubHomePage.fillInPkNumberOfCompletedAssessment()
 
-  // Select strenghts and needs reports assessment
+  // Select sentence plan
   await stubHomePage.selectSentencePlan();
 
   // Click create handover button

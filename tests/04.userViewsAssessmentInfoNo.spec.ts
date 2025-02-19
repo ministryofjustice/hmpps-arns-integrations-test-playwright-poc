@@ -19,7 +19,7 @@ test('User views assessment info when creating a goal - No answers', async ({ pa
   await stubHomePage.selectNoAccLinkedToReoffending();
   await stubHomePage.selectNoAccStrengths();
 
-  // Select strenghts and needs reports assessment
+  // Select sentence plan
   await stubHomePage.selectSentencePlan();
 
   // Click create handover button

@@ -13,9 +13,32 @@ test('User views assessment info when creating a goal - Yes answers', async ({ p
   // Check the title of the page is correct
   await stubHomePage.checkPageTitle();
 
-  // Set up criminogenic needs
+  // Set up accomodation criminogenic needs Yes answers
   await stubHomePage.clickCriminogenicNeedsTab();
   await stubHomePage.selectYesAccLinkedToHarmDropdown();
   await stubHomePage.selectYesAccLinkedToReoffending();
   await stubHomePage.selectYesAccStrengths();
+
+  // Select strenghts and needs reports assessment
+  await stubHomePage.selectSentencePlan();
+
+  // Click create handover button
+  await stubHomePage.clickCreateHandoverButton(); 
+
+  // Click open button
+  await stubHomePage.clickOpenButton();
+
+  // Check the page title is correct
+  await sentencePlanPage.checkPageTitle();
+
+  // Check information from accomodation assessment from create a goal page
+  await sentencePlanPage.clickCreateGoalButton();
+  await sentencePlanPage.clickViewInfoFromAssessmentDropdown();
+  await sentencePlanPage.checkThisAreaIsNotMarkedAsCompleteWarningDisplays();
+  await sentencePlanPage.checkAreaIsLinkedToRoSH();
+  await sentencePlanPage.checkAreaIsLinkedToRiskOfReoffending();
+  await sentencePlanPage.checkStrenghtsAndProtectiveFactorsDisplays();
+  await sentencePlanPage.checkMissingInformationDisplays();
+  await sentencePlanPage.checkMotivationResponseDisplaysAsMissingInfo();
+  console.log('Information from accomodation assessment Yes answers verified');
 });

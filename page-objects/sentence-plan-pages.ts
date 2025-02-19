@@ -22,6 +22,35 @@ export class SentencePlanPage {
         await expect (newTabGlobal!.getByRole('alert')).toBeVisible();
     }
 
+    async clickViewInfoFromAssessmentDropdown() {
+        await newTabGlobal!.locator('summary').click();
+    }
+
+    async checkThisAreaIsNotMarkedAsCompleteWarningDisplays() {
+        await expect (newTabGlobal!.getByText('Warning This area has not')).toBeVisible();
+    }
+
+    async checkAreaIsLinkedToRoSH() {
+        await expect (newTabGlobal!.getByText('This area is linked to RoSH (risk of serious harm)')).toBeVisible();
+    }
+
+    async checkAreaIsLinkedToRiskOfReoffending() {
+        await expect (newTabGlobal!.getByText('This area is linked to risk of reoffending')).toBeVisible();
+    }
+
+    async checkStrenghtsAndProtectiveFactorsDisplays() {
+        await expect (newTabGlobal!.getByText('There are strengths or protective factors related to this area')).toBeVisible();
+    }
+
+    async checkMotivationResponseDisplaysAsMissingInfo() {
+        await expect (newTabGlobal!.locator('#main-content > div > div.govuk-grid-column-two-thirds > details > div > ul > li'))
+        .toContainText('motivation to make changes')
+    }
+
+    async checkMissingInformationDisplays() {
+        await expect (newTabGlobal!.getByText('Missing information')).toBeVisible();
+    }
+
     async clickCreateGoalButton() {
         await newTabGlobal!.getByRole('button', { name: 'Create goal' }).click();
     }

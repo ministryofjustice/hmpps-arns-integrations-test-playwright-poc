@@ -40,5 +40,5 @@ test('User views assessment info when creating a goal - No answers', async ({ pa
   await sentencePlanPage.checkStrenghtsAndProtectiveFactorsAreNotInPlace();
   await sentencePlanPage.checkMissingInformationDisplays();
   await sentencePlanPage.checkMotivationResponseDisplaysAsMissingInfo();
-  console.log('Information from accomodation assessment Yes answers verified');
+  console.log('Information from accomodation assessment No answers verified');
 });

@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { DEFAULT_CLICK_OPTIONS } from './pages-common'
+import { DEFAULT_CLICK_OPTIONS, PK_WITH_COMPLETED_SAN } from './pages-common'
 
 export class StubHomePage {
   constructor(
@@ -12,6 +12,7 @@ export class StubHomePage {
     private accLinkedToReoffending: Locator = page.locator('#accLinkedToReoffending'),
     private accStrengths: Locator = page.locator('#accStrengths'),
     private accOtherWeightedScore: Locator = page.locator('#accOtherWeightedScore'),
+    private pkField: Locator = page.locator('#oasys-assessment-pk')
   ) {}
   
   async goto() {
@@ -76,5 +77,9 @@ export class StubHomePage {
 
   async selectNullAccStrengths() {
     await this.accStrengths.selectOption('Null');
+  }
+
+  async fillInPkNumberOfCompletedAssessment() {
+    await this.pkField.fill(PK_WITH_COMPLETED_SAN);
   }
 }

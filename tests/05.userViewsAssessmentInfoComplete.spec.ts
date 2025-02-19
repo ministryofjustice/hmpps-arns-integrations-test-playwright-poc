@@ -2,11 +2,11 @@ import { test } from '@playwright/test';
 import { StubHomePage } from '../page-objects/stub-home-page';
 import { SentencePlanPage } from '../page-objects/sentence-plan-pages';
 
-test('User views assessment info when creating a goal - No answers', async ({ page }) => {
-  
+test('User views assessment info when they have completed that assessment', async ({ page }) => {
+
   const stubHomePage = new StubHomePage(page);
   const sentencePlanPage = new SentencePlanPage(page);
-  
+
   // Navigate to the stub home page
   await stubHomePage.goto();
 
@@ -20,7 +20,7 @@ test('User views assessment info when creating a goal - No answers', async ({ pa
   await stubHomePage.selectSentencePlan();
 
   // Click create handover button
-  await stubHomePage.clickCreateHandoverButton(); 
+  await stubHomePage.clickCreateHandoverButton();
 
   // Click open button
   await stubHomePage.clickOpenButton();

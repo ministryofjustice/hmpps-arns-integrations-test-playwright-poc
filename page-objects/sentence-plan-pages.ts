@@ -85,11 +85,11 @@ export class SentencePlanPage {
     }
 
     async checkAddSTepsToGoalPageTitle() {
-        await expect(newTabGlobal!).toHaveTitle('Add steps to goal - Sentence plan');
+        await expect(newTabGlobal!).toHaveTitle('Add or change steps - Sentence plan');
     }
 
     async selectProbationPracticioner() {
-        await newTabGlobal!.getByLabel('Who will do this step?').selectOption('Probation practitioner');
+        await newTabGlobal!.locator('#step-actor-1').selectOption('Probation practitioner');
     }
 
     async selectProgrammeStaff() {
@@ -127,7 +127,7 @@ export class SentencePlanPage {
     }
 
     async checkAddStepsToGoalPageTitle() {
-        await expect(newTabGlobal!).toHaveTitle('Add steps to goal - Sentence plan');
+        await expect(newTabGlobal!).toHaveTitle('Add or change steps - Sentence plan');
     }
 
     async fillInNewGoalTitle() {
@@ -151,18 +151,22 @@ export class SentencePlanPage {
         await expect (newTabGlobal!.getByRole('heading', { name: 'Test New Accomodation goal' })).toBeVisible();
     }
 
+    async clickViewStepsElement() {
+        await newTabGlobal!.locator('summary').click();
+    }
+
     async checkNewStepIsStoredCorrectly() {
-        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
+        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > div.govuk-details__text_inactive > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
         .toHaveText('Second step title');
     }
 
     async checkNewStepIsRemoved() {
-        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
+        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > details > div > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
         .toHaveCount(0);
     }
 
     async checkExistingStepHasNotBeenDeleted() {
-        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > table > tbody > tr > td:nth-child(2)'))
+        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > div.govuk-details__text_inactive > table > tbody > tr > td:nth-child(2)'))
         .toBeVisible();
     }
 

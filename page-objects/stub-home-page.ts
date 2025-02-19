@@ -13,8 +13,8 @@ export class StubHomePage {
     private accStrengths: Locator = page.locator('#accStrengths'),
     private accOtherWeightedScore: Locator = page.locator('#accOtherWeightedScore'),
     private pkField: Locator = page.locator('#oasys-assessment-pk')
-  ) {}
-  
+  ) { }
+
   async goto() {
     await this.page.goto('/');
   }

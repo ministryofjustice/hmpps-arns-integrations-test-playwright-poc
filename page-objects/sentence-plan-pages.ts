@@ -30,6 +30,10 @@ export class SentencePlanPage {
         await expect (newTabGlobal!.getByText('Warning This area has not')).toBeVisible();
     }
 
+    async checkNoInfoAvailableYetWarningDisplays() {
+        await expect (newTabGlobal!.getByText('Warning No information is available'))
+    }
+
     async checkAreaIsLinkedToRoSH() {
         await expect (newTabGlobal!.getByText('This area is linked to RoSH (risk of serious harm)')).toBeVisible();
     }
@@ -38,8 +42,20 @@ export class SentencePlanPage {
         await expect (newTabGlobal!.getByText('This area is linked to risk of reoffending')).toBeVisible();
     }
 
-    async checkStrenghtsAndProtectiveFactorsDisplays() {
+    async checkStrenghtsAndProtectiveFactorsAreInPlace() {
         await expect (newTabGlobal!.getByText('There are strengths or protective factors related to this area')).toBeVisible();
+    }
+
+    async checkAreaIsNotLinkedToRoSH() {
+        await expect (newTabGlobal!.getByText('This area is not linked to RoSH (risk of serious harm)')).toBeVisible();
+    }
+
+    async checkAreaIsNotLinkedToRiskOfReoffending() {
+        await expect (newTabGlobal!.getByText('This area is not linked to risk of reoffending')).toBeVisible();
+    }
+
+    async checkStrenghtsAndProtectiveFactorsAreNotInPlace() {
+        await expect (newTabGlobal!.getByText('There are no strengths or protective factors related to this area')).toBeVisible();
     }
 
     async checkMotivationResponseDisplaysAsMissingInfo() {
@@ -153,6 +169,16 @@ export class SentencePlanPage {
 
     async clickViewStepsElement() {
         await newTabGlobal!.locator('summary').click();
+    }
+
+    async checkExpectedStepIsListedWhenViewStepsElementIsToggled() {
+        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > details > div > table > tbody > tr:nth-child(1) > td:nth-child(2)'))
+        .toHaveText('Accomodation step title');
+    }
+
+    async checkRemovedStepIsNotShowingWhenViewStepsElementIsToggled() {
+    await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > details > div > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
+    .toHaveCount(0);
     }
 
     async checkNewStepIsStoredCorrectly() {

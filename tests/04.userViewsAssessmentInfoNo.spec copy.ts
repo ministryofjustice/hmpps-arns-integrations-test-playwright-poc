@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 import { StubHomePage } from '../page-objects/stub-home-page';
 import { SentencePlanPage } from '../page-objects/sentence-plan-pages';
 
-test('User views assessment info when creating a goal - Yes answers', async ({ page }) => {
+test('User views assessment info when creating a goal - No answers', async ({ page }) => {
   
   const stubHomePage = new StubHomePage(page);
   const sentencePlanPage = new SentencePlanPage(page);
@@ -13,11 +13,11 @@ test('User views assessment info when creating a goal - Yes answers', async ({ p
   // Check the title of the page is correct
   await stubHomePage.checkPageTitle();
 
-  // Set up accomodation criminogenic needs Yes answers
+  // Set up accomodation criminogenic needs No answers
   await stubHomePage.clickCriminogenicNeedsTab();
-  await stubHomePage.selectYesAccLinkedToHarmDropdown();
-  await stubHomePage.selectYesAccLinkedToReoffending();
-  await stubHomePage.selectYesAccStrengths();
+  await stubHomePage.selectNoAccLinkedToHarmDropdown();
+  await stubHomePage.selectNoAccLinkedToReoffending();
+  await stubHomePage.selectNoAccStrengths();
 
   // Select strenghts and needs reports assessment
   await stubHomePage.selectSentencePlan();
@@ -35,9 +35,9 @@ test('User views assessment info when creating a goal - Yes answers', async ({ p
   await sentencePlanPage.clickCreateGoalButton();
   await sentencePlanPage.clickViewInfoFromAssessmentDropdown();
   await sentencePlanPage.checkThisAreaIsNotMarkedAsCompleteWarningDisplays();
-  await sentencePlanPage.checkAreaIsLinkedToRoSH();
-  await sentencePlanPage.checkAreaIsLinkedToRiskOfReoffending();
-  await sentencePlanPage.checkStrenghtsAndProtectiveFactorsAreInPlace();
+  await sentencePlanPage.checkAreaIsNotLinkedToRoSH();
+  await sentencePlanPage.checkAreaIsNotLinkedToRiskOfReoffending();
+  await sentencePlanPage.checkStrenghtsAndProtectiveFactorsAreNotInPlace();
   await sentencePlanPage.checkMissingInformationDisplays();
   await sentencePlanPage.checkMotivationResponseDisplaysAsMissingInfo();
   console.log('Information from accomodation assessment Yes answers verified');

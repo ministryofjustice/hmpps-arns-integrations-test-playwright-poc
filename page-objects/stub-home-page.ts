@@ -53,4 +53,28 @@ export class StubHomePage {
   async selectYesAccStrengths() {
     await this.accStrengths.selectOption('Yes');
   }
+
+  async selectNoAccLinkedToHarmDropdown() {
+    await this.accLinkedToHarmDropdown.selectOption('No');
+  }
+
+  async selectNoAccLinkedToReoffending() {
+    await this.accLinkedToReoffending.selectOption('No');
+  }
+
+  async selectNoAccStrengths() {
+    await this.accStrengths.selectOption('No');
+  }
+
+  async selectNullAccLinkedToHarmDropdown() {
+    await this.accLinkedToHarmDropdown.selectOption('Null');
+  }
+
+  async selectNullAccLinkedToReoffending() {
+    await this.accLinkedToReoffending.selectOption('Null');
+  }
+
+  async selectNullAccStrengths() {
+    await this.accStrengths.selectOption('Null');
+  }
 }

@@ -19,7 +19,60 @@ export class SentencePlanPage {
     }
 
     async validationErrorDisplays() {
-        await expect (newTabGlobal!.getByRole('alert')).toBeVisible();
+        await expect(newTabGlobal!.getByRole('alert')).toBeVisible();
+    }
+
+    async clickViewInfoFromAssessmentDropdown() {
+        await newTabGlobal!.locator('summary').click();
+    }
+
+    async checkThisAreaIsNotMarkedAsCompleteWarningDisplays() {
+        await expect(newTabGlobal!.getByText('Warning This area has not')).toBeVisible();
+    }
+
+    async checkThisAreaIsNotMarkedAsCompleteWarningDoesNotDisplay() {
+        await expect(newTabGlobal!.getByText('Warning This area has not')).toHaveCount(0);
+    }
+
+    async checkNoInfoAvailableYetWarningDisplays() {
+        await expect(newTabGlobal!.getByText('Warning No information is available'))
+    }
+
+    async checkNoInfoAvailableWarningDoesNotDisplay() {
+        await expect(newTabGlobal!.getByText('Warning No information is available')).toHaveCount(0);
+    }
+
+    async checkAreaIsLinkedToRoSH() {
+        await expect(newTabGlobal!.getByText('This area is linked to RoSH (risk of serious harm)')).toBeVisible();
+    }
+
+    async checkAreaIsLinkedToRiskOfReoffending() {
+        await expect(newTabGlobal!.getByText('This area is linked to risk of reoffending')).toBeVisible();
+    }
+
+    async checkStrenghtsAndProtectiveFactorsAreInPlace() {
+        await expect(newTabGlobal!.getByText('There are strengths or protective factors related to this area')).toBeVisible();
+    }
+
+    async checkAreaIsNotLinkedToRoSH() {
+        await expect(newTabGlobal!.getByText('This area is not linked to RoSH (risk of serious harm)')).toBeVisible();
+    }
+
+    async checkAreaIsNotLinkedToRiskOfReoffending() {
+        await expect(newTabGlobal!.getByText('This area is not linked to risk of reoffending')).toBeVisible();
+    }
+
+    async checkStrenghtsAndProtectiveFactorsAreNotInPlace() {
+        await expect(newTabGlobal!.getByText('There are no strengths or protective factors related to this area')).toBeVisible();
+    }
+
+    async checkMotivationResponseDisplaysAsMissingInfo() {
+        await expect(newTabGlobal!.locator('#main-content > div > div.govuk-grid-column-two-thirds > details > div > ul > li'))
+            .toContainText('motivation to make changes')
+    }
+
+    async checkMissingInformationDisplays() {
+        await expect(newTabGlobal!.getByText('Missing information')).toBeVisible();
     }
 
     async clickCreateGoalButton() {
@@ -32,7 +85,7 @@ export class SentencePlanPage {
 
     async fillInGoalTitle() {
         await newTabGlobal!.locator('#goal-input-autocomplete')
-        .fill('Test Accomodation goal');
+            .fill('Test Accomodation goal');
     }
 
     async tickGoalNotRelatedToAreaOfNeed() {
@@ -43,7 +96,7 @@ export class SentencePlanPage {
         await newTabGlobal!.locator('#start-working-goal-radio').check();
     }
 
-    async tickIn3Months(){
+    async tickIn3Months() {
         await newTabGlobal!.locator('#date-selection-radio').check();
     }
 
@@ -69,12 +122,12 @@ export class SentencePlanPage {
 
     async fillInStepTitle() {
         await newTabGlobal!.locator('#step-description-1')
-        .fill('Accomodation step title')
+            .fill('Accomodation step title')
     }
 
     async fillInSecondStepTitle() {
         await newTabGlobal!.locator('#step-description-2')
-        .fill('Second step title');
+            .fill('Second step title');
     }
 
     async clickRemoveStepButton() {
@@ -103,7 +156,7 @@ export class SentencePlanPage {
 
     async fillInNewGoalTitle() {
         await newTabGlobal!.locator('#goal-input-autocomplete')
-        .fill('Test New Accomodation goal');
+            .fill('Test New Accomodation goal');
     }
 
     async changeToFutureGoal() {
@@ -119,26 +172,36 @@ export class SentencePlanPage {
     }
 
     async checkGoalTitleChangeIsStoredCorrectly() {
-        await expect (newTabGlobal!.getByRole('heading', { name: 'Test New Accomodation goal' })).toBeVisible();
+        await expect(newTabGlobal!.getByRole('heading', { name: 'Test New Accomodation goal' })).toBeVisible();
     }
 
     async clickViewStepsElement() {
         await newTabGlobal!.locator('summary').click();
     }
 
+    async checkExpectedStepIsListedWhenViewStepsElementIsToggled() {
+        await expect(newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > details > div > table > tbody > tr:nth-child(1) > td:nth-child(2)'))
+            .toHaveText('Accomodation step title');
+    }
+
+    async checkRemovedStepIsNotShowingWhenViewStepsElementIsToggled() {
+        await expect(newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > details > div > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
+            .toHaveCount(0);
+    }
+
     async checkNewStepIsStoredCorrectly() {
-        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > div.govuk-details__text_inactive > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
-        .toHaveText('Second step title');
+        await expect(newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > div.govuk-details__text_inactive > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
+            .toHaveText('Second step title');
     }
 
     async checkNewStepIsRemoved() {
-        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > details > div > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
-        .toHaveCount(0);
+        await expect(newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > details > div > table > tbody > tr:nth-child(2) > td:nth-child(2)'))
+            .toHaveCount(0);
     }
 
     async checkExistingStepHasNotBeenDeleted() {
-        await expect (newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > div.govuk-details__text_inactive > table > tbody > tr > td:nth-child(2)'))
-        .toBeVisible();
+        await expect(newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > div.govuk-details__text_inactive > table > tbody > tr > td:nth-child(2)'))
+            .toBeVisible();
     }
 
     async clickAddAnotherStepButton() {
@@ -155,7 +218,7 @@ export class SentencePlanPage {
 
     async fillInNotesAboutAgreeingPlan() {
         await newTabGlobal!.locator('#notes')
-        .fill('Test notes about agreeing the plan.')
+            .fill('Test notes about agreeing the plan.')
     }
 
     async clickSaveButtonOnAgreePlanPage() {
@@ -172,7 +235,7 @@ export class SentencePlanPage {
 
     async checkAddStepsValidationErrorDisplays() {
         await expect(newTabGlobal!.locator('div').filter({ hasText: 'There is a problem Add steps' }).nth(3))
-        .toBeVisible();
+            .toBeVisible();
     }
 
     async checkUserIsNotifiedGoalHasBeenAdded() {
@@ -181,11 +244,11 @@ export class SentencePlanPage {
 
     async checkNumberOfGoalsToWorkOnNowIsCorrect() {
         await expect(newTabGlobal!.getByRole('link', { name: 'Goals to work on now (2)' }))
-        .toBeVisible();
+            .toBeVisible();
     }
 
     async checkNumberOfFutureGoalsIsCorrect() {
         await expect(newTabGlobal!.getByRole('link', { name: 'Future goals (1)' }))
-        .toBeVisible();
+            .toBeVisible();
     }
 }

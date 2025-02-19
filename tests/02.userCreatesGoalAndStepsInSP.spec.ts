@@ -13,7 +13,7 @@ test('user creates and updates a goal, adds, updates and removes steps and agree
   // Check the title of the page is correct
   await stubHomePage.checkPageTitle();
 
-  // Select strenghts and needs reports assessment
+  // Select sentence plan
   await stubHomePage.selectSentencePlan();
 
   // Click create handover button
@@ -56,7 +56,6 @@ test('user creates and updates a goal, adds, updates and removes steps and agree
   await sentencePlanPage.selectProgrammeStaff();
   await sentencePlanPage.fillInSecondStepTitle();
   await sentencePlanPage.clickSaveAndContinueButton();
-  //await sentencePlanPage.clickViewStepsElement();
   await sentencePlanPage.checkNewStepIsStoredCorrectly();
   console.log('Step added');
 
@@ -64,7 +63,6 @@ test('user creates and updates a goal, adds, updates and removes steps and agree
   await sentencePlanPage.clickAddOrChangeStepsLink();
   await sentencePlanPage.clickRemoveStepButton();
   await sentencePlanPage.clickSaveAndContinueButton();
-  //await sentencePlanPage.clickViewStepsElement();
   await sentencePlanPage.checkNewStepIsRemoved();
   await sentencePlanPage.checkExistingStepHasNotBeenDeleted();
   console.log('Step removed');
@@ -82,6 +80,10 @@ test('user creates and updates a goal, adds, updates and removes steps and agree
   await sentencePlanPage.fillInNotesAboutAgreeingPlan();
   await sentencePlanPage.clickSaveButtonOnAgreePlanPage();
   await sentencePlanPage.checkUserIsBAckOnSentencePlanLandingPage();
+  await sentencePlanPage.clickViewStepsElement();
+  await sentencePlanPage.checkExpectedStepIsListedWhenViewStepsElementIsToggled();
+  await sentencePlanPage.checkRemovedStepIsNotShowingWhenViewStepsElementIsToggled();
+
   console.log('Plan agreed');
 
   // Create a goal without steps

@@ -33,5 +33,5 @@ test('User views assessment info when they have completed that assessment', asyn
   await sentencePlanPage.clickViewInfoFromAssessmentDropdown();
   await sentencePlanPage.checkThisAreaIsNotMarkedAsCompleteWarningDoesNotDisplay();
   await sentencePlanPage.checkNoInfoAvailableYetWarningDoesNotDisplay();
-  console.log('Information from accomodation assessment No warning verified');
+  console.log('Information from completed accomodation assessment verified');
 });

@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 import { StubHomePage } from '../page-objects/stub-home-page';
 import { SentencePlanPage } from '../page-objects/sentence-plan-pages';
 
-test('User views assessment info when creating a goal - No answers', async ({ page }) => {
+test('User views assessment info when creating a goal - Null answers', async ({ page }) => {
   
   const stubHomePage = new StubHomePage(page);
   const sentencePlanPage = new SentencePlanPage(page);
@@ -13,11 +13,11 @@ test('User views assessment info when creating a goal - No answers', async ({ pa
   // Check the title of the page is correct
   await stubHomePage.checkPageTitle();
 
-  // Set up accomodation criminogenic needs No answers
+  // Set up accomodation criminogenic needs Null answers
   await stubHomePage.clickCriminogenicNeedsTab();
-  await stubHomePage.selectNoAccLinkedToHarmDropdown();
-  await stubHomePage.selectNoAccLinkedToReoffending();
-  await stubHomePage.selectNoAccStrengths();
+  await stubHomePage.selectNullAccLinkedToHarmDropdown();
+  await stubHomePage.selectNullAccLinkedToReoffending();
+  await stubHomePage.selectNullAccStrengths();
 
   // Select sentence plan
   await stubHomePage.selectSentencePlan();
@@ -34,12 +34,7 @@ test('User views assessment info when creating a goal - No answers', async ({ pa
   // Check information from accomodation assessment from create a goal page
   await sentencePlanPage.clickCreateGoalButton();
   await sentencePlanPage.clickViewInfoFromAssessmentDropdown();
-  await sentencePlanPage.checkThisAreaIsNotMarkedAsCompleteWarningDisplays();
-  await sentencePlanPage.checkNoInfoAvailableYetWarningDoesNotDisplay();
-  await sentencePlanPage.checkAreaIsNotLinkedToRoSH();
-  await sentencePlanPage.checkAreaIsNotLinkedToRiskOfReoffending();
-  await sentencePlanPage.checkStrenghtsAndProtectiveFactorsAreNotInPlace();
-  await sentencePlanPage.checkMissingInformationDisplays();
-  await sentencePlanPage.checkMotivationResponseDisplaysAsMissingInfo();
-  console.log('Information from accomodation assessment No answers verified');
+  await sentencePlanPage.checkThisAreaIsNotMarkedAsCompleteWarningDoesNotDisplay();
+  await sentencePlanPage.checkNoInfoAvailableYetWarningDisplays();
+  console.log('Information from accomodation assessment Null answers verified');
 });

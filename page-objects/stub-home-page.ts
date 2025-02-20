@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { DEFAULT_CLICK_OPTIONS } from './pages-common'
+import { DEFAULT_CLICK_OPTIONS, PK_WITH_COMPLETED_SAN } from './pages-common'
 
 export class StubHomePage {
   constructor(
@@ -7,8 +7,14 @@ export class StubHomePage {
     private targetServiceDropdown: Locator = page.getByLabel('Target service'),
     private createHandoverButton: Locator = page.getByRole('button', { name: 'Create handover link' }),
     private openbutton: Locator = page.getByRole('button', { name: 'Open' }),
-  ) {}
-  
+    private criminogenicNeedsTab: Locator = page.locator('#tab_criminogenicNeeds'),
+    private accLinkedToHarmDropdown: Locator = page.locator('#accLinkedToHarm'),
+    private accLinkedToReoffending: Locator = page.locator('#accLinkedToReoffending'),
+    private accStrengths: Locator = page.locator('#accStrengths'),
+    private accOtherWeightedScore: Locator = page.locator('#accOtherWeightedScore'),
+    private pkField: Locator = page.locator('#oasys-assessment-pk')
+  ) { }
+
   async goto() {
     await this.page.goto('/');
   }
@@ -31,5 +37,49 @@ export class StubHomePage {
 
   async clickOpenButton() {
     await this.openbutton.click(DEFAULT_CLICK_OPTIONS);
+  }
+
+  async clickCriminogenicNeedsTab() {
+    await this.criminogenicNeedsTab.click();
+  }
+
+  async selectYesAccLinkedToHarmDropdown() {
+    await this.accLinkedToHarmDropdown.selectOption('Yes');
+  }
+
+  async selectYesAccLinkedToReoffending() {
+    await this.accLinkedToReoffending.selectOption('Yes');
+  }
+
+  async selectYesAccStrengths() {
+    await this.accStrengths.selectOption('Yes');
+  }
+
+  async selectNoAccLinkedToHarmDropdown() {
+    await this.accLinkedToHarmDropdown.selectOption('No');
+  }
+
+  async selectNoAccLinkedToReoffending() {
+    await this.accLinkedToReoffending.selectOption('No');
+  }
+
+  async selectNoAccStrengths() {
+    await this.accStrengths.selectOption('No');
+  }
+
+  async selectNullAccLinkedToHarmDropdown() {
+    await this.accLinkedToHarmDropdown.selectOption('Null');
+  }
+
+  async selectNullAccLinkedToReoffending() {
+    await this.accLinkedToReoffending.selectOption('Null');
+  }
+
+  async selectNullAccStrengths() {
+    await this.accStrengths.selectOption('Null');
+  }
+
+  async fillInPkNumberOfCompletedAssessment() {
+    await this.pkField.fill(PK_WITH_COMPLETED_SAN);
   }
 }

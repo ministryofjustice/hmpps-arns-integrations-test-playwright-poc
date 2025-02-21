@@ -35,11 +35,11 @@ export class SentencePlanPage {
     }
 
     async checkNoInfoAvailableYetWarningDisplays() {
-        await expect(newTabGlobal!.getByText('Warning No information is available'))
+        await expect(newTabGlobal!.getByText('Warning No information is')).toBeVisible();
     }
 
-    async checkNoInfoAvailableWarningDoesNotDisplay() {
-        await expect(newTabGlobal!.getByText('Warning No information is available')).toHaveCount(0);
+    async checkNoInfoAvailableYetWarningDoesNotDisplay() {
+        await expect(newTabGlobal!.getByText('Warning No information is')).toHaveCount(0);
     }
 
     async checkAreaIsLinkedToRoSH() {

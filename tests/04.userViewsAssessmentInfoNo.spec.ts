@@ -35,6 +35,7 @@ test('User views assessment info when creating a goal - No answers', async ({ pa
   await sentencePlanPage.clickCreateGoalButton();
   await sentencePlanPage.clickViewInfoFromAssessmentDropdown();
   await sentencePlanPage.checkThisAreaIsNotMarkedAsCompleteWarningDisplays();
+  await sentencePlanPage.checkNoInfoAvailableYetWarningDoesNotDisplay();
   await sentencePlanPage.checkAreaIsNotLinkedToRoSH();
   await sentencePlanPage.checkAreaIsNotLinkedToRiskOfReoffending();
   await sentencePlanPage.checkStrenghtsAndProtectiveFactorsAreNotInPlace();

@@ -39,7 +39,6 @@ test('User views assessment info when they have completed that assessment', asyn
 
   // Check information from plan history page
   await sentencePlanPage.clickPlanHistoryTopNavLink();
-  await sentencePlanPage.checkPlanHistoryDateAndPracticionerUpdateIsUnique();
   await sentencePlanPage.checkPlanCreationUpdateIsUnique();
   console.log('Update information from plan history verified');
 

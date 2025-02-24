@@ -13,7 +13,7 @@ test('User views assessment info when they have completed that assessment', asyn
   // Check the title of the page is correct
   await stubHomePage.checkPageTitle();
 
-  // Set up accomodation criminogenic needs No answers
+  // Paste PK of existing user
   await stubHomePage.fillInPkNumberOfCompletedAssessment()
 
   // Select sentence plan

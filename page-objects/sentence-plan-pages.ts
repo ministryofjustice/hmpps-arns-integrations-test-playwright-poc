@@ -261,7 +261,6 @@ export class SentencePlanPage {
         await newTabGlobal!.locator('a.moj-primary-navigation__link').first().click();
     }
 
-
     async clickPlanHistoryTopNavLink() {
         await newTabGlobal!.getByRole('link', { name: 'Plan history', exact: true }).click();
     }

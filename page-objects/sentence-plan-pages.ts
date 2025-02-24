@@ -2,6 +2,14 @@ import { expect, Locator, Page } from '@playwright/test';
 import { GOAL_CREATED_DATA } from './pages-common';
 
 const { chromium } = require('playwright');
+const gettodayDateFormatted = (): string => {
+    const today = new Date();
+    return today.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+}
 
 let newTabGlobal: Page | null = null;
 
@@ -297,6 +305,12 @@ export class SentencePlanPage {
 
     async checkPlanCreationUpdateIsUnique() {
         await expect(newTabGlobal!.locator('p').filter({ hasText: GOAL_CREATED_DATA }).getByRole('strong'))
+            .toHaveCount(1);
+    }
+
+    async checkPlanCreationIsNotOverwritten() {
+        const todayDate = gettodayDateFormatted();
+        await expect(newTabGlobal!.locator('p').filter({ hasText: 'Plan created on ' + todayDate }).getByRole('strong'))
             .toHaveCount(1);
     }
 }

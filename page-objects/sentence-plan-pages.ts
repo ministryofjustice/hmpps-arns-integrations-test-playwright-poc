@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
+import { GOAL_STATUS_UPDATE } from './pages-common';
 
 const { chromium } = require('playwright');
 
@@ -150,6 +151,10 @@ export class SentencePlanPage {
         await expect(newTabGlobal!).toHaveTitle('Change goal - Sentence plan');
     }
 
+    async checkUpdateStepsPageTitle() {
+        await expect(newTabGlobal!).toHaveTitle('Update goal and steps - Sentence plan');
+    }
+
     async checkAddStepsToGoalPageTitle() {
         await expect(newTabGlobal!).toHaveTitle('Add or change steps - Sentence plan');
     }
@@ -250,5 +255,49 @@ export class SentencePlanPage {
     async checkNumberOfFutureGoalsIsCorrect() {
         await expect(newTabGlobal!.getByRole('link', { name: 'Future goals (1)' }))
             .toBeVisible();
+    }
+
+    async clickPlanTopNavLink() {
+        await newTabGlobal!.locator('a.moj-primary-navigation__link').first().click();
+    }
+
+
+    async clickPlanHistoryTopNavLink() {
+        await newTabGlobal!.getByRole('link', { name: 'Plan history', exact: true }).click();
+    }
+
+    async clickUpdateLink() {
+        await newTabGlobal!.getByRole('link', { name: 'Update   (test goal)' }).click();
+    }
+
+    async updateStepStatustoInProgress() {
+        await newTabGlobal!.getByRole('row', { name: 'Probation practitioner test 1' }).getByLabel('Status').selectOption('IN_PROGRESS');
+    }
+
+    async checkStepStatusIsSetToInProgress() {
+        await expect(newTabGlobal!.getByRole('row', { name: 'Probation practitioner test 1' }).getByRole('strong'))
+            .toHaveText('In progress');
+    }
+
+    async updateStepStatusBackToNotStarted() {
+        await newTabGlobal!.getByRole('cell', { name: 'In progress' }).getByLabel('Status').selectOption('NOT_STARTED');
+    }
+
+    async checkStepStatusBackToNotStarted() {
+        await expect(newTabGlobal!.getByRole('row', { name: 'Probation practitioner test 1' }).getByRole('strong'))
+            .toHaveText('Not started');
+    }
+
+    async addNotesAboutStepUpdate() {
+        await newTabGlobal!.getByLabel('Add notes about progress (').fill('Status update test note');
+    }
+
+    async clickSaveGoalAndStepsButton() {
+        await newTabGlobal!.getByRole('button', { name: 'Save goal and steps' }).click();
+    }
+
+    async assertPlanHistoryDateAndPracticionerUpdate() {
+        await expect(newTabGlobal!.locator('p').filter({ hasText: GOAL_STATUS_UPDATE }).getByRole('strong'))
+            .toHaveCount(1);
     }
 }

@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { GOAL_STATUS_UPDATE } from './pages-common';
+import { GOAL_CREATION_UPDATE, GOAL_STATUS_UPDATE } from './pages-common';
 
 const { chromium } = require('playwright');
 
@@ -295,8 +295,13 @@ export class SentencePlanPage {
         await newTabGlobal!.getByRole('button', { name: 'Save goal and steps' }).click();
     }
 
-    async assertPlanHistoryDateAndPracticionerUpdate() {
+    async checkPlanHistoryDateAndPracticionerUpdateIsUnique() {
         await expect(newTabGlobal!.locator('p').filter({ hasText: GOAL_STATUS_UPDATE }).getByRole('strong'))
+            .toHaveCount(1);
+    }
+
+    async checkPlanCreationUpdateIsUnique() {
+        await expect(newTabGlobal!.locator('p').filter({ hasText: GOAL_CREATION_UPDATE }).getByRole('strong'))
             .toHaveCount(1);
     }
 }

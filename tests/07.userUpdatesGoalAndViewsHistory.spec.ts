@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 import { StubHomePage } from '../page-objects/stub-home-page';
 import { SentencePlanPage } from '../page-objects/sentence-plan-pages';
 
-test('User views assessment info when they have completed that assessment', async ({ page }) => {
+test('User updates their step status and checks plan history', async ({ page }) => {
 
   const stubHomePage = new StubHomePage(page);
   const sentencePlanPage = new SentencePlanPage(page);

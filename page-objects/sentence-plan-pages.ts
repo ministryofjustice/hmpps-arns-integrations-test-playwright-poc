@@ -311,6 +311,6 @@ export class SentencePlanPage {
     async checkPlanCreationIsNotOverwritten() {
         const todayDate = gettodayDateFormatted();
         await expect(newTabGlobal!.locator('p').filter({ hasText: 'Plan created on ' + todayDate }).getByRole('strong'))
-            .toHaveCount(1);
+            .toHaveCount(0);
     }
 }

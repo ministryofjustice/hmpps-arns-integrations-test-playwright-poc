@@ -273,6 +273,10 @@ export class SentencePlanPage {
         await newTabGlobal!.getByRole('link', { name: 'Plan history', exact: true }).click();
     }
 
+    async clickAboutTopNavLink() {
+        await newTabGlobal!.getByRole('link', { name: 'About', exact: false }).click();
+    }
+
     async clickUpdateLink() {
         await newTabGlobal!.getByRole('link', { name: 'Update   (test goal)' }).click();
     }
@@ -311,6 +315,22 @@ export class SentencePlanPage {
     async checkPlanCreationIsNotOverwritten() {
         const todayDate = getTodayDateFormatted();
         await expect(newTabGlobal!.locator('p').filter({ hasText: 'Plan created on ' + todayDate }).getByRole('strong'))
+            .toHaveCount(0);
+    }
+
+    async checkAboutPageTitle() {
+        await expect(newTabGlobal!).toHaveTitle('About - Sentence plan');
+    }
+
+    async checkBannerDisplaysForIncompleteAssessment() {
+        await expect(newTabGlobal!.getByLabel('Warning'))
+            .toHaveCount(1);
+        await expect(newTabGlobal!.locator('h2.govuk-heading-m').first())
+            .toHaveText('Some areas have incomplete information');
+    }
+
+    async checkBannerDoesntDisplayForCompleteAssessment() {
+        await expect(newTabGlobal!.getByLabel('Warning'))
             .toHaveCount(0);
     }
 }

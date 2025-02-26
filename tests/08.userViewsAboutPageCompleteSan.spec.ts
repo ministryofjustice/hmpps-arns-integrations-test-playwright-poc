@@ -4,7 +4,7 @@ import { SentencePlanPage } from '../page-objects/sentence-plan-pages';
 
 /* Note: this test feature will fail if the test data is wiped. 
 It relies on pre-existing PK with a completed SAN assessment. */
-test('User views assessment info when they have completed SAN assessment', async ({ page }) => {
+test('User views about page when they have completed SAN assessment', async ({ page }) => {
 
   const stubHomePage = new StubHomePage(page);
   const sentencePlanPage = new SentencePlanPage(page);
@@ -30,10 +30,11 @@ test('User views assessment info when they have completed SAN assessment', async
   // Check the page title is correct
   await sentencePlanPage.checkPageTitle();
 
-  // Check information from accomodation assessment from create a goal page
-  await sentencePlanPage.clickCreateGoalButton();
-  await sentencePlanPage.clickViewInfoFromAssessmentDropdown();
-  await sentencePlanPage.checkThisAreaIsNotMarkedAsCompleteWarningDoesNotDisplay();
-  await sentencePlanPage.checkNoInfoAvailableYetWarningDoesNotDisplay();
-  console.log('Information from completed accomodation assessment verified');
+  // Access About section
+  await sentencePlanPage.clickAboutTopNavLink();
+  await sentencePlanPage.checkAboutPageTitle();
+
+  // Check no banner displays
+  await sentencePlanPage.checkBannerDoesntDisplayForCompleteAssessment();
+  console.log('About page complete assessment - no banner displayed');
 });

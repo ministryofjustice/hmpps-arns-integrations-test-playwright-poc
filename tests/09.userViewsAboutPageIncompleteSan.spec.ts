@@ -15,9 +15,6 @@ test('User views about page when they have not completed SAN assessment', async 
   // Check the title of the page is correct
   await stubHomePage.checkPageTitle();
 
-  // Paste PK of existing user
-  //await stubHomePage.fillInPkNumberOfCompletedAssessment()
-
   // Select sentence plan
   await stubHomePage.selectSentencePlan();
 

@@ -36,6 +36,7 @@ test('User updates their step status and checks plan history', async ({ page }) 
   await sentencePlanPage.updateStepStatustoInProgress();
   await sentencePlanPage.addNotesAboutStepUpdate();
   await sentencePlanPage.clickSaveGoalAndStepsButton();
+  await sentencePlanPage.clickViewStepsElement();
   await sentencePlanPage.checkStepStatusIsSetToInProgress();
   console.log('Goal step status updated to in progress');
 
@@ -52,6 +53,7 @@ test('User updates their step status and checks plan history', async ({ page }) 
   await sentencePlanPage.updateStepStatusBackToNotStarted();
   await sentencePlanPage.addNotesAboutStepUpdate();
   await sentencePlanPage.clickSaveGoalAndStepsButton();
+  await sentencePlanPage.clickViewStepsElement();
   await sentencePlanPage.checkStepStatusBackToNotStarted();
   console.log('Goal step status updated back to not started');
 });

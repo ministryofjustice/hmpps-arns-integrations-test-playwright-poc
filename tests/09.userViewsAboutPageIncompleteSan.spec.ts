@@ -41,11 +41,11 @@ test('User views about page when they have not completed SAN assessment', async 
 
   // Check no banner displays
   await sentencePlanPage.checkBannerDisplaysForIncompleteAssessment();
-  console.log('About page incomplete assessment - banner displayed');
 
   // Check sections are listed in the missinf information area
   await sentencePlanPage.checkSectionsAreListedAsIncompleteInformation();
 
   // Check no information available yet for accomodation is displayed
   await sentencePlanPage.checkNoInfoAvailableDisplays();
+  console.log('About page incomplete assessment - info verified');
 });

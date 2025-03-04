@@ -15,6 +15,14 @@ test('User views about page when they have not completed SAN assessment', async 
   // Check the title of the page is correct
   await stubHomePage.checkPageTitle();
 
+  // Set up accomodation criminogenic needs Null answers
+  await stubHomePage.clickCriminogenicNeedsTab();
+  await stubHomePage.selectNullAccLinkedToHarmDropdown();
+  await stubHomePage.selectNullAccLinkedToReoffending();
+  await stubHomePage.selectNullAccStrengths();
+  await stubHomePage.selectNullAccOtherWeightedScore();
+  await stubHomePage.selectNullAccThreshold();
+
   // Select sentence plan
   await stubHomePage.selectSentencePlan();
 
@@ -34,4 +42,10 @@ test('User views about page when they have not completed SAN assessment', async 
   // Check no banner displays
   await sentencePlanPage.checkBannerDisplaysForIncompleteAssessment();
   console.log('About page incomplete assessment - banner displayed');
+
+  // Check sections are listed in the missinf information area
+  await sentencePlanPage.checkSectionsAreListedAsIncompleteInformation();
+
+  // Check no information available yet for accomodation is displayed
+  await sentencePlanPage.checkNoInfoAvailableDisplays();
 });

@@ -12,6 +12,7 @@ export class StubHomePage {
     private accLinkedToReoffending: Locator = page.locator('#accLinkedToReoffending'),
     private accStrengths: Locator = page.locator('#accStrengths'),
     private accOtherWeightedScore: Locator = page.locator('#accOtherWeightedScore'),
+    private accThreshold: Locator = page.locator('#accThreshold'),
     private pkField: Locator = page.locator('#oasys-assessment-pk')
   ) { }
 
@@ -77,6 +78,14 @@ export class StubHomePage {
 
   async selectNullAccStrengths() {
     await this.accStrengths.selectOption('Null');
+  }
+
+  async selectNullAccOtherWeightedScore() {
+    await this.accOtherWeightedScore.selectOption('Null');
+  }
+
+  async selectNullAccThreshold() {
+    await this.accThreshold.selectOption('Null');
   }
 
   async fillInPkNumberOfCompletedAssessment() {

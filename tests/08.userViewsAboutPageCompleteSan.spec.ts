@@ -36,5 +36,5 @@ test('User views about page when they have completed SAN assessment', async ({ p
 
   // Check no banner displays
   await sentencePlanPage.checkBannerDoesntDisplayForCompleteAssessment();
-  console.log('About page complete assessment - no banner displayed');
+  console.log('About page complete assessment - info verified');
 });

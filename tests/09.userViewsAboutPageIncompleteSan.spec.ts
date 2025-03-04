@@ -42,7 +42,7 @@ test('User views about page when they have not completed SAN assessment', async 
   // Check no banner displays
   await sentencePlanPage.checkBannerDisplaysForIncompleteAssessment();
 
-  // Check sections are listed in the missinf information area
+  // Check sections are listed in the missing information area
   await sentencePlanPage.checkSectionsAreListedAsIncompleteInformation();
 
   // Check no information available yet for accomodation is displayed

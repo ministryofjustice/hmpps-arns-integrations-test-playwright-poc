@@ -39,7 +39,7 @@ test('User views about page when they have not completed SAN assessment', async 
   await sentencePlanPage.clickAboutTopNavLink();
   await sentencePlanPage.checkAboutPageTitle();
 
-  // Check no banner displays
+  // Check banner displays
   await sentencePlanPage.checkBannerDisplaysForIncompleteAssessment();
 
   // Check sections are listed in the missing information area

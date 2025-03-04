@@ -273,6 +273,10 @@ export class SentencePlanPage {
         await newTabGlobal!.getByRole('link', { name: 'Plan history', exact: true }).click();
     }
 
+    async clickAboutTopNavLink() {
+        await newTabGlobal!.getByRole('link', { name: 'About', exact: false }).click();
+    }
+
     async clickUpdateLink() {
         await newTabGlobal!.getByRole('link', { name: 'Update   (test goal)' }).click();
     }
@@ -312,5 +316,46 @@ export class SentencePlanPage {
         const todayDate = getTodayDateFormatted();
         await expect(newTabGlobal!.locator('p').filter({ hasText: 'Plan created on ' + todayDate }).getByRole('strong'))
             .toHaveCount(0);
+    }
+
+    async checkAboutPageTitle() {
+        await expect(newTabGlobal!).toHaveTitle('About - Sentence plan');
+    }
+
+    async checkBannerDisplaysForIncompleteAssessment() {
+        await expect(newTabGlobal!.getByLabel('Warning'))
+            .toHaveCount(1);
+        await expect(newTabGlobal!.locator('h2.govuk-heading-m').first())
+            .toHaveText('Some areas have incomplete information');
+    }
+
+    async checkBannerDoesntDisplayForCompleteAssessment() {
+        await expect(newTabGlobal!.getByLabel('Warning'))
+            .toHaveCount(0);
+    }
+
+    async checkSectionsAreListedAsIncompleteInformation() {
+        const missingInfoAccordion = newTabGlobal!.locator('#accordion-default-')
+        await expect (missingInfoAccordion).toBeVisible();
+        const missingInfoSections =[
+          newTabGlobal!.getByLabel('Accommodation'),
+          newTabGlobal!.getByLabel('Alcohol use'),
+          newTabGlobal!.getByLabel('Drug use'),
+          newTabGlobal!.getByLabel('Employment and education'),
+          newTabGlobal!.getByLabel('Finances'),
+          newTabGlobal!.getByLabel('Health and wellbeing'),
+          newTabGlobal!.getByLabel('Personal relationships and'),
+          newTabGlobal!.getByLabel('Thinking, behaviours and')
+        ];
+        for (const locator of missingInfoSections) {
+            await expect(locator).toBeVisible();
+        }
+    }
+
+    async checkNoInfoAvailableDisplays() {
+        await newTabGlobal!.locator('#accommodation > div.govuk-accordion__section-header > h3 > button').click();
+        await expect (newTabGlobal!.getByText('No information is available yet'))
+        .toBeVisible();
+        
     }
 }

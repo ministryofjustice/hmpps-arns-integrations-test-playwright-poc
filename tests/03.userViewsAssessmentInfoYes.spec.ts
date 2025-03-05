@@ -1,11 +1,13 @@
 import { test } from '@playwright/test';
 import { StubHomePage } from '../page-objects/stub-home-page';
 import { SentencePlanPage } from '../page-objects/sentence-plan-pages';
+import { Accessibility } from '../page-objects/accessibility';
 
 test('User views assessment info when creating a goal - Yes answers', async ({ page }) => {
   
   const stubHomePage = new StubHomePage(page);
   const sentencePlanPage = new SentencePlanPage(page);
+  const accessibility = new Accessibility(page);
   
   // Navigate to the stub home page
   await stubHomePage.goto();
@@ -33,7 +35,15 @@ test('User views assessment info when creating a goal - Yes answers', async ({ p
 
   // Check information from accomodation assessment from create a goal page
   await sentencePlanPage.clickCreateGoalButton();
+
+  // Check page has no accessiblity violations
+  await accessibility.shouldHaveNoAccessibilityViolations();
+
   await sentencePlanPage.clickViewInfoFromAssessmentDropdown();
+
+  // Check page has no accessiblity violations
+  await accessibility.shouldHaveNoAccessibilityViolations();
+
   await sentencePlanPage.checkThisAreaIsNotMarkedAsCompleteWarningDisplays();
   await sentencePlanPage.checkNoInfoAvailableYetWarningDoesNotDisplay();
   await sentencePlanPage.checkAreaIsLinkedToRoSH();

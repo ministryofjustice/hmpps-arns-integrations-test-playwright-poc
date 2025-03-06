@@ -335,7 +335,7 @@ export class SentencePlanPage {
     }
 
     async checkSectionsAreListedAsIncompleteInformation() {
-        const missingInfoAccordion = newTabGlobal!.locator('#accordion-default-')
+        const missingInfoAccordion = newTabGlobal!.locator('#assessment-accordion-incompleteAreas')
         await expect (missingInfoAccordion).toBeVisible();
         const missingInfoSections =[
           newTabGlobal!.getByLabel('Accommodation'),

@@ -242,6 +242,10 @@ export class SentencePlanPage {
         await expect(newTabGlobal!).toHaveTitle('Plan - Sentence plan');
     }
 
+    async checkCreateAGoalPageTitle() {
+        await expect(newTabGlobal!).toHaveTitle('Create a goal - Sentence plan');
+    }
+
     async clickSaveWithoutStepsButton() {
         await newTabGlobal!.getByRole('button', { name: 'Save without steps' }).click();
     }
@@ -334,18 +338,32 @@ export class SentencePlanPage {
             .toHaveCount(0);
     }
 
+    async clickShowAllSectionsAccordion() {
+        await newTabGlobal!.locator('#assessment-accordion-highScoring').getByRole('button', { name: 'Show all sections' })
+            .click();
+    }
+
+    async clickCreateAGoalLinkFromWithinSection() {
+        await newTabGlobal!.locator('#assessment-accordion-highScoring-content-1 > p.goal-link > a')
+            .click();
+    }
+
+    async clickBackButtonFromCreateGoalPage() {
+        await newTabGlobal!.getByRole('link', { name: 'Back' }).click();
+    }
+
     async checkSectionsAreListedAsIncompleteInformation() {
         const missingInfoAccordion = newTabGlobal!.locator('#assessment-accordion-incompleteAreas')
-        await expect (missingInfoAccordion).toBeVisible();
-        const missingInfoSections =[
-          newTabGlobal!.getByLabel('Accommodation'),
-          newTabGlobal!.getByLabel('Alcohol use'),
-          newTabGlobal!.getByLabel('Drug use'),
-          newTabGlobal!.getByLabel('Employment and education'),
-          newTabGlobal!.getByLabel('Finances'),
-          newTabGlobal!.getByLabel('Health and wellbeing'),
-          newTabGlobal!.getByLabel('Personal relationships and'),
-          newTabGlobal!.getByLabel('Thinking, behaviours and')
+        await expect(missingInfoAccordion).toBeVisible();
+        const missingInfoSections = [
+            newTabGlobal!.getByLabel('Accommodation'),
+            newTabGlobal!.getByLabel('Alcohol use'),
+            newTabGlobal!.getByLabel('Drug use'),
+            newTabGlobal!.getByLabel('Employment and education'),
+            newTabGlobal!.getByLabel('Finances'),
+            newTabGlobal!.getByLabel('Health and wellbeing'),
+            newTabGlobal!.getByLabel('Personal relationships and'),
+            newTabGlobal!.getByLabel('Thinking, behaviours and')
         ];
         for (const locator of missingInfoSections) {
             await expect(locator).toBeVisible();
@@ -354,8 +372,8 @@ export class SentencePlanPage {
 
     async checkNoInfoAvailableDisplays() {
         await newTabGlobal!.locator('#accommodation > div.govuk-accordion__section-header > h3 > button').click();
-        await expect (newTabGlobal!.getByText('No information is available yet'))
-        .toBeVisible();
-        
+        await expect(newTabGlobal!.getByText('No information is available yet'))
+            .toBeVisible();
+
     }
 }

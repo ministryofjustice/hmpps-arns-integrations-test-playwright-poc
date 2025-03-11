@@ -2,8 +2,13 @@ name: Playwright Tests
 on:
   pull_request:
     branches: [ main, master ]
-  schedule:
-    - cron: '0 6,13,18 * * 1-5'
+  workflow_call:
+  inputs:
+      channel_id:
+        description: 'The slack channel ID to send a message on failure. If this is not provided then no message is sent.'
+        required: false
+        default: 'NO_SLACK'
+        type: string
 jobs:
   test:
     timeout-minutes: 60
@@ -26,3 +31,11 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Slack notification
+      uses: ministryofjustice/hmpps-github-actions/.github/actions/slack_codescan_notification@v2 # WORKFLOW_VERSION
+      if: (failure() || inputs.channel_id != 'NO_SLACK'
+      with:
+        title: "Integration tests notification"
+        channel_id: ${{ inputs.channel_id}}
+        SLACK_BOT_TOKEN: ${{ secrets.HMPPS_SRE_SLACK_BOT_TOKEN }}
+        subproject: ${{ inputs.subproject }}

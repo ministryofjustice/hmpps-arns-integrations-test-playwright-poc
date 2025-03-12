@@ -17,10 +17,10 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   await stubHomePage.selectStrenghtsAndNeeds();
 
   // Click create handover button
-  await stubHomePage.clickCreateHandoverButton(); 
+  //await stubHomePage.clickCreateHandoverButton(); 
 
   // Click open button
-  await stubHomePage.clickOpenButton();
+  //await stubHomePage.clickOpenButton();
 
   // check the page title is correct
   await strengthsAndNeedsLandingPage.checkPageTitle();

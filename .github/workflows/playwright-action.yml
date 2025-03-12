@@ -1,0 +1,14 @@
+name: Integration tests
+on:
+  pull_request:
+    branches: *
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6,13,18 * * 1-5'
+jobs:
+  send-notification:
+    name: Notify slack
+    uses: ./.github/workflows/playwright.yml
+    with:
+      channel_id: ${{ vars.INTEGRATION_ALERTS_SLACK_CHANNEL_ID || 'NO_SLACK' }}
+    secrets: inherit

@@ -24,6 +24,13 @@ runs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
+                  "text": "${{ inputs.warningOnly == 'true' && ':warning:' || ':no_entry:' }} Github Workflow ${{ github.workflow }} ${{ inputs.warningOnly == 'true' && 'ran and identified issues' || 'failed' }}"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
                   "text": "*Workflow:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
                 }
               },

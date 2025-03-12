@@ -1,7 +1,7 @@
 name: Integration tests
 on:
   pull_request:
-    branches: '*'
+    branches: [ main, master ]
   workflow_dispatch:
   schedule:
     - cron: '0 6,13,18 * * 1-5'

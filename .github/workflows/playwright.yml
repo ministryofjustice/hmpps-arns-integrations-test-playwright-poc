@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ main, master ]
   workflow_call:
-  inputs:
+    inputs:
       channel_id:
         description: 'The slack channel ID to send a message on failure. If this is not provided then no message is sent.'
         required: false

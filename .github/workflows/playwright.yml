@@ -33,7 +33,7 @@ jobs:
           retention-days: 30
       - name: Slack notification
         if: failure() && inputs.channel_id != 'NO_SLACK'
-        uses: ./.github/actions/action.yml
+        uses: ./.github/actions/slack_integration_notification
         with:
           title: "Integration tests notification"
           channel_id: ${{ inputs.channel_id }}

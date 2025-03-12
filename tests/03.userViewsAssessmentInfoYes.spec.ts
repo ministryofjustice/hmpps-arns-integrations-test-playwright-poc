@@ -28,7 +28,7 @@ test('User views assessment info when creating a goal - Yes answers', async ({ p
   await stubHomePage.clickCreateHandoverButton(); 
 
   // Click open button
-  await stubHomePage.clickOpenButton();
+  //await stubHomePage.clickOpenButton();
 
   // Check the page title is correct
   await sentencePlanPage.checkPageTitle();

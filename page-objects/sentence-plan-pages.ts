@@ -368,6 +368,10 @@ export class SentencePlanPage {
         for (const locator of missingInfoSections) {
             await expect(locator).toBeVisible();
         }
+        const allTextMissingInfoSections = await missingInfoAccordion.allTextContents();
+        const sortedMissingInfoSections = [...allTextMissingInfoSections].sort((a, b) => a.localeCompare(b));
+        // Assert sections are in alaphabetical order
+        expect(allTextMissingInfoSections).toEqual(sortedMissingInfoSections);
     }
 
     async checkNoInfoAvailableDisplays() {

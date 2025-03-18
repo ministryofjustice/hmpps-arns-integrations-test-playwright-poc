@@ -20,22 +20,22 @@
       "sentence-plan-version": ""
     },
     "accLinkedToHarm": {
-      "accLinkedToHarm": "YES"
+      "accLinkedToHarm": "NO"
     },
     "accLinkedToReoffending": {
-      "accLinkedToReoffending": "YES"
+      "accLinkedToReoffending": "NO"
     },
     "accStrengths": {
       "accStrengths": "YES"
     },
     "accOtherWeightedScore": {
-      "accOtherWeightedScore": "1"
+      "accOtherWeightedScore": "6"
     },
     "accThreshold": {
       "accThreshold": "YES"
     },
     "eteLinkedToHarm": {
-      "eteLinkedToHarm": "YES"
+      "eteLinkedToHarm": "NO"
     },
     "eteLinkedToReoffending": {
       "eteLinkedToReoffending": "NO"
@@ -53,7 +53,7 @@
       "financeLinkedToHarm": "NO"
     },
     "financeLinkedToReoffending": {
-      "financeLinkedToReoffending": "YES"
+      "financeLinkedToReoffending": "NO"
     },
     "financeStrengths": {
       "financeStrengths": "NO"
@@ -65,13 +65,13 @@
       "financeThreshold": "N/A"
     },
     "drugLinkedToHarm": {
-      "drugLinkedToHarm": "YES"
+      "drugLinkedToHarm": "NO"
     },
     "drugLinkedToReoffending": {
-      "drugLinkedToReoffending": "YES"
+      "drugLinkedToReoffending": "NO"
     },
     "drugStrengths": {
-      "drugStrengths": "YES"
+      "drugStrengths": "NO"
     },
     "drugOtherWeightedScore": {
       "drugOtherWeightedScore": "3"
@@ -80,13 +80,13 @@
       "drugThreshold": "YES"
     },
     "alcoholLinkedToHarm": {
-      "alcoholLinkedToHarm": "YES"
+      "alcoholLinkedToHarm": "NO"
     },
     "alcoholLinkedToReoffending": {
       "alcoholLinkedToReoffending": "NO"
     },
     "alcoholStrengths": {
-      "alcoholStrengths": "YES"
+      "alcoholStrengths": "NO"
     },
     "alcoholOtherWeightedScore": {
       "alcoholOtherWeightedScore": "1"
@@ -101,7 +101,7 @@
       "emoLinkedToReoffending": "NO"
     },
     "emoStrengths": {
-      "emoStrengths": "NULL"
+      "emoStrengths": "NO"
     },
     "emoOtherWeightedScore": {
       "emoOtherWeightedScore": "N/A"
@@ -113,7 +113,7 @@
       "relLinkedToHarm": "NO"
     },
     "relLinkedToReoffending": {
-      "relLinkedToReoffending": "YES"
+      "relLinkedToReoffending": "NO"
     },
     "relStrengths": {
       "relStrengths": "NO"
@@ -128,10 +128,10 @@
       "thinkLinkedToHarm": "NO"
     },
     "thinkLinkedToReoffending": {
-      "thinkLinkedToReoffending": "NULL"
+      "thinkLinkedToReoffending": "NO"
     },
     "thinkStrengths": {
-      "thinkStrengths": "NULL"
+      "thinkStrengths": "NO"
     },
     "thinkOtherWeightedScore": {
       "thinkOtherWeightedScore": "6"
@@ -149,7 +149,7 @@
       "lifestyleStrengths": "N/A"
     },
     "lifestyleOtherWeightedScore": {
-      "lifestyleOtherWeightedScore": ""
+      "lifestyleOtherWeightedScore": "4"
     },
     "lifestyleThreshold": {
       "lifestyleThreshold": "YES"

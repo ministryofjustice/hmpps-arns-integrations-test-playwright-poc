@@ -6,6 +6,7 @@ export class StubHomePage {
     private page: Page,
     private targetServiceDropdown: Locator = page.getByLabel('Target service'),
     private createHandoverButton: Locator = page.getByRole('button', { name: 'Create handover link' }),
+    private pasteConfigurationButton: Locator = page.getByRole('button', { name: 'Paste configuration' }),
     private openbutton: Locator = page.getByRole('button', { name: 'Open' }),
     private criminogenicNeedsTab: Locator = page.locator('#tab_criminogenicNeeds'),
     private accLinkedToHarmDropdown: Locator = page.locator('#accLinkedToHarm'),
@@ -30,6 +31,10 @@ export class StubHomePage {
 
   async selectSentencePlan() {
     await this.targetServiceDropdown.selectOption('sentence-plan');
+  }
+
+  async clickPasteConfigurationButton() {
+    await this.pasteConfigurationButton.click();
   }
 
   async clickCreateHandoverButton() {

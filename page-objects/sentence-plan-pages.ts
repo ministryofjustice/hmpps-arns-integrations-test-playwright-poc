@@ -378,6 +378,19 @@ export class SentencePlanPage {
         await newTabGlobal!.locator('#accommodation > div.govuk-accordion__section-header > h3 > button').click();
         await expect(newTabGlobal!.getByText('No information is available yet'))
             .toBeVisible();
+    }
 
+    async checkIncompleteInfoSectionNoFlagsListsCorrectOrder() {
+        // High scoring
+        await expect(newTabGlobal!.locator('#accordion-default-heading-1 > span')).toHaveText('Accommodation');
+        await expect(newTabGlobal!.locator('#accordion-default-heading-2 > span')).toHaveText('Personal relationships and community');
+        await expect(newTabGlobal!.locator('#accordion-default-heading-3 > span')).toHaveText('Thinking, behaviours and attitudes');
+        await expect(newTabGlobal!.locator('#accordion-default-heading-4 > span')).toHaveText('Drug use');
+        await expect(newTabGlobal!.locator('#accordion-default-heading-5 > span')).toHaveText('Employment and education');
+        // Low scoring
+         await expect(newTabGlobal!.locator('#assessment-accordion-lowScoring')).toContainText('Alcohol use');
+        // Without a need score
+        await expect(newTabGlobal!.locator('#assessment-accordion-withoutScoring')).toContainText('Health and wellbeing');
+        await expect(newTabGlobal!.locator('#assessment-accordion-withoutScoring')).toContainText('Finances');
     }
 }

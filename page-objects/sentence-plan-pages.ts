@@ -380,17 +380,57 @@ export class SentencePlanPage {
             .toBeVisible();
     }
 
-    async checkIncompleteInfoSectionNoFlagsListsCorrectOrder() {
+    async checkInfoSectionNoFlagsListsCorrectOrder() {
+
+        const highScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-highScoring')
+        await expect(highScoringInfoAccordion).toBeVisible();
+        const highScoringInfoSections = [
+            newTabGlobal!.getByLabel('Accommodation'),
+            newTabGlobal!.getByLabel('Personal relationships and'),
+            newTabGlobal!.getByLabel('Thinking, behaviours and'),
+            newTabGlobal!.getByLabel('Drug use'),
+            newTabGlobal!.getByLabel('Employment and education'),
+        ];
+        for (const locator of highScoringInfoSections) {
+            await expect(locator).toBeVisible();
+        }
         // High scoring
-        await expect(newTabGlobal!.locator('#accordion-default-heading-1 > span')).toHaveText('Accommodation');
-        await expect(newTabGlobal!.locator('#accordion-default-heading-2 > span')).toHaveText('Personal relationships and community');
-        await expect(newTabGlobal!.locator('#accordion-default-heading-3 > span')).toHaveText('Thinking, behaviours and attitudes');
-        await expect(newTabGlobal!.locator('#accordion-default-heading-4 > span')).toHaveText('Drug use');
-        await expect(newTabGlobal!.locator('#accordion-default-heading-5 > span')).toHaveText('Employment and education');
+        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Accommodation');
+        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Personal relationships and community');
+        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Thinking, behaviours and attitudes');
+        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Drug use');
+        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Employment and education');
         // Low scoring
          await expect(newTabGlobal!.locator('#assessment-accordion-lowScoring')).toContainText('Alcohol use');
         // Without a need score
         await expect(newTabGlobal!.locator('#assessment-accordion-withoutScoring')).toContainText('Health and wellbeing');
         await expect(newTabGlobal!.locator('#assessment-accordion-withoutScoring')).toContainText('Finances');
+    }
+
+    async checkCompletedAssessmentSectionsListsCorrectOrder() {
+        const highScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-highScoring')
+        await expect(highScoringInfoAccordion).toBeVisible();
+        const highScoringInfoSections = [
+            newTabGlobal!.getByLabel('Accommodation'),
+            newTabGlobal!.getByLabel('Personal relationships and'),
+            newTabGlobal!.getByLabel('Thinking, behaviours and'),
+            newTabGlobal!.getByLabel('Drug use'),
+            newTabGlobal!.getByLabel('Employment and education'),
+        ];
+        for (const locator of highScoringInfoSections) {
+            await expect(locator).toBeVisible();
+        }
+        // High scoring
+        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Drug use');
+        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Employment and education');
+        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Personal relationships');
+        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Thinking, behaviours and attitudes');
+        // Low scoring
+         await expect(newTabGlobal!.locator('#assessment-accordion-lowScoring')).toContainText('Accomodation');
+         await expect(newTabGlobal!.locator('#assessment-accordion-lowScoring')).toContainText('Alcohol use');
+
+        // Without a need score
+        await expect(newTabGlobal!.locator('#assessment-accordion-withoutScoring')).toContainText('Finances');
+        await expect(newTabGlobal!.locator('#assessment-accordion-withoutScoring')).toContainText('Health and wellbeing');        
     }
 }

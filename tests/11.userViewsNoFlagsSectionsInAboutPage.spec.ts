@@ -48,6 +48,6 @@ test('User views their no flags sections and their info in About page', async ({
 
   // Check user info is displaying in the expected order on the about page
   await sentencePlanPage.checkBannerDoesntDisplayForCompleteAssessment();
-  await sentencePlanPage.checkIncompleteInfoSectionNoFlagsListsCorrectOrder();
+  await sentencePlanPage.checkInfoSectionNoFlagsListsCorrectOrder();
   console.log('About page complete assessment - info scores without flags verified');
 });

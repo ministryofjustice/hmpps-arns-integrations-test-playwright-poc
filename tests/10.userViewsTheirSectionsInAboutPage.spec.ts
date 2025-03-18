@@ -48,6 +48,6 @@ test('User views their sections and their info in About page', async ({ page }) 
 
   // Check user info is displaying in the expected order on the about page
   await sentencePlanPage.checkBannerDoesntDisplayForCompleteAssessment();
-
+  await sentencePlanPage.checkCompletedAssessmentSectionsListsCorrectOrder();    
   console.log('About page complete assessment - info order verified');
 });

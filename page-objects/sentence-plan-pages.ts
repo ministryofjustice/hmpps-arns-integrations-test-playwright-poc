@@ -367,11 +367,16 @@ export class SentencePlanPage {
         ];
         for (const locator of missingInfoSections) {
             await expect(locator).toBeVisible();
+            // Ensure the sections above are displayed in that order
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
         }
-        const allTextMissingInfoSections = await missingInfoAccordion.allTextContents();
-        const sortedMissingInfoSections = [...allTextMissingInfoSections].sort((a, b) => a.localeCompare(b));
-        // Assert sections are in alaphabetical order
-        expect(allTextMissingInfoSections).toEqual(sortedMissingInfoSections);
+    }
+
+    async checkThereAreNoHighOrLowScoringAreas() {
+        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(9)')).toHaveText('No high-scoring areas.');
+        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(11)')).toHaveText('No low-scoring areas.');
     }
 
     async checkNoInfoAvailableDisplays() {

@@ -381,56 +381,101 @@ export class SentencePlanPage {
     }
 
     async checkInfoSectionNoFlagsListsCorrectOrder() {
-
+        // High scoring
         const highScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-highScoring')
         await expect(highScoringInfoAccordion).toBeVisible();
+        await expect(highScoringInfoAccordion).toContainText('Accommodation');
+        await expect(highScoringInfoAccordion).toContainText('Personal relationships and community');
+        await expect(highScoringInfoAccordion).toContainText('Thinking, behaviours and attitudes');
+        await expect(highScoringInfoAccordion).toContainText('Drug use');
+        await expect(highScoringInfoAccordion).toContainText('Employment and education');
         const highScoringInfoSections = [
             newTabGlobal!.getByLabel('Accommodation'),
             newTabGlobal!.getByLabel('Personal relationships and'),
             newTabGlobal!.getByLabel('Thinking, behaviours and'),
             newTabGlobal!.getByLabel('Drug use'),
-            newTabGlobal!.getByLabel('Employment and education'),
+            newTabGlobal!.getByLabel('Employment and education')
         ];
         for (const locator of highScoringInfoSections) {
             await expect(locator).toBeVisible();
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
         }
-        // High scoring
-        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Accommodation');
-        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Personal relationships and community');
-        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Thinking, behaviours and attitudes');
-        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Drug use');
-        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Employment and education');
         // Low scoring
-         await expect(newTabGlobal!.locator('#assessment-accordion-lowScoring')).toContainText('Alcohol use');
+        const lowScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-lowScoring')
+        await expect(lowScoringInfoAccordion).toBeVisible();
+        await expect(lowScoringInfoAccordion).toContainText('Alcohol use');
         // Without a need score
-        await expect(newTabGlobal!.locator('#assessment-accordion-withoutScoring')).toContainText('Health and wellbeing');
-        await expect(newTabGlobal!.locator('#assessment-accordion-withoutScoring')).toContainText('Finances');
+        const withoutScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-withoutScoring')
+        await expect(withoutScoringInfoAccordion).toBeVisible();
+        await expect(withoutScoringInfoAccordion).toContainText('Health and wellbeing');
+        await expect(withoutScoringInfoAccordion).toContainText('Finances');
+        const withoutScoringInfoSections = [
+            newTabGlobal!.getByLabel('Health and wellbeing'),
+            newTabGlobal!.getByLabel('Finances')
+        ];
+        for (const locator of withoutScoringInfoSections) {
+            await expect(locator).toBeVisible();
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
+        }
     }
 
-    async checkCompletedAssessmentSectionsListsCorrectOrder() {
+    async checkCompletedAssessmentHighScoringSectionDisplaysCorrectly() {
+        // High scoring
         const highScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-highScoring')
         await expect(highScoringInfoAccordion).toBeVisible();
+        await expect(highScoringInfoAccordion).toContainText('Drug use');
+        await expect(highScoringInfoAccordion).toContainText('Employment and education ');
+        await expect(highScoringInfoAccordion).toContainText('Personal relationships and community');
+        await expect(highScoringInfoAccordion).toContainText('Thinking, behaviours and attitudes');
         const highScoringInfoSections = [
-            newTabGlobal!.getByLabel('Accommodation'),
-            newTabGlobal!.getByLabel('Personal relationships and'),
-            newTabGlobal!.getByLabel('Thinking, behaviours and'),
             newTabGlobal!.getByLabel('Drug use'),
             newTabGlobal!.getByLabel('Employment and education'),
+            newTabGlobal!.getByLabel('Personal relationships and'),
+            newTabGlobal!.getByLabel('Thinking, behaviours and')
         ];
         for (const locator of highScoringInfoSections) {
             await expect(locator).toBeVisible();
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
         }
-        // High scoring
-        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Drug use');
-        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Employment and education');
-        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Personal relationships');
-        await expect(newTabGlobal!.locator('#assessment-accordion-highScoring')).toHaveText('Thinking, behaviours and attitudes');
+    }
+    async checkCompletedAssessmentLowScoringSectionDisplaysCorrectly() {
         // Low scoring
-         await expect(newTabGlobal!.locator('#assessment-accordion-lowScoring')).toContainText('Accomodation');
-         await expect(newTabGlobal!.locator('#assessment-accordion-lowScoring')).toContainText('Alcohol use');
-
+        const lowScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-lowScoring')
+        await expect(lowScoringInfoAccordion).toBeVisible();
+        await expect(lowScoringInfoAccordion).toContainText('Accommodation');
+        await expect(lowScoringInfoAccordion).toContainText('Alcohol use');
+        const lowScoringInfoSections = [
+            newTabGlobal!.getByLabel('Accommodation'),
+            newTabGlobal!.getByLabel('Alcohol use')
+        ];
+        for (const locator of lowScoringInfoSections) {
+            await expect(locator).toBeVisible();
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
+        }
+    }
+    async checkCompletedAssessmentWithoutAScoreSectionDisplaysCorrectly() {
         // Without a need score
-        await expect(newTabGlobal!.locator('#assessment-accordion-withoutScoring')).toContainText('Finances');
-        await expect(newTabGlobal!.locator('#assessment-accordion-withoutScoring')).toContainText('Health and wellbeing');        
+        const withoutScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-withoutScoring')
+        await expect(withoutScoringInfoAccordion).toBeVisible();
+        await expect(withoutScoringInfoAccordion).toContainText('Finances');
+        await expect(withoutScoringInfoAccordion).toContainText('Health and wellbeing');
+        const withoutScoringInfoSections = [
+            newTabGlobal!.getByLabel('Finances'),
+            newTabGlobal!.getByLabel('Health and wellbeing')
+        ];
+        for (const locator of withoutScoringInfoSections) {
+            await expect(locator).toBeVisible();
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
+        }
     }
 }

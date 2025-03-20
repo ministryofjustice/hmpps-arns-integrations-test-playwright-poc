@@ -369,7 +369,7 @@ export class SentencePlanPage {
             await expect(locator).toBeVisible();
             // Ensure the sections above are displayed in that order
             const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
-            const sortedPositions = [...positions]
+            const sortedPositions = [...positions].sort((a, b) => a - b);
             expect(positions).toEqual(sortedPositions);
         }
     }
@@ -399,7 +399,7 @@ export class SentencePlanPage {
         for (const locator of highScoringInfoSections) {
             await expect(locator).toBeVisible();
             const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
-            const sortedPositions = [...positions]
+            const sortedPositions = [...positions].sort((a, b) => a - b);
             expect(positions).toEqual(sortedPositions);
         }
         // Low scoring
@@ -416,7 +416,7 @@ export class SentencePlanPage {
         for (const locator of withoutScoringInfoSections) {
             await expect(locator).toBeVisible();
             const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
-            const sortedPositions = [...positions]
+            const sortedPositions = [...positions].sort((a, b) => a - b);
             expect(positions).toEqual(sortedPositions);
         }
     }
@@ -434,7 +434,7 @@ export class SentencePlanPage {
         for (const locator of highScoringInfoSections) {
             await expect(locator).toBeVisible();
             const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
-            const sortedPositions = [...positions]
+            const sortedPositions = [...positions].sort((a, b) => a - b);
             expect(positions).toEqual(sortedPositions);
         }
     }
@@ -449,7 +449,7 @@ export class SentencePlanPage {
         for (const locator of lowScoringInfoSections) {
             await expect(locator).toBeVisible();
             const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
-            const sortedPositions = [...positions]
+            const sortedPositions = [...positions].sort((a, b) => a - b);
             expect(positions).toEqual(sortedPositions);
         }
     }
@@ -464,7 +464,7 @@ export class SentencePlanPage {
         for (const locator of withoutScoringInfoSections) {
             await expect(locator).toBeVisible();
             const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
-            const sortedPositions = [...positions]
+            const sortedPositions = [...positions].sort((a, b) => a - b);
             expect(positions).toEqual(sortedPositions);
         }
     }

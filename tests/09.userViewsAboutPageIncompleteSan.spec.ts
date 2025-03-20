@@ -43,6 +43,9 @@ test('User views about page when they have not completed SAN assessment', async 
   // Check sections are listed in the missing information area
   await sentencePlanPage.checkSectionsAreListedAsIncompleteInformation();
 
+  // Check no sections are listed in high and low-scoring area
+  await sentencePlanPage.checkThereAreNoHighOrLowScoringAreas();
+
   // Check no information available yet for accomodation is displayed
   await sentencePlanPage.checkNoInfoAvailableDisplays();
   console.log('About page incomplete assessment - info verified');

@@ -1,0 +1,157 @@
+{
+    "oasys-assessment-pk": "787703",
+    "subject": {
+      "given-name": "Jessyca",
+      "family-name": "Volkman",
+      "gender": "9",
+      "date-of-birth": "1937-04-29",
+      "sexually-motivated-offence-history": "",
+      "location": "COMMUNITY",
+      "crn": "X778160",
+      "pnc": "01/72057888A"
+    },
+    "user": {
+      "identifier": "OAStub-6ff8f2b9",
+      "display-name": "Kareem Toy",
+      "access-mode": "READ_WRITE"
+    },
+    "versions": {
+      "assessment-version": "",
+      "sentence-plan-version": ""
+    },
+    "accLinkedToHarm": {
+      "accLinkedToHarm": "YES"
+    },
+    "accLinkedToReoffending": {
+      "accLinkedToReoffending": "YES"
+    },
+    "accStrengths": {
+      "accStrengths": "YES"
+    },
+    "accOtherWeightedScore": {
+      "accOtherWeightedScore": "1"
+    },
+    "accThreshold": {
+      "accThreshold": "YES"
+    },
+    "eteLinkedToHarm": {
+      "eteLinkedToHarm": "YES"
+    },
+    "eteLinkedToReoffending": {
+      "eteLinkedToReoffending": "NO"
+    },
+    "eteStrengths": {
+      "eteStrengths": "NO"
+    },
+    "eteOtherWeightedScore": {
+      "eteOtherWeightedScore": "2"
+    },
+    "eteThreshold": {
+      "eteThreshold": "YES"
+    },
+    "financeLinkedToHarm": {
+      "financeLinkedToHarm": "NO"
+    },
+    "financeLinkedToReoffending": {
+      "financeLinkedToReoffending": "YES"
+    },
+    "financeStrengths": {
+      "financeStrengths": "NO"
+    },
+    "financeOtherWeightedScore": {
+      "financeOtherWeightedScore": "N/A"
+    },
+    "financeThreshold": {
+      "financeThreshold": "N/A"
+    },
+    "drugLinkedToHarm": {
+      "drugLinkedToHarm": "YES"
+    },
+    "drugLinkedToReoffending": {
+      "drugLinkedToReoffending": "YES"
+    },
+    "drugStrengths": {
+      "drugStrengths": "YES"
+    },
+    "drugOtherWeightedScore": {
+      "drugOtherWeightedScore": "3"
+    },
+    "drugThreshold": {
+      "drugThreshold": "YES"
+    },
+    "alcoholLinkedToHarm": {
+      "alcoholLinkedToHarm": "YES"
+    },
+    "alcoholLinkedToReoffending": {
+      "alcoholLinkedToReoffending": "NO"
+    },
+    "alcoholStrengths": {
+      "alcoholStrengths": "YES"
+    },
+    "alcoholOtherWeightedScore": {
+      "alcoholOtherWeightedScore": "1"
+    },
+    "alcoholThreshold": {
+      "alcoholThreshold": "NO"
+    },
+    "emoLinkedToHarm": {
+      "emoLinkedToHarm": "NO"
+    },
+    "emoLinkedToReoffending": {
+      "emoLinkedToReoffending": "NO"
+    },
+    "emoStrengths": {
+      "emoStrengths": "NULL"
+    },
+    "emoOtherWeightedScore": {
+      "emoOtherWeightedScore": "N/A"
+    },
+    "emoThreshold": {
+      "emoThreshold": "N/A"
+    },
+    "relLinkedToHarm": {
+      "relLinkedToHarm": "NO"
+    },
+    "relLinkedToReoffending": {
+      "relLinkedToReoffending": "YES"
+    },
+    "relStrengths": {
+      "relStrengths": "NO"
+    },
+    "relOtherWeightedScore": {
+      "relOtherWeightedScore": "5"
+    },
+    "relThreshold": {
+      "relThreshold": "YES"
+    },
+    "thinkLinkedToHarm": {
+      "thinkLinkedToHarm": "NO"
+    },
+    "thinkLinkedToReoffending": {
+      "thinkLinkedToReoffending": "NULL"
+    },
+    "thinkStrengths": {
+      "thinkStrengths": "NULL"
+    },
+    "thinkOtherWeightedScore": {
+      "thinkOtherWeightedScore": "6"
+    },
+    "thinkThreshold": {
+      "thinkThreshold": "YES"
+    },
+    "lifestyleLinkedToHarm": {
+      "lifestyleLinkedToHarm": "N/A"
+    },
+    "lifestyleLinkedToReoffending": {
+      "lifestyleLinkedToReoffending": "N/A"
+    },
+    "lifestyleStrengths": {
+      "lifestyleStrengths": "N/A"
+    },
+    "lifestyleOtherWeightedScore": {
+      "lifestyleOtherWeightedScore": ""
+    },
+    "lifestyleThreshold": {
+      "lifestyleThreshold": "YES"
+    }
+  }

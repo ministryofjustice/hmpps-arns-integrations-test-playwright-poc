@@ -34,6 +34,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    permissions: ['clipboard-read','clipboard-write'],
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://arns-oastub-test.hmpps.service.justice.gov.uk/',
 

@@ -367,13 +367,105 @@ export class SentencePlanPage {
         ];
         for (const locator of missingInfoSections) {
             await expect(locator).toBeVisible();
+            // Ensure the sections above are displayed in that order
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
         }
+    }
+
+    async checkThereAreNoHighOrLowScoringAreas() {
+        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(9)')).toHaveText('No high-scoring areas.');
+        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(11)')).toHaveText('No low-scoring areas.');
     }
 
     async checkNoInfoAvailableDisplays() {
         await newTabGlobal!.locator('#accommodation > div.govuk-accordion__section-header > h3 > button').click();
         await expect(newTabGlobal!.getByText('No information is available yet'))
             .toBeVisible();
+    }
 
+    async checkInfoSectionNoFlagsListsCorrectOrder() {
+        // High scoring
+        const highScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-highScoring')
+        await expect(highScoringInfoAccordion).toBeVisible();
+        const highScoringInfoSections = [
+            newTabGlobal!.getByLabel('Accommodation'),
+            newTabGlobal!.getByLabel('Personal relationships and'),
+            newTabGlobal!.getByLabel('Thinking, behaviours and'),
+            newTabGlobal!.getByLabel('Drug use'),
+            newTabGlobal!.getByLabel('Employment and education')
+        ];
+        for (const locator of highScoringInfoSections) {
+            await expect(locator).toBeVisible();
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
+        }
+        // Low scoring
+        const lowScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-lowScoring')
+        await expect(lowScoringInfoAccordion).toBeVisible();
+        await expect(lowScoringInfoAccordion).toContainText('Alcohol use');
+        // Without a need score
+        const withoutScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-withoutScoring')
+        await expect(withoutScoringInfoAccordion).toBeVisible();
+        const withoutScoringInfoSections = [
+            newTabGlobal!.getByLabel('Health and wellbeing'),
+            newTabGlobal!.getByLabel('Finances')
+        ];
+        for (const locator of withoutScoringInfoSections) {
+            await expect(locator).toBeVisible();
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
+        }
+    }
+
+    async checkCompletedAssessmentHighScoringSectionDisplaysCorrectly() {
+        // High scoring
+        const highScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-highScoring')
+        await expect(highScoringInfoAccordion).toBeVisible();
+        const highScoringInfoSections = [
+            newTabGlobal!.getByLabel('Drug use'),
+            newTabGlobal!.getByLabel('Employment and education'),
+            newTabGlobal!.getByLabel('Personal relationships and'),
+            newTabGlobal!.getByLabel('Thinking, behaviours and')
+        ];
+        for (const locator of highScoringInfoSections) {
+            await expect(locator).toBeVisible();
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
+        }
+    }
+    async checkCompletedAssessmentLowScoringSectionDisplaysCorrectly() {
+        // Low scoring
+        const lowScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-lowScoring')
+        await expect(lowScoringInfoAccordion).toBeVisible();
+        const lowScoringInfoSections = [
+            newTabGlobal!.getByLabel('Accommodation'),
+            newTabGlobal!.getByLabel('Alcohol use')
+        ];
+        for (const locator of lowScoringInfoSections) {
+            await expect(locator).toBeVisible();
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
+        }
+    }
+    async checkCompletedAssessmentWithoutAScoreSectionDisplaysCorrectly() {
+        // Without a need score
+        const withoutScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-withoutScoring')
+        await expect(withoutScoringInfoAccordion).toBeVisible();
+        const withoutScoringInfoSections = [
+            newTabGlobal!.getByLabel('Finances'),
+            newTabGlobal!.getByLabel('Health and wellbeing')
+        ];
+        for (const locator of withoutScoringInfoSections) {
+            await expect(locator).toBeVisible();
+            const positions = await locator.evaluateAll(items => items.map(item => item.getBoundingClientRect().y));
+            const sortedPositions = [...positions].sort((a, b) => a - b);
+            expect(positions).toEqual(sortedPositions);
+        }
     }
 }

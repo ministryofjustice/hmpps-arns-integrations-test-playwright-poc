@@ -389,11 +389,6 @@ export class SentencePlanPage {
         // High scoring
         const highScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-highScoring')
         await expect(highScoringInfoAccordion).toBeVisible();
-        await expect(highScoringInfoAccordion).toContainText('Accommodation');
-        await expect(highScoringInfoAccordion).toContainText('Personal relationships and community');
-        await expect(highScoringInfoAccordion).toContainText('Thinking, behaviours and attitudes');
-        await expect(highScoringInfoAccordion).toContainText('Drug use');
-        await expect(highScoringInfoAccordion).toContainText('Employment and education');
         const highScoringInfoSections = [
             newTabGlobal!.getByLabel('Accommodation'),
             newTabGlobal!.getByLabel('Personal relationships and'),
@@ -414,8 +409,6 @@ export class SentencePlanPage {
         // Without a need score
         const withoutScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-withoutScoring')
         await expect(withoutScoringInfoAccordion).toBeVisible();
-        await expect(withoutScoringInfoAccordion).toContainText('Health and wellbeing');
-        await expect(withoutScoringInfoAccordion).toContainText('Finances');
         const withoutScoringInfoSections = [
             newTabGlobal!.getByLabel('Health and wellbeing'),
             newTabGlobal!.getByLabel('Finances')
@@ -432,10 +425,6 @@ export class SentencePlanPage {
         // High scoring
         const highScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-highScoring')
         await expect(highScoringInfoAccordion).toBeVisible();
-        await expect(highScoringInfoAccordion).toContainText('Drug use');
-        await expect(highScoringInfoAccordion).toContainText('Employment and education ');
-        await expect(highScoringInfoAccordion).toContainText('Personal relationships and community');
-        await expect(highScoringInfoAccordion).toContainText('Thinking, behaviours and attitudes');
         const highScoringInfoSections = [
             newTabGlobal!.getByLabel('Drug use'),
             newTabGlobal!.getByLabel('Employment and education'),
@@ -453,8 +442,6 @@ export class SentencePlanPage {
         // Low scoring
         const lowScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-lowScoring')
         await expect(lowScoringInfoAccordion).toBeVisible();
-        await expect(lowScoringInfoAccordion).toContainText('Accommodation');
-        await expect(lowScoringInfoAccordion).toContainText('Alcohol use');
         const lowScoringInfoSections = [
             newTabGlobal!.getByLabel('Accommodation'),
             newTabGlobal!.getByLabel('Alcohol use')
@@ -470,8 +457,6 @@ export class SentencePlanPage {
         // Without a need score
         const withoutScoringInfoAccordion = newTabGlobal!.locator('#assessment-accordion-withoutScoring')
         await expect(withoutScoringInfoAccordion).toBeVisible();
-        await expect(withoutScoringInfoAccordion).toContainText('Finances');
-        await expect(withoutScoringInfoAccordion).toContainText('Health and wellbeing');
         const withoutScoringInfoSections = [
             newTabGlobal!.getByLabel('Finances'),
             newTabGlobal!.getByLabel('Health and wellbeing')

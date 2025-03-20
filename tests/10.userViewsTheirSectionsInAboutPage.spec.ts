@@ -23,12 +23,12 @@ test('User views their sections and their info in About page', async ({ page }) 
   await stubHomePage.clickCriminogenicNeedsTab();
 
   // Read json file and convert to string
-  const filePath = './data/data.json'
+  const filePath = './data/variedData.json'
   const jsonData = fs.readFileSync(filePath, 'utf-8');
 
   // Copy json data to clipboard
   await page.evaluate(async (text) => { await navigator.clipboard.writeText(text);}, jsonData);
-  console.log('data JSON file copied to clipboard')
+  console.log('varied data JSON file copied to clipboard')
 
   // Paste configuration using UI
   await stubHomePage.clickPasteConfigurationButton();

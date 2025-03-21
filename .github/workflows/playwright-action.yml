@@ -2,7 +2,7 @@ name: Integration tests
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 6,13,18 * * 1-5'
+    - cron: '30 7,13,18 * * 1-5'
 jobs:
   send-notification:
     name: Integration tests

@@ -223,7 +223,7 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   await strengthsAndNeedsLandingPage.tickVictimIsAStranger();
   await strengthsAndNeedsLandingPage.tickVictimAge50to64();
   await strengthsAndNeedsLandingPage.tickVictimUnknownGender();
-  await strengthsAndNeedsLandingPage.selectVictimsEthnicity();
+  await strengthsAndNeedsLandingPage.selectVictimsRace();
   await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
   await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 

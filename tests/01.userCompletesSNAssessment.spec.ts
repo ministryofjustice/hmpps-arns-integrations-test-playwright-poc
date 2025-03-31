@@ -226,7 +226,6 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   await strengthsAndNeedsLandingPage.selectVictimsEthnicity();
   await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
   await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
-
   await strengthsAndNeedsLandingPage.tickNoneInvolved();
   await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 

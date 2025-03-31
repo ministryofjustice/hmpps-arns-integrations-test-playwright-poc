@@ -557,7 +557,8 @@ export class StrengthsAndNeedsLandingPage {
         await newTabGlobal!.locator('#offence_analysis_victim_sex-4').check();
     }
 
-    async selectVictimsEthnicity() {
+    async selectVictimsRace() {
+        // select option from dropdown
         await newTabGlobal!.locator('#offence_analysis_victim_race').selectOption('White - Gypsy or Irish Traveller');
     }
 

@@ -24,6 +24,10 @@ export class StrengthsAndNeedsLandingPage {
 
     // Accomodation
 
+    async clickAccomodationLeftNavLink() {
+        await newTabGlobal!.getByRole('link', { name: 'Accomodation' }).click();
+    }
+
     async tickSettled() {
         await newTabGlobal!.locator('#current_accommodation').check();
     }
@@ -56,15 +60,27 @@ export class StrengthsAndNeedsLandingPage {
         await newTabGlobal!.locator('#tab_practitioner-analysis').click();
     }
 
-    async tickAccomodationFactors() {
-        await newTabGlobal!.locator('#accommodation_practitioner_analysis_strengths_or_protective_factors-2').check();
+    async tickYesFactors() {
+        await newTabGlobal!.locator('#accommodation_practitioner_analysis_strengths_or_protective_factors').check();
     }
 
-    async tickRiskOfHarm() {
+    async tickYesRiskOfHarm() {
         await newTabGlobal!.locator('#accommodation_practitioner_analysis_risk_of_serious_harm-2').check();
     }
 
-    async tickRiskOfReoffending() {
+    async tickYesRiskOfReoffending() {
+        await newTabGlobal!.locator('#accommodation_practitioner_analysis_risk_of_reoffending-2').check();
+    }
+
+    async tickNoAccomodationFactors() {
+        await newTabGlobal!.locator('#accommodation_practitioner_analysis_strengths_or_protective_factors-2').check();
+    }
+
+    async tickNoRiskOfHarm() {
+        await newTabGlobal!.locator('#accommodation_practitioner_analysis_risk_of_serious_harm-2').check();
+    }
+
+    async tickNoRiskOfReoffending() {
         await newTabGlobal!.locator('#accommodation_practitioner_analysis_risk_of_reoffending-2').check();
     }
 
@@ -74,6 +90,18 @@ export class StrengthsAndNeedsLandingPage {
 
     async checkSectionCompleteIconDisplays() {
         await expect (newTabGlobal!.getByRole('link', { name: 'Accommodation ✓' })).toBeVisible();
+    }
+
+    async clickAccomodationFactorsChangeLink() {
+        await newTabGlobal!.getByRole('link', { name: 'Change  value for Strengths' }).click();
+    }
+
+    async clickAccomodationRiskOfHarmChangeLink() {
+        await newTabGlobal!.getByRole('link', { name: 'Change  value for Linked to risk of serious harm' }).click();
+    }
+
+    async clickRiskOfReOffendingChangeLink() {
+        await newTabGlobal!.getByRole('link', { name: 'Change  value for Linked to risk of reoffending' }).click();
     }
 
     // Employment
@@ -529,13 +557,8 @@ export class StrengthsAndNeedsLandingPage {
         await newTabGlobal!.locator('#offence_analysis_victim_sex-4').check();
     }
 
-    async fillVictimsEthnicity() {
-        await newTabGlobal!.locator('#offence_analysis_victim_race').fill('White');
-        await this.page.waitForTimeout(1000);
-    }
-
-    async selectEthnicity() {
-        await newTabGlobal!.getByRole('option', { name: 'White - Gypsy or Irish Traveller' }).click();
+    async selectVictimsEthnicity() {
+        await newTabGlobal!.locator('#offence_analysis_victim_race').selectOption('White - Gypsy or Irish Traveller');
     }
 
     async tickNoneInvolved() {

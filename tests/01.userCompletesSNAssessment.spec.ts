@@ -42,9 +42,9 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
 
   // Fill in practicioner analysis 
   await strengthsAndNeedsLandingPage.clickPracticionerAnalysisTab();
-  await strengthsAndNeedsLandingPage.tickAccomodationFactors();
-  await strengthsAndNeedsLandingPage.tickRiskOfHarm();
-  await strengthsAndNeedsLandingPage.tickRiskOfReoffending();
+  await strengthsAndNeedsLandingPage.tickNoAccomodationFactors();
+  await strengthsAndNeedsLandingPage.tickNoRiskOfHarm();
+  await strengthsAndNeedsLandingPage.tickNoRiskOfReoffending();
   await strengthsAndNeedsLandingPage.clickMarkAsComplete();
   await strengthsAndNeedsLandingPage.checkSectionCompleteIconDisplays();
   console.log('Accomodation assessment completed');
@@ -186,7 +186,6 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   await strengthsAndNeedsLandingPage.tickAbleToSolveProblems();
   await strengthsAndNeedsLandingPage.tickUnderstandsPeoplesViews();
   await strengthsAndNeedsLandingPage.tickNoManipulativeBehaviour();
-  await strengthsAndNeedsLandingPage.tickNoSexualRiskToOthers();
   await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
   await strengthsAndNeedsLandingPage.tickTemperManagement();
@@ -197,6 +196,9 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   await strengthsAndNeedsLandingPage.tickAcceptsSupervision();
   await strengthsAndNeedsLandingPage.tickDoesntSupportCriminalBehaviour();
   await strengthsAndNeedsLandingPage.tickThinkingBehaviourAlreadyMakingChanges();
+  await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
+
+  await strengthsAndNeedsLandingPage.tickNoSexualRiskToOthers();
   await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
   // Fill in practicioner analysis
@@ -221,8 +223,7 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   await strengthsAndNeedsLandingPage.tickVictimIsAStranger();
   await strengthsAndNeedsLandingPage.tickVictimAge50to64();
   await strengthsAndNeedsLandingPage.tickVictimUnknownGender();
-  await strengthsAndNeedsLandingPage.fillVictimsEthnicity();
-  await strengthsAndNeedsLandingPage.selectEthnicity();
+  await strengthsAndNeedsLandingPage.selectVictimsEthnicity();
   await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
   await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 

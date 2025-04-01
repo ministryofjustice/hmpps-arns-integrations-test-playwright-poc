@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { GOAL_CREATED_DATA } from './pages-common';
+import { GOAL_CREATED_DATA, SP_TEST_ENV_LINK } from './pages-common';
 
 const { chromium } = require('playwright');
 const getTodayDateFormatted = (): string => {

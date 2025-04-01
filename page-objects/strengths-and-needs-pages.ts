@@ -609,18 +609,4 @@ export class StrengthsAndNeedsLandingPage {
     async navigateToSPLink() {
         await newTabGlobal!.goto(SP_TEST_ENV_LINK);
     }
-
-    async clickAboutPageAfterNavigatingToSPWithoutOasysStep() {
-        
-        const aboutLink = await newTabGlobal!.getByRole('link', { name: 'About', exact: false })
-        await aboutLink.waitFor({ state: 'visible' });
-        await aboutLink.click();
-    }
-
-    async checkBannerDisplaysForIncompleteAssessment() {
-        await expect(newTabGlobal!.getByLabel('Warning'))
-            .toHaveCount(1);
-        await expect(newTabGlobal!.locator('h2.govuk-heading-m').first())
-            .toHaveText('Some areas have incomplete information');
-    }
 }

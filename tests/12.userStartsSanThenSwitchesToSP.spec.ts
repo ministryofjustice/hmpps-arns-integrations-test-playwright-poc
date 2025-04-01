@@ -51,13 +51,12 @@ test('User navigates to their About page from an incomplete San assessment', asy
   await strengthsAndNeedsLandingPage.navigateToSPLink();
 
   // Check navigation has taken place
-  await sentencePlanfromSanPage.checkPageTitle();
+  await sentencePlanfromSanPage.checkPageTitle()
 
   // Access About section
   await sentencePlanfromSanPage.clickAboutPageAfterNavigatingToSPWithoutOasysStep();
 
   // Check user info is displaying in the expected order on the about page
-  await strengthsAndNeedsLandingPage.checkBannerDisplaysForIncompleteAssessment();
-  await sentencePlanPage.checkInfoSectionNoFlagsListsCorrectOrder();
+  await sentencePlanfromSanPage.checkAboutPageDisplaysCorrectInfoForIncompleteSan();
   console.log('About page incomplete assessment without OASYS step verified');
 });

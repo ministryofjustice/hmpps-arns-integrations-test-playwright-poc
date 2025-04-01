@@ -3,22 +3,22 @@ import { expect, Locator, Page } from '@playwright/test';
 let newTabGlobal: Page | null = null;
 
 //#region high scoring content details
-const highScoringInfoContentDetails = 
+const highScoringInfoContentDetails =
     'This area is linked to RoSH (risk of serious harm)'
-    'Test yes serious harm'
-    'This area is linked to risk of reoffending'
-    'Test yes reoffending'
-    'Motivation to make changes in this area'
-    'wants to make changes but needs help.'
-    'There are strengths or protective factors related to this area'
-    'Test yes factors'
-    'Employment and education need score 4 out of 4'
-    'Create employment and education goal';
+'Test yes serious harm'
+'This area is linked to risk of reoffending'
+'Test yes reoffending'
+'Motivation to make changes in this area'
+'wants to make changes but needs help.'
+'There are strengths or protective factors related to this area'
+'Test yes factors'
+'Employment and education need score 4 out of 4'
+'Create employment and education goal';
 //#endregion
 
 //#region low scoring content details
-const lowScoringInfoContentDetails = 
-'This area is not linked to RoSH (risk of serious harm)'
+const lowScoringInfoContentDetails =
+    'This area is not linked to RoSH (risk of serious harm)'
 'Test no serious harm'
 'This area is not linked to risk of reoffending'
 'Test no reoffending'
@@ -56,27 +56,27 @@ export class SentencePlanfromSanPage {
     async checkAboutPageDisplaysCorrectInfoForIncompleteSan() {
         // Check banner displays for incomplete assessment
         const warning = await newTabGlobal!.getByLabel('Warning');
-        await expect (warning).toHaveCount(1);
+        await expect(warning).toHaveCount(1);
         const incompleteInfo = await newTabGlobal!.locator('h2.govuk-heading-m').first();
-        await expect (incompleteInfo).toHaveText('Some areas have incomplete information');
+        await expect(incompleteInfo).toHaveText('Some areas have incomplete information');
 
         // Check high-scoring area displays the right info
         const highScoringInfoAccordion = await newTabGlobal!.locator('#assessment-accordion-highScoring');
-        await expect (highScoringInfoAccordion).toContainText('Employment and education');
+        await expect(highScoringInfoAccordion).toContainText('Employment and education');
         const employmentAndEducationSection = await newTabGlobal!.getByLabel('Employment and education ,');
         await employmentAndEducationSection.click();
         const highScoringInfoContent = await newTabGlobal!.locator('#assessment-accordion-highScoring-content-1');
         const highScoringInfoText = await highScoringInfoContent.textContent();
-        await expect (highScoringInfoText).toContain(highScoringInfoContentDetails);
+        await expect(highScoringInfoText).toContain(highScoringInfoContentDetails);
         await employmentAndEducationSection.click();
-        
+
         // Check low-scoring area displays the right info
         const lowScoringInfoAccordion = await newTabGlobal!.locator('#assessment-accordion-lowScoring');
-        await expect (lowScoringInfoAccordion).toContainText('Accommodation');
+        await expect(lowScoringInfoAccordion).toContainText('Accommodation');
         const accommodationSection = await newTabGlobal!.getByLabel('Accommodation , , Show this')
         await accommodationSection.click();
         const lowScoringInfoContent = await newTabGlobal!.locator('#assessment-accordion-lowScoring-content-1');
         const lowScoringInfoText = await lowScoringInfoContent.textContent();
-        await expect (lowScoringInfoText).toContain(lowScoringInfoContentDetails);
+        await expect(lowScoringInfoText).toContain(lowScoringInfoContentDetails);
     }
 }

@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
+import { SP_TEST_ENV_LINK } from './pages-common';
 
 const { chromium } = require('playwright');
 
@@ -19,7 +20,7 @@ export class StrengthsAndNeedsLandingPage {
     }
 
     async validationErrorDisplays() {
-        await expect (newTabGlobal!.getByRole('alert')).toBeVisible();
+        await expect(newTabGlobal!.getByRole('alert')).toBeVisible();
     }
 
     // Accomodation
@@ -89,7 +90,7 @@ export class StrengthsAndNeedsLandingPage {
     }
 
     async checkSectionCompleteIconDisplays() {
-        await expect (newTabGlobal!.getByRole('link', { name: 'Accommodation ✓' })).toBeVisible();
+        await expect(newTabGlobal!.getByRole('link', { name: 'Accommodation ✓' })).toBeVisible();
     }
 
     async clickAccomodationFactorsChangeLink() {
@@ -167,7 +168,7 @@ export class StrengthsAndNeedsLandingPage {
     }
 
     async checkEmploymentSectionCompleteIconDisplays() {
-        await expect (newTabGlobal!.getByRole('link', { name: 'Employment and education ✓' })).toBeVisible();
+        await expect(newTabGlobal!.getByRole('link', { name: 'Employment and education ✓' })).toBeVisible();
     }
 
     // Finances
@@ -217,7 +218,7 @@ export class StrengthsAndNeedsLandingPage {
     }
 
     async checkFinanceSectionCompleteIconDisplays() {
-        await expect (newTabGlobal!.getByRole('link', { name: 'Finances ✓' })).toBeVisible();
+        await expect(newTabGlobal!.getByRole('link', { name: 'Finances ✓' })).toBeVisible();
     }
 
     // Drug use
@@ -243,7 +244,7 @@ export class StrengthsAndNeedsLandingPage {
     }
 
     async checkDrugSectionCompleteIconDisplays() {
-        await expect (newTabGlobal!.getByRole('link', { name: 'Drug use ✓' })).toBeVisible();
+        await expect(newTabGlobal!.getByRole('link', { name: 'Drug use ✓' })).toBeVisible();
     }
 
     // Alcohol use
@@ -273,9 +274,9 @@ export class StrengthsAndNeedsLandingPage {
     }
 
     async checkAlcoholSectionCompleteIconDisplays() {
-        await expect (newTabGlobal!.getByRole('link', { name: 'Alcohol use ✓' })).toBeVisible();
+        await expect(newTabGlobal!.getByRole('link', { name: 'Alcohol use ✓' })).toBeVisible();
     }
-    
+
     // Health and wellbeing
 
     async clickHealthAndWellbeingLeftNavLink() {
@@ -290,7 +291,7 @@ export class StrengthsAndNeedsLandingPage {
         await newTabGlobal!.locator('#health_wellbeing_mental_health_condition').check();
     }
 
-    async tickPsychiatricTreatment(){
+    async tickPsychiatricTreatment() {
         await newTabGlobal!.locator('#health_wellbeing_psychiatric_treatment').check();
     }
 
@@ -347,7 +348,7 @@ export class StrengthsAndNeedsLandingPage {
     }
 
     async checkHealthSectionCompleteIconDisplays() {
-        await expect (newTabGlobal!.getByRole('link', { name: 'Health and wellbeing ✓' })).toBeVisible();
+        await expect(newTabGlobal!.getByRole('link', { name: 'Health and wellbeing ✓' })).toBeVisible();
     }
 
     // Personal relationships and community
@@ -362,7 +363,7 @@ export class StrengthsAndNeedsLandingPage {
 
     async fillInInfoAboutChildren() {
         await newTabGlobal!.locator('#personal_relationships_community_children_details_yes_children_living_with_pop_details')
-        .fill('child 1');
+            .fill('child 1');
     }
 
     async tickPartnerImportantPeople() {
@@ -383,7 +384,7 @@ export class StrengthsAndNeedsLandingPage {
 
     async enterChallengesInRelationshipsDetails() {
         await newTabGlobal!.locator('#personal_relationships_community_challenges_intimate_relationship')
-        .fill('person is comfortable addressing challenges.');
+            .fill('person is comfortable addressing challenges.');
     }
 
     async tickPositiveChildhood() {
@@ -411,7 +412,7 @@ export class StrengthsAndNeedsLandingPage {
     }
 
     async checkPersonalRelationshipsSectionCompleteIconDisplays() {
-        await expect (newTabGlobal!.getByRole('link', { name: 'Personal relationships and community ✓' })).toBeVisible();
+        await expect(newTabGlobal!.getByRole('link', { name: 'Personal relationships and community ✓' })).toBeVisible();
     }
 
     // Thinking, behaviours and attitudes
@@ -492,8 +493,8 @@ export class StrengthsAndNeedsLandingPage {
         await newTabGlobal!.locator('#thinking_behaviours_attitudes_criminal_behaviour').check();
     }
 
-    async tickThinkingBehaviourAlreadyMakingChanges(){
-    await newTabGlobal!.locator('#thinking_behaviours_attitudes_changes').check();
+    async tickThinkingBehaviourAlreadyMakingChanges() {
+        await newTabGlobal!.locator('#thinking_behaviours_attitudes_changes').check();
     }
 
     async tickThinkingBehaviourFactors() {
@@ -502,7 +503,7 @@ export class StrengthsAndNeedsLandingPage {
 
     async fillProtectiveFactorsComment() {
         await newTabGlobal!.locator('#thinking_behaviours_attitudes_practitioner_analysis_strengths_or_protective_factors_yes_details')
-        .fill('Yes comment to thinking and behaviour protective factors');
+            .fill('Yes comment to thinking and behaviour protective factors');
     }
 
     async tickThinkingBehaviourRiskOfHarm() {
@@ -514,7 +515,7 @@ export class StrengthsAndNeedsLandingPage {
     }
 
     async checkThinkingBehaviourSectionCompleteIconDisplays() {
-        await expect (newTabGlobal!.getByRole('link', { name: 'Thinking, behaviours and attitudes ✓' })).toBeVisible();
+        await expect(newTabGlobal!.getByRole('link', { name: 'Thinking, behaviours and attitudes ✓' })).toBeVisible();
     }
 
     // Offence analysis
@@ -525,7 +526,7 @@ export class StrengthsAndNeedsLandingPage {
 
     async fillBriefDescription() {
         await newTabGlobal!.locator('#offence_analysis_description_of_offence')
-        .fill('This is a brief description for the offence analysis.')
+            .fill('This is a brief description for the offence analysis.')
     }
 
     async tickWeapon() {
@@ -534,7 +535,7 @@ export class StrengthsAndNeedsLandingPage {
 
     async fillReasonForOffence() {
         await newTabGlobal!.locator('#offence_analysis_reason')
-        .fill('This is why this took place.')
+            .fill('This is why this took place.')
     }
 
     async tickThrillSeeking() {
@@ -576,7 +577,7 @@ export class StrengthsAndNeedsLandingPage {
 
     async fillPatternsOfOffending() {
         await newTabGlobal!.locator('#offence_analysis_patterns_of_offending')
-        .fill('There are no obvious patterns at this point.')
+            .fill('There are no obvious patterns at this point.')
     }
 
     async tickNotApplicableEscalation() {
@@ -589,7 +590,7 @@ export class StrengthsAndNeedsLandingPage {
 
     async fillDetailsAboutNoRiskOfSeriousHarm() {
         await newTabGlobal!.locator('#offence_analysis_risk_no_details')
-        .fill('No risk of serious harm.')
+            .fill('No risk of serious harm.')
     }
 
     async tickNoToPerpetratorOfDomestic() {
@@ -602,6 +603,10 @@ export class StrengthsAndNeedsLandingPage {
 
     async confirmUserIsOnOffenceAnalysisPage() {
         const heading = newTabGlobal!.getByRole('heading', { name: 'Offence analysis' });
-        await expect (heading).toBeVisible();
+        await expect(heading).toBeVisible();
+    }
+
+    async navigateToSPLink() {
+        await newTabGlobal!.goto(SP_TEST_ENV_LINK);
     }
 }

@@ -229,6 +229,24 @@ export class SentencePlanPage {
         await newTabGlobal!.locator('#agree-plan-radio').check();
     }
 
+    async tickNoIDoNotAgree() {
+        await newTabGlobal!.locator('#agree-plan-radio-2').check();
+    }
+
+    async fillInIDoNotAgreeDetails() {
+        await newTabGlobal!.locator('#does-not-agree-details')
+            .fill('I do not agree');
+    }
+
+    async tickCouldNotAnswer() {
+        await newTabGlobal!.locator('#agree-plan-radio-4').check();
+    }
+
+    async fillInCouldNotAnswerDetails() {
+        await newTabGlobal!.locator('#could-not-answer-details')
+            .fill('I could not answer');
+    }
+
     async fillInNotesAboutAgreeingPlan() {
         await newTabGlobal!.locator('#notes')
             .fill('Test notes about agreeing the plan.')
@@ -467,5 +485,29 @@ export class SentencePlanPage {
             const sortedPositions = [...positions].sort((a, b) => a - b);
             expect(positions).toEqual(sortedPositions);
         }
+    }
+
+    async clickUpdateAgreementLink() {
+        await newTabGlobal!.locator('#update-assessment-text > a').click();
+    }
+
+    async checkUpdateAgreePlanPageTitle() {
+        await expect (newTabGlobal!).toHaveTitle('Do they agree? - Sentence plan')
+    }
+
+    async clickBackLinkOnUpdateAgreePlanPage() {
+        await newTabGlobal!.getByRole('link', { name: 'Back', exact: true }).click();
+    }
+
+    async tickYesIAgreeOnUpdateAgreePlanPage() {
+        await newTabGlobal!.locator('#agree-plan-radio').check();
+    }
+
+    async tickNoIDoNotAgreeOnUpdateAgreePlanPage() {
+        await newTabGlobal!.locator('#agree-plan-radio-2').check();
+    }
+
+    async clickSaveOnUpdateAgreePlanPage() {
+        await newTabGlobal!.locator('#update-agree-plan-form > div.govuk-button-group > button').click();
     }
 }

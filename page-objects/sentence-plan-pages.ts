@@ -109,6 +109,10 @@ export class SentencePlanPage {
         await newTabGlobal!.locator('#date-selection-radio').check();
     }
 
+    async tickIn6Months() {
+        await newTabGlobal!.locator('#date-selection-radio-2').check();
+    }
+
     async tickFutureGoal() {
         await newTabGlobal!.locator('#start-working-goal-radio-2').check();
     }
@@ -492,7 +496,7 @@ export class SentencePlanPage {
     }
 
     async checkUpdateAgreePlanPageTitle() {
-        await expect (newTabGlobal!).toHaveTitle('Do they agree? - Sentence plan')
+        await expect(newTabGlobal!).toHaveTitle('Do they agree? - Sentence plan')
     }
 
     async clickBackLinkOnUpdateAgreePlanPage() {
@@ -509,5 +513,26 @@ export class SentencePlanPage {
 
     async clickSaveOnUpdateAgreePlanPage() {
         await newTabGlobal!.locator('#update-agree-plan-form > div.govuk-button-group > button').click();
+    }
+
+    async checkAgreementDataCorrectlyDisplaysInPlanHistory() {
+        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(2) > strong'))
+            .toContainText("Agreement updated");
+        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(3)'))
+            .toContainText("did not agree to this plan.");
+        await expect(newTabGlobal!.locator('#main-content > div > div > div:nth-child(4)'))
+            .toContainText("I do not agree");
+        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(6) > strong'))
+            .toContainText("Plan created");
+        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(7)'))
+            .toContainText("could not agree to this plan.");
+        await expect(newTabGlobal!.locator('#main-content > div > div > div:nth-child(8)'))
+            .toContainText("I could not answer");
+        await expect(newTabGlobal!.locator('#main-content > div > div > div.plan-additional-note'))
+            .toContainText("Test notes about agreeing the plan.");
+    }
+
+    async checkPlanHistoryPageTitle() {
+        await expect(newTabGlobal!).toHaveTitle('Plan history - Sentence plan')
     }
 }

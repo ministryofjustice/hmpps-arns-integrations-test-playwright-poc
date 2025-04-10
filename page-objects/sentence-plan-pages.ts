@@ -397,8 +397,8 @@ export class SentencePlanPage {
     }
 
     async checkThereAreNoHighOrLowScoringAreas() {
-        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(9)')).toHaveText('No high-scoring areas.');
-        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(11)')).toHaveText('No low-scoring areas.');
+        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(9)')).toHaveText('No high-scoring areas at the moment.');
+        await expect(newTabGlobal!.locator('#main-content > div > div > p:nth-child(11)')).toHaveText('No low-scoring areas at the moment.');
     }
 
     async checkNoInfoAvailableDisplays() {

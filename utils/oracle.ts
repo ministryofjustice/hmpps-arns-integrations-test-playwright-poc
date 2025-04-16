@@ -11,7 +11,7 @@ export async function getConnection(): Promise<oracledb.Connection> {
 export async function runQuery<T = any>(query: string, params: any[] = []): Promise<oracledb.Result<T>> {
   const connection = await getConnection();
   try {
-    return await connection.execute<T>(query, params, { autoCommit: true });
+    return await connection.execute<T>(query, params);
   } finally {
     await connection.close();
   }

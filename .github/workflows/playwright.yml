@@ -25,6 +25,10 @@ jobs:
       - name: Run Playwright tests
         id: playwright-tests
         run: npx playwright test --project=chromium
+        env:
+          ORACLE_DB_USER: ${{ secrets.ORACLE_DB_USER }}
+          ORACLE_DB_PASSWORD: ${{ secrets.ORACLE_DB_PASSWORD }}
+          ORACLE_DB_CONNECT_STRING: ${{ secrets.ORACLE_DB_CONNECT_STRING }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

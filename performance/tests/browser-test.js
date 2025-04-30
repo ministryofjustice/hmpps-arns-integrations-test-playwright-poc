@@ -3,8 +3,8 @@ import { describe, expect } from 'https://jslib.k6.io/k6chaijs/4.3.4.3/index.js'
 import { sleep } from 'k6'
 import { Trend } from 'k6/metrics'
 
-import { stubHomePage } from '../page-objects/stub-home-page'
-import { strengthsAndNeedsLandingPage } from '../page-objects/strengths-and-needs-pages'
+import { stubHomePage } from '../../page-objects/stub-home-page'
+import { strengthsAndNeedsLandingPage } from '../../page-objects/strengths-and-needs-pages'
 
 
 export async function browserTest() {
@@ -78,6 +78,10 @@ await strengthsAndNeedsLandingPage.tickEmployed();
 await strengthsAndNeedsLandingPage.tickFullTime();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 await strengthsAndNeedsLandingPage.tickContinuousEmployment();
 await strengthsAndNeedsLandingPage.tickCaringResponsibilities();
 await strengthsAndNeedsLandingPage.tickEntryLevel();
@@ -89,6 +93,10 @@ await strengthsAndNeedsLandingPage.tickPositiveExperienceOfEducation();
 await strengthsAndNeedsLandingPage.tickIHaveAlreadyMadeChanges();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 // Fill in practicioner analysis 
 await strengthsAndNeedsLandingPage.clickPracticionerAnalysisTab();
 await strengthsAndNeedsLandingPage.tickEmploymentFactors();
@@ -97,6 +105,10 @@ await strengthsAndNeedsLandingPage.tickEmploymentRiskOfReoffending();
 await strengthsAndNeedsLandingPage.clickMarkAsComplete();
 await strengthsAndNeedsLandingPage.checkEmploymentSectionCompleteIconDisplays();
 console.log('Employment assessment completed');
+
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
 
 // Fill in finances assessment
 await strengthsAndNeedsLandingPage.clickFinancesLeftNavLink();
@@ -109,6 +121,10 @@ await strengthsAndNeedsLandingPage.tickDebtToOthers();
 await strengthsAndNeedsLandingPage.tickFinanceIHaveAlreadyMadechanges();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 // Fill in practicioner analysis 
 await strengthsAndNeedsLandingPage.clickPracticionerAnalysisTab();
 await strengthsAndNeedsLandingPage.tickFinanceFactors();
@@ -117,6 +133,10 @@ await strengthsAndNeedsLandingPage.tickFinanceRiskOfReoffending();
 await strengthsAndNeedsLandingPage.clickMarkAsComplete();
 await strengthsAndNeedsLandingPage.checkFinanceSectionCompleteIconDisplays();
 console.log('Finances assessment completed');
+
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
 
 // Fill in drug use assessment
 await strengthsAndNeedsLandingPage.clickDrugUseLeftNavLink();
@@ -132,6 +152,10 @@ await strengthsAndNeedsLandingPage.clickMarkAsComplete();
 await strengthsAndNeedsLandingPage.checkDrugSectionCompleteIconDisplays();
 console.log('Drug use assessment completed');
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 // Fill in alcohol use assessment
 await strengthsAndNeedsLandingPage.clickAlcoholUseLeftNavLink();
 await strengthsAndNeedsLandingPage.tickNoAlcoholUse();
@@ -145,6 +169,10 @@ await strengthsAndNeedsLandingPage.tickAlcoholRiskOfReoffending();
 await strengthsAndNeedsLandingPage.clickMarkAsComplete();
 await strengthsAndNeedsLandingPage.checkAlcoholSectionCompleteIconDisplays();
 console.log('Alcohol use assessment completed');
+
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
 
 // Fill in health and wellbeing assessment
 await strengthsAndNeedsLandingPage.clickHealthAndWellbeingLeftNavLink();
@@ -164,6 +192,10 @@ await strengthsAndNeedsLandingPage.tickHealthPositiveFactors();
 await strengthsAndNeedsLandingPage.tickHealthAlreadyMakingChanges();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 // Fill in practicioner analysis 
 await strengthsAndNeedsLandingPage.clickPracticionerAnalysisTab();
 await strengthsAndNeedsLandingPage.tickHealthFactors();
@@ -173,14 +205,26 @@ await strengthsAndNeedsLandingPage.clickMarkAsComplete();
 await strengthsAndNeedsLandingPage.checkHealthSectionCompleteIconDisplays();
 console.log('Health and wellbeing assessment completed');
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 // Fill in personal relationships and community assessment
 await strengthsAndNeedsLandingPage.clickPersonalRelationshipsLeftNavLink();
 await strengthsAndNeedsLandingPage.tickYesChildrenLiving();
 await strengthsAndNeedsLandingPage.fillInInfoAboutChildren();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 await strengthsAndNeedsLandingPage.tickPartnerImportantPeople();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
+
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
 
 await strengthsAndNeedsLandingPage.tickHappyWithRelationship();
 await strengthsAndNeedsLandingPage.tickStableRelationship();
@@ -191,6 +235,10 @@ await strengthsAndNeedsLandingPage.tickChildBehaviouralProblem();
 await strengthsAndNeedsLandingPage.tickPersonalRelationshipsAlreadyMakingChanges();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 // Fill in practicioner analysis
 await strengthsAndNeedsLandingPage.clickPracticionerAnalysisTab();
 await strengthsAndNeedsLandingPage.tickPersonalRelationshipsFactors();
@@ -199,6 +247,10 @@ await strengthsAndNeedsLandingPage.tickPersonalRelationshipsRiskOfReoffending();
 await strengthsAndNeedsLandingPage.clickMarkAsComplete();
 await strengthsAndNeedsLandingPage.checkPersonalRelationshipsSectionCompleteIconDisplays();
 console.log('Personal and relationships assessment completed');
+
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
 
 // Fill in thinking behaviours and attitudes assessment
 await strengthsAndNeedsLandingPage.clickThinkingAndAttitudesLeftNavLink();
@@ -211,6 +263,10 @@ await strengthsAndNeedsLandingPage.tickUnderstandsPeoplesViews();
 await strengthsAndNeedsLandingPage.tickNoManipulativeBehaviour();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 await strengthsAndNeedsLandingPage.tickTemperManagement();
 await strengthsAndNeedsLandingPage.tickDoesntUseViolence();
 await strengthsAndNeedsLandingPage.tickImpulsiveBehaviour();
@@ -221,8 +277,16 @@ await strengthsAndNeedsLandingPage.tickDoesntSupportCriminalBehaviour();
 await strengthsAndNeedsLandingPage.tickThinkingBehaviourAlreadyMakingChanges();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 await strengthsAndNeedsLandingPage.tickNoSexualRiskToOthers();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
+
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
 
 // Fill in practicioner analysis
 await strengthsAndNeedsLandingPage.clickPracticionerAnalysisTab();
@@ -234,6 +298,10 @@ await strengthsAndNeedsLandingPage.clickMarkAsComplete();
 await strengthsAndNeedsLandingPage.checkThinkingBehaviourSectionCompleteIconDisplays();
 console.log('Thinking behaviour assessment completed');
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 // Fill in offence analysis
 await strengthsAndNeedsLandingPage.clickOffenceAnalysisLeftNavLink();
 await strengthsAndNeedsLandingPage.fillBriefDescription();
@@ -243,6 +311,10 @@ await strengthsAndNeedsLandingPage.tickThrillSeeking();
 await strengthsAndNeedsLandingPage.tickOneOrMorePeople();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 await strengthsAndNeedsLandingPage.tickVictimIsAStranger();
 await strengthsAndNeedsLandingPage.tickVictimAge50to64();
 await strengthsAndNeedsLandingPage.tickVictimUnknownGender();
@@ -250,8 +322,16 @@ await strengthsAndNeedsLandingPage.selectVictimsRace();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
+
 await strengthsAndNeedsLandingPage.tickNoneInvolved();
 await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
+
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
 
 await strengthsAndNeedsLandingPage.tickRealizesImpactOnVictims();
 await strengthsAndNeedsLandingPage.tickAcceptsResponsibility();
@@ -263,6 +343,10 @@ await strengthsAndNeedsLandingPage.tickNoToPerpetratorOfDomestic();
 await strengthsAndNeedsLandingPage.tickNoToBeingAVictim();
 await strengthsAndNeedsLandingPage.clickMarkAsComplete();
 console.log('Offence analysis completed');
+
+// check page load duration
+page.evaluate(() => window.performance.mark('page-visit'))
+page.evaluate(() => window.performance.measure('page-visit', 'action-completed'))
 
 // Ensure user is on ofeence analysis summary page
 await strengthsAndNeedsLandingPage.confirmUserIsOnOffenceAnalysisPage();

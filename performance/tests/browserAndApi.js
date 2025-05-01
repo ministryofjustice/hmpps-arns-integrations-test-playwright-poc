@@ -10,7 +10,7 @@ export const options = {
       executor: 'constant-vus',
       exec: 'browserTest',
       vus: 1,
-      duration: '10s',
+      duration: '30s',
       options: {
         browser: {
           type: 'chromium',
@@ -41,6 +41,20 @@ export async function browserTest() {
     // Check the page is correct
     await check(page.locator('#main-content > div > div:nth-child(2) > div > div > h1')
       .textContent === 'Strengths and needs',
+    );
+
+    // Select No accomodation
+    await page.locator('#current_accommodation-3').check();
+
+    // Select emergency hostel
+    await page.locator('#type_of_no_accommodation-2').check();
+
+    // Submit form
+    await page.locator('#form > div.questiongroup-action-buttons > button').click();
+
+    // Ensure user is on the no accomodation page
+    await check(page.locator('#no_accommodation_reason-hint > div > p:nth-child(1)')
+      .textContent === 'Consider current and past homelessness issues.',
     );
 
   } finally {

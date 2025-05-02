@@ -5,6 +5,7 @@ import { sleep } from 'k6';
 
 const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/'
 
+//#region options
 export const options = {
   scenarios: {
     browser: {
@@ -39,7 +40,9 @@ export const options = {
     http_req_duration: ['p(95)<200'], // 95% of requests should be below 200ms
   },
 };
+//#endregion
 
+//#region browser test
 export async function browserTest() {
   const page = await browser.newPage();
 
@@ -89,7 +92,9 @@ export async function browserTest() {
     await page.close();
   }
 }
+//#endregion
 
+//#region api test
 export function api() {
 
   const res = http.get('https://arns-oastub-test.hmpps.service.justice.gov.uk/');
@@ -98,3 +103,4 @@ export function api() {
     'status is 200': (r) => r.status === 200,
   });
 }
+//#endregion

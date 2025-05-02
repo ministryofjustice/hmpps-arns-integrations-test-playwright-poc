@@ -14,15 +14,21 @@ export const options = {
       options: {
         browser: {
           type: 'chromium',
-          headless: 'false'
+          headless: 'false',
         },
       },
     },
     api: {
-      executor: 'constant-vus',
+      executor: 'ramping-vus',
       exec: 'api',
-      vus: 20,
-      duration: '1m',
+      //vus: 50,
+      //duration: '1m',
+      stages: [
+        { duration: '25s', target: 50 },  // Gradually increase to 50 VUs
+        { duration: '25s', target: 50 },   // Maintain 50 VUs
+        { duration: '10s', target: 0 },  // Gradually reduce to 0 VUs with graceful shutdown
+      ],
+      gracefulRampDown: '10s',
     },
   },
 };

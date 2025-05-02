@@ -1,6 +1,7 @@
 import { browser } from 'k6/browser';
 import { check } from 'https://jslib.k6.io/k6-utils/1.5.0/index.js';
 import http from 'k6/http';
+import { sleep } from 'k6';
 
 const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/'
 
@@ -10,7 +11,7 @@ export const options = {
       executor: 'constant-vus',
       exec: 'browserTest',
       vus: 1,
-      duration: '30s',
+      duration: '1m',
       options: {
         browser: {
           type: 'chromium',
@@ -24,8 +25,8 @@ export const options = {
       //vus: 50,
       //duration: '1m',
       stages: [
-        { duration: '25s', target: 50 },  // Gradually increase to 50 VUs
-        { duration: '25s', target: 50 },   // Maintain 50 VUs
+        { duration: '10s', target: 50 },  // Gradually increase to 50 VUs
+        { duration: '10s', target: 50 },   // Maintain 50 VUs
         { duration: '10s', target: 0 },  // Gradually reduce to 0 VUs with graceful shutdown
       ],
       gracefulRampDown: '10s',
@@ -46,28 +47,43 @@ export async function browserTest() {
     await page.goto(testStubUrl, { waitUntil: 'networkidle' });
 
     // Access SAN assessment
-    await page.locator('#target-service').selectOption('strengths-and-needs-assessment');
-    await page.locator('#form > div:nth-child(2) > div > div.action-shelf > button').click();
-    await page.locator('#main-content > div.govuk-grid-row > div > div > div.govuk-button-group > a').click();
+    await page.locator('//*[@id="target-service"]').selectOption('strengths-and-needs-assessment');
+    await page.locator('//*[@id="form"]/div[1]/div/div/button[1]').click();
+    await page.locator('//*[@id="main-content"]/div[3]/div/div/div[2]/a').click();
+    sleep(3);
 
-    // Check the page is correct
-    await check(page.locator('#main-content > div > div:nth-child(2) > div > div > h1')
-      .textContent === 'Strengths and needs',
-    );
+    // Move driver
+    const pages = browser.context().pages();
+    const page2 = pages[pages.length - 1];
+
+    await page2.bringToFront();
+    console.log('Current URL after switching: ', page2.url())
+    console.log(page2.title());
+    console.log("=========================");
 
     // Select No accomodation
-    await page.locator('#current_accommodation-3').check();
+    await page2.locator('#current_accommodation-3').check();
 
     // Select emergency hostel
-    await page.locator('#type_of_no_accommodation-2').check();
+    await page2.locator('#type_of_no_accommodation-2').check();
 
     // Submit form
-    await page.locator('#form > div.questiongroup-action-buttons > button').click();
+    await page2.locator('//*[@id="form"]/div[2]/button').click();
+    sleep(3);
 
-    // Ensure user is on the no accomodation page
-    await check(page.locator('#no_accommodation_reason-hint > div > p:nth-child(1)')
-      .textContent === 'Consider current and past homelessness issues.',
-    );
+    // Submit no accomodation form
+    await page2.locator('//*[@id="no_accommodation_reason-6"]').check();
+    await page2.locator('//*[@id="suitable_housing_planned-3"]').check();
+    await page2.locator('//*[@id="accommodation_changes-4"]').check();
+    await page2.locator('//*[@id="form"]/div[5]/button').click();
+    
+    // Submit practitioner analysis
+    await page2.locator('//*[@id="tab_practitioner-analysis"]').click();
+    await page2.locator('//*[@id="accommodation_practitioner_analysis_strengths_or_protective_factors-2"]').check();
+    await page2.locator('//*[@id="accommodation_practitioner_analysis_risk_of_serious_harm-2"]').check();
+    await page2.locator('//*[@id="accommodation_practitioner_analysis_risk_of_reoffending"]').check();
+    await page2.locator('//*[@id="accommodation_practitioner_analysis_risk_of_reoffending_yes_details"]').type('Performance test');
+    await page2.locator('//*[@id="form"]/div[4]/button').click();
 
   } finally {
     await page.close();

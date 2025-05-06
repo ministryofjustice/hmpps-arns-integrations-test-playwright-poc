@@ -88,6 +88,34 @@ export async function browserTest() {
     await page2.locator('//*[@id="accommodation_practitioner_analysis_risk_of_reoffending_yes_details"]').type('Performance test');
     await page2.locator('//*[@id="form"]/div[4]/button').click();
 
+    // Move onto Employment and education section
+    await page2.locator('//*[@id="main-content"]/div/div[3]/div[1]/nav/ul/li[2]/a').click();
+    await page2.locator('//*[@id="employment_status-2"]').check();
+    await page2.locator('//*[@id="form"]/div[2]/button').click();
+
+    await page2.locator('//a[contains(text(), "Employment and education")]').check();
+    await page2.locator('//*[@id="employment_other_responsibilities"]').check();
+    await page2.locator('//*[@id="education_highest_level_completed-8"]').check();
+    await page2.locator('//*[@id="education_professional_or_vocational_qualifications-4"]').check();
+    await page2.locator('//*[@id="education_transferable_skills-2"]').check();
+    await page2.locator('//*[@id="education_difficulties-5"]').check();
+    await page2.locator('//*[@id="employment_experience"]').check();
+    await page2.locator('//*[@id="education_experience"]').check();
+    await page2.locator('//*[@id="employment_education_changes-3"]').check();
+
+    // Submit form
+    await page2.locator('//*[@id="form"]/div[11]/button').click();
+
+    // Submit practitioner analysis
+    await page2.locator('//*[@id="tab_practitioner-analysis"]').click();
+    await page2.locator('//*[@id="employment_education_practitioner_analysis_strengths_or_protective_factors-2"]').check();
+    await page2.locator('//*[@id="employment_education_practitioner_analysis_risk_of_serious_harm-2"]').check();
+    await page2.locator('//*[@id="employment_education_practitioner_analysis_risk_of_reoffending"]').check();
+    await page2.locator('//*[@id="employment_education_practitioner_analysis_risk_of_reoffending_yes_details"]').type('Performance test');
+    await page2.locator('//*[@id="form"]/div[4]/button').click();
+
+    sleep(5);
+
   } finally {
     await page.close();
   }

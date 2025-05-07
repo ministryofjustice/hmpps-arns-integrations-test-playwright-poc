@@ -1,5 +1,5 @@
 # Setup
-To run locally first install k6
+To run locally first install k6. The browser module is now included in the default installation as of k6 version 0.52.0.
 `brew install k6`
 
 To run the tests head/headless you will need chromium installed - to install chromium run

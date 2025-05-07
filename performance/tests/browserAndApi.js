@@ -4,36 +4,51 @@ import http from 'k6/http';
 import { sleep } from 'k6';
 
 const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/'
-const employmentAndEducationUrl = 'https://strengths-based-needs-assessments-test.hmpps.service.justice.gov.uk/form/1/0/current-employment'
+
+const SCENARIO = __ENV.SCENARIO || 'load, soak'; // API scenario to run alongside browser
 
 //#region options
 export const options = {
-  scenarios: {
-    browser: {
-      executor: 'constant-vus',
-      exec: 'browserTest',
-      vus: 1,
-      duration: '30s',
-      options: {
-        browser: {
-          type: 'chromium',
-          headless: 'false',
+  scenarios: (function () {
+    const scenarios = {
+      browser: {
+        executor: 'constant-vus',
+        exec: 'browserTest',
+        vus: 1,
+        duration: '2m',
+        options: {
+          browser: {
+            type: 'chromium',
+            headless: false,
+          },
         },
       },
-    },
-    api: {
-      executor: 'ramping-vus',
-      exec: 'api',
-      //vus: 50,
-      //duration: '1m',
-      stages: [
-        { duration: '10s', target: 50 },  // Gradually increase to 50 VUs
-        { duration: '10s', target: 50 },   // Maintain 50 VUs
-        { duration: '10s', target: 0 },  // Gradually reduce to 0 VUs with graceful shutdown
-      ],
-      gracefulRampDown: '10s',
-    },
-  },
+    };
+
+    if (SCENARIO === 'load') {
+      scenarios.api = {
+        executor: 'ramping-vus',
+        exec: 'apiLoad',
+        stages: [
+          { duration: '30s', target: 50 },
+          { duration: '1m', target: 50 },
+          { duration: '30s', target: 0 },
+        ],
+        gracefulRampDown: '10s',
+      };
+    }
+  
+    if (SCENARIO === 'soak') {
+      scenarios.api = {
+        executor: 'constant-vus',
+        exec: 'apiSoak',
+        vus: 50,
+        duration: '5m',
+      };
+    }
+    return scenarios;
+  })(),
+
   thresholds: {
     browser_http_req_failed: ['rate<0.01'], // http errors should be less than 1%
     browser_http_req_duration: ['p(90)<200', 'p(95)<500'], // 90% of requests should be below 200ms / 95% of requests should be below 500ms
@@ -124,12 +139,25 @@ export async function browserTest() {
 //#endregion
 
 //#region api test
-export function api() {
+export function apiLoad() {
 
   const res = http.get('https://arns-oastub-test.hmpps.service.justice.gov.uk/');
-
   check(res, {
     'status is 200': (r) => r.status === 200,
   });
+  sleep(1);
 }
+
+export function apiSoak() {
+
+  const res = http.get('https://arns-oastub-test.hmpps.service.justice.gov.uk/');
+  check(res, {
+    'status is 200': (r) => r.status === 200,
+  });
+  sleep(2);
+}
+
+
+
+
 //#endregion

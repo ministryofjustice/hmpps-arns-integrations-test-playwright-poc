@@ -18,12 +18,6 @@ The available runtime scenarios are:
  * load
  * soak
 
- ** note ** 
- The API tests require an Authorization header to be added at runtime. This can be configued as an ENVIRONMENT VARIABLE depending on the environment:
-
-* Dev = DEV_AUTH
-* PreProd = PRE_PROD_AUTH
-
 # Running the tests
 To run the tests locally these can be executed from the command line in a terminal. 
 From the route of the project, you can run the following commands
@@ -47,12 +41,7 @@ There have been thresholds set on a selection of metrics that have been specifie
 * Server response time is lower than 2000 milliseconds in 90% of requests and lower than
 5000 milliseconds in 100% of requests
 This is captured in `browser_http_req_duration` && `browser_http_req_failed`
-* “start” page within the service should take longer than 2 seconds to load in 90% of
-sessions
-This is captured in `total_dashboard_time`
 * The API test metrics are also monitored 
 This is captured in `http_req_duration` && `http_req_failed`
 
 Should any of these exceed the selected threshold metric an error will be displayed in the test results.
-
-

@@ -4,6 +4,7 @@ import http from 'k6/http';
 import { sleep } from 'k6';
 
 const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/'
+const employmentAndEducationUrl = 'https://strengths-based-needs-assessments-test.hmpps.service.justice.gov.uk/form/1/0/current-employment'
 
 //#region options
 export const options = {
@@ -12,7 +13,7 @@ export const options = {
       executor: 'constant-vus',
       exec: 'browserTest',
       vus: 1,
-      duration: '1m',
+      duration: '30s',
       options: {
         browser: {
           type: 'chromium',
@@ -87,14 +88,15 @@ export async function browserTest() {
     await page2.locator('//*[@id="accommodation_practitioner_analysis_risk_of_reoffending"]').check();
     await page2.locator('//*[@id="accommodation_practitioner_analysis_risk_of_reoffending_yes_details"]').type('Performance test');
     await page2.locator('//*[@id="form"]/div[4]/button').click();
+    sleep(3);
 
     // Move onto Employment and education section
-    await page2.locator('//*[@id="main-content"]/div/div[3]/div[1]/nav/ul/li[2]/a').click();
+    await page2.locator('//*[@id="main-content"]/div/div[3]/div[1]/nav/ul/li[2]/a/span').click();
     await page2.locator('//*[@id="employment_status-2"]').check();
     await page2.locator('//*[@id="form"]/div[2]/button').click();
 
-    await page2.locator('//a[contains(text(), "Employment and education")]').check();
     await page2.locator('//*[@id="employment_other_responsibilities"]').check();
+    await page2.locator('//*[@id="employment_history"]').click();
     await page2.locator('//*[@id="education_highest_level_completed-8"]').check();
     await page2.locator('//*[@id="education_professional_or_vocational_qualifications-4"]').check();
     await page2.locator('//*[@id="education_transferable_skills-2"]').check();
@@ -113,8 +115,7 @@ export async function browserTest() {
     await page2.locator('//*[@id="employment_education_practitioner_analysis_risk_of_reoffending"]').check();
     await page2.locator('//*[@id="employment_education_practitioner_analysis_risk_of_reoffending_yes_details"]').type('Performance test');
     await page2.locator('//*[@id="form"]/div[4]/button').click();
-
-    sleep(5);
+    sleep(3);
 
   } finally {
     await page.close();

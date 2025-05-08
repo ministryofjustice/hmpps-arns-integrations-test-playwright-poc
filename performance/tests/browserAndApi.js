@@ -20,7 +20,7 @@ export const options = {
         executor: 'constant-vus',
         exec: 'browserTest',
         vus: 1,
-        duration: '30s',
+        duration: '2m',
         // adjust the above values as needed if you need to run browser an API scenarios together 
         options: {
           browser: {
@@ -36,9 +36,10 @@ export const options = {
         executor: 'ramping-vus',
         exec: 'runIfLoad',
         stages: [
-          { duration: '2m', target: 500 },
-          { duration: '2m', target: 500 },
-          { duration: '1m', target: 0 },
+          { duration: '2m', target: 500 },   // Ramp up to 500 VUs over 2 minutes
+          { duration: '5m', target: 2000 },  // Ramp up to 2000 VUs over 5 minutes
+          { duration: '5m', target: 2000 },  // Hold 2000 VUs for 5 minutes
+          { duration: '1m', target: 0 },     // Ramp down over 1 minute
         ],
         gracefulRampDown: '1m',
       };

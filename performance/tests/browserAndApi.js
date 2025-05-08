@@ -7,30 +7,34 @@ import formData from '../data/formData.js';
 
 const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/'
 
-const SCENARIO = __ENV.SCENARIO || 'load, soak'; // API scenario to run alongside browser
+const SCENARIOS = (__ENV.SCENARIO || 'load').split(',').map(s => s.trim());
+// splitting scenarios into a list to set which api test to run alongside the browser test
+// refer to the README to pass scenarios in your run commands
 
 //#region options
 export const options = {
   scenarios: (function () {
-    const scenarios = {
-      browser: {
+    const scenarios = {};
+    if (SCENARIOS.includes('browser')) {
+      scenarios.browser = {
         executor: 'constant-vus',
         exec: 'browserTest',
-        vus: 5,
-        duration: '5m',
+        vus: 1,
+        duration: '30s',
+        // adjust the above values as needed if you need to run browser an API scenarios together 
         options: {
           browser: {
             type: 'chromium',
             headless: false,
           },
         },
-      },
-    };
+      };
+    }
 
-    if (SCENARIO === 'load') {
+    if (SCENARIOS.includes('load')) {
       scenarios.api = {
         executor: 'ramping-vus',
-        exec: 'apiLoad',
+        exec: 'runIfLoad',
         stages: [
           { duration: '2m', target: 500 },
           { duration: '2m', target: 500 },
@@ -40,12 +44,22 @@ export const options = {
       };
     }
   
-    if (SCENARIO === 'soak') {
+    if (SCENARIOS.includes('soak')) {
       scenarios.api = {
         executor: 'constant-vus',
-        exec: 'apiSoak',
+        exec: 'runIfSoak',
         vus: 50,
-        duration: '5m',
+        duration: '1h',
+      };
+    }
+
+    if (SCENARIOS.includes('smoke')) {
+      scenarios.api = {
+        executor: 'shared-iterations',
+        exec: 'runIfSmoke',
+        vus: 1,
+        iterations: 1,
+        maxDuration: '30s',
       };
     }
     return scenarios;
@@ -141,7 +155,7 @@ export async function browserTest() {
 //#endregion
 
 //#region api test
-export function apiLoad() {
+export function apiTest() {
 
   // Send the GET request and retrieve cookies
   const res = http.get(testStubUrl);
@@ -171,16 +185,14 @@ export function apiLoad() {
   sleep(1);
 }
 
-export function apiSoak() {
-
-  const res = http.get('https://arns-oastub-test.hmpps.service.justice.gov.uk/');
-  check(res, {
-    'status is 200': (r) => r.status === 200,
-  });
-  sleep(2);
+export function runIfLoad() {
+  if (SCENARIOS.includes('load')) apiTest();
 }
-
-
-
+export function runIfSoak() {
+  if (SCENARIOS.includes('soak')) apiTest();
+}
+export function runIfSmoke() {
+  if (SCENARIOS.includes('smoke')) apiTest();
+}
 
 //#endregion

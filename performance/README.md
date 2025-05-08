@@ -6,30 +6,32 @@ To run the tests head/headless you will need chromium installed - to install chr
 `brew install --force chromium --no-quarantine ` 
 
 # Configure the tests
-The tests are configured so the browser test always runs in parallel with one selected API scenario (like "load" or "soak"), to monitor the UI whilst the API is being subjected to various loads. The logic is as follows:
-* The browser scenario always runs, regardless of SCENARIO
-* The SCENARIO env var controls only the API scenario (load or soak)
+The tests are configured so the browser and api tests can be run independently or in parallel with one selected API scenario (like "load" or "soak"), to monitor the UI whilst the API is being subjected to various loads. The logic is as follows:
+* The SCENARIO env var controls the scenarios
  
-
 The available runtime scenarios are:
  
- BROWSER TEST
- API TESTS
+ - BROWSER TEST
+ - API TESTS
  * load
  * soak
+ * smoke
 
 # Running the tests
 To run the tests locally these can be executed from the command line in a terminal. 
 From the route of the project, you can run the following commands
 
+Browser test only
+`SCENARIO=browser k6 run performance/tests/browserAndApi.js`
+
 Browser + Load test
-`SCENARIO=load k6 run performance/tests/browserAndApi.js`
+`SCENARIO=browser,load k6 run performance/tests/browserAndApi.js`
 
 Browser + Soak test
-`SCENARIO=soak k6 run performance/tests/browserAndApi.js`
+`SCENARIO=browser,soak k6 run performance/tests/browserAndApi.js`
 
-To run the tests in head mode and see the browser (HEADLESS:FALSE)
-`K6_BROWSER_HEADLESS=false load k6 run performance/tests/browserAndApi.js`
+To run the browser tests in head mode and see the browser (HEADLESS:FALSE)
+`K6_BROWSER_HEADLESS=false browser k6 run performance/tests/browserAndApi.js`
 
 NOTE: you may want to adjust the `duration` value in the Browser test to match which API scneario you're running, but not necessarily. The default 2m value gives a reasonable snapshot on UI monitoring for the scenarios.
 

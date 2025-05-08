@@ -15,7 +15,7 @@ export const options = {
         executor: 'constant-vus',
         exec: 'browserTest',
         vus: 1,
-        duration: '2m',
+        duration: '5m',
         options: {
           browser: {
             type: 'chromium',
@@ -30,11 +30,11 @@ export const options = {
         executor: 'ramping-vus',
         exec: 'apiLoad',
         stages: [
-          { duration: '30s', target: 50 },
-          { duration: '1m', target: 50 },
-          { duration: '30s', target: 0 },
+          { duration: '2m', target: 500 },
+          { duration: '2m', target: 500 },
+          { duration: '1m', target: 0 },
         ],
-        gracefulRampDown: '10s',
+        gracefulRampDown: '1m',
       };
     }
   
@@ -141,8 +141,36 @@ export async function browserTest() {
 //#region api test
 export function apiLoad() {
 
+  // Step 1: Send a GET request and retrieve cookies
   const res = http.get('https://arns-oastub-test.hmpps.service.justice.gov.uk/');
+  
+  // Check that the response status is 200
   check(res, {
+    'status is 200': (r) => r.status === 200,
+  });
+  
+  // Get cookie from the GET request
+  const sessionCookie = res.cookies['hmpps-assess-risks-and-needs-oastub-ui.session'];
+  
+  // Step 2: Prepare the headers for the POST request
+  const headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Cookie': `hmpps-assess-risks-and-needs-oastub-ui.session=${sessionCookie}`, // Add the session cookie here
+  };
+
+  // Step 3: Send a POST request using the cookie from the GET request
+  const postData = {
+    'target-service': 'strengths-and-needs-assessment',
+    'oasys-assessment-pk': '430739',
+    'given-name': 'Will',
+  };
+
+  //const encodedData = new URLSearchParams(postData).toString();
+
+  const postRes = http.post('https://arns-oastub-test.hmpps.service.justice.gov.uk/', JSON.stringify(postData), { headers: headers });
+
+  // Check that the POST request status is 200
+  check(postRes, {
     'status is 200': (r) => r.status === 200,
   });
   sleep(1);

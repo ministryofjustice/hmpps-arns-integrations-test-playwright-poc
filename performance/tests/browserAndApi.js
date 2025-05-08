@@ -43,7 +43,7 @@ export const options = {
         gracefulRampDown: '1m',
       };
     }
-  
+
     if (SCENARIOS.includes('soak')) {
       scenarios.api = {
         executor: 'constant-vus',
@@ -60,6 +60,17 @@ export const options = {
         vus: 1,
         iterations: 1,
         maxDuration: '30s',
+      };
+    }
+    if (SCENARIOS.includes('stress')) {
+      scenarios.api = {
+        executor: 'constant-arrival-rate',
+        exec: 'runIfStress',
+        rate: 1000,             // 1000 iterations per second
+        timeUnit: '1s',
+        duration: '5m',
+        preAllocatedVUs: 500,   // can start here
+        maxVUs: 4000,           // allows scaling up as needed
       };
     }
     return scenarios;
@@ -111,7 +122,7 @@ export async function browserTest() {
     await page2.locator('//*[@id="suitable_housing_planned-3"]').check();
     await page2.locator('//*[@id="accommodation_changes-4"]').check();
     await page2.locator('//*[@id="form"]/div[5]/button').click();
-    
+
     // Submit practitioner analysis
     await page2.locator('//*[@id="tab_practitioner-analysis"]').click();
     await page2.locator('//*[@id="accommodation_practitioner_analysis_strengths_or_protective_factors-2"]').check();
@@ -159,15 +170,15 @@ export function apiTest() {
 
   // Send the GET request and retrieve cookies
   const res = http.get(testStubUrl);
-  
+
   // Check that the response status is 200
   check(res, {
     'status is 200': (r) => r.status === 200,
   });
-  
+
   // Get cookie from the GET request
   const sessionCookie = res.cookies['hmpps-assess-risks-and-needs-oastub-ui.session'];
-  
+
   // Set headers for the POST request
   const headers = {
     'Content-Type': 'text/html; charset=utf-8',
@@ -176,7 +187,7 @@ export function apiTest() {
 
   const encodedData = (formData).toString();
 
-  const postRes = http.post(testStubUrl,  encodedData, { headers });
+  const postRes = http.post(testStubUrl, encodedData, { headers });
 
   // Check that the POST request status is 200
   check(postRes, {
@@ -193,6 +204,9 @@ export function runIfSoak() {
 }
 export function runIfSmoke() {
   if (SCENARIOS.includes('smoke')) apiTest();
+}
+export function runIfStress() {
+  if (SCENARIOS.includes('stress')) apiTest();
 }
 
 //#endregion

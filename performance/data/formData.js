@@ -1,0 +1,158 @@
+export default
+    {
+        "oasys-assessment-pk": "378421",
+        "subject": {
+            "given-name": "Yazmin",
+            "family-name": "Hirthe",
+            "gender": "9",
+            "date-of-birth": "1990-01-20",
+            "sexually-motivated-offence-history": "",
+            "location": "PRISON",
+            "crn": "X777916",
+            "pnc": "01/39560991A"
+        },
+        "user": {
+            "identifier": "OAStub-d68ad07f",
+            "display-name": "Pietro Gulgowski",
+            "access-mode": "READ_WRITE"
+        },
+        "versions": {
+            "assessment-version": "",
+            "sentence-plan-version": ""
+        },
+        "accLinkedToHarm": {
+            "accLinkedToHarm": "NULL"
+        },
+        "accLinkedToReoffending": {
+            "accLinkedToReoffending": "YES"
+        },
+        "accStrengths": {
+            "accStrengths": "YES"
+        },
+        "accOtherWeightedScore": {
+            "accOtherWeightedScore": "1"
+        },
+        "accThreshold": {
+            "accThreshold": "NULL"
+        },
+        "eteLinkedToHarm": {
+            "eteLinkedToHarm": "NO"
+        },
+        "eteLinkedToReoffending": {
+            "eteLinkedToReoffending": "NULL"
+        },
+        "eteStrengths": {
+            "eteStrengths": "YES"
+        },
+        "eteOtherWeightedScore": {
+            "eteOtherWeightedScore": "2"
+        },
+        "eteThreshold": {
+            "eteThreshold": "YES"
+        },
+        "financeLinkedToHarm": {
+            "financeLinkedToHarm": "NO"
+        },
+        "financeLinkedToReoffending": {
+            "financeLinkedToReoffending": "YES"
+        },
+        "financeStrengths": {
+            "financeStrengths": "NULL"
+        },
+        "financeOtherWeightedScore": {
+            "financeOtherWeightedScore": "N/A"
+        },
+        "financeThreshold": {
+            "financeThreshold": "N/A"
+        },
+        "drugLinkedToHarm": {
+            "drugLinkedToHarm": "NO"
+        },
+        "drugLinkedToReoffending": {
+            "drugLinkedToReoffending": "NO"
+        },
+        "drugStrengths": {
+            "drugStrengths": "NO"
+        },
+        "drugOtherWeightedScore": {
+            "drugOtherWeightedScore": "5"
+        },
+        "drugThreshold": {
+            "drugThreshold": "NULL"
+        },
+        "alcoholLinkedToHarm": {
+            "alcoholLinkedToHarm": "YES"
+        },
+        "alcoholLinkedToReoffending": {
+            "alcoholLinkedToReoffending": "NO"
+        },
+        "alcoholStrengths": {
+            "alcoholStrengths": "YES"
+        },
+        "alcoholOtherWeightedScore": {
+            "alcoholOtherWeightedScore": "0"
+        },
+        "alcoholThreshold": {
+            "alcoholThreshold": "NO"
+        },
+        "emoLinkedToHarm": {
+            "emoLinkedToHarm": "NO"
+        },
+        "emoLinkedToReoffending": {
+            "emoLinkedToReoffending": "YES"
+        },
+        "emoStrengths": {
+            "emoStrengths": "YES"
+        },
+        "emoOtherWeightedScore": {
+            "emoOtherWeightedScore": "N/A"
+        },
+        "emoThreshold": {
+            "emoThreshold": "N/A"
+        },
+        "relLinkedToHarm": {
+            "relLinkedToHarm": "YES"
+        },
+        "relLinkedToReoffending": {
+            "relLinkedToReoffending": "NO"
+        },
+        "relStrengths": {
+            "relStrengths": "NULL"
+        },
+        "relOtherWeightedScore": {
+            "relOtherWeightedScore": "0"
+        },
+        "relThreshold": {
+            "relThreshold": "YES"
+        },
+        "thinkLinkedToHarm": {
+            "thinkLinkedToHarm": "YES"
+        },
+        "thinkLinkedToReoffending": {
+            "thinkLinkedToReoffending": "NO"
+        },
+        "thinkStrengths": {
+            "thinkStrengths": "YES"
+        },
+        "thinkOtherWeightedScore": {
+            "thinkOtherWeightedScore": "5"
+        },
+        "thinkThreshold": {
+            "thinkThreshold": "NULL"
+        },
+        "lifestyleLinkedToHarm": {
+            "lifestyleLinkedToHarm": "N/A"
+        },
+        "lifestyleLinkedToReoffending": {
+            "lifestyleLinkedToReoffending": "N/A"
+        },
+        "lifestyleStrengths": {
+            "lifestyleStrengths": "N/A"
+        },
+        "lifestyleOtherWeightedScore": {
+            "lifestyleOtherWeightedScore": "6"
+        },
+        "lifestyleThreshold": {
+            "lifestyleThreshold": "YES"
+        }
+    }

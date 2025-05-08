@@ -2,6 +2,8 @@ import { browser } from 'k6/browser';
 import { check } from 'https://jslib.k6.io/k6-utils/1.5.0/index.js';
 import http from 'k6/http';
 import { sleep } from 'k6';
+import formData from '../data/formData.js';
+
 
 const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/'
 
@@ -14,7 +16,7 @@ export const options = {
       browser: {
         executor: 'constant-vus',
         exec: 'browserTest',
-        vus: 1,
+        vus: 5,
         duration: '5m',
         options: {
           browser: {
@@ -141,8 +143,8 @@ export async function browserTest() {
 //#region api test
 export function apiLoad() {
 
-  // Step 1: Send a GET request and retrieve cookies
-  const res = http.get('https://arns-oastub-test.hmpps.service.justice.gov.uk/');
+  // Send the GET request and retrieve cookies
+  const res = http.get(testStubUrl);
   
   // Check that the response status is 200
   check(res, {
@@ -152,22 +154,15 @@ export function apiLoad() {
   // Get cookie from the GET request
   const sessionCookie = res.cookies['hmpps-assess-risks-and-needs-oastub-ui.session'];
   
-  // Step 2: Prepare the headers for the POST request
+  // Set headers for the POST request
   const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Type': 'text/html; charset=utf-8',
     'Cookie': `hmpps-assess-risks-and-needs-oastub-ui.session=${sessionCookie}`, // Add the session cookie here
   };
 
-  // Step 3: Send a POST request using the cookie from the GET request
-  const postData = {
-    'target-service': 'strengths-and-needs-assessment',
-    'oasys-assessment-pk': '430739',
-    'given-name': 'Will',
-  };
+  const encodedData = (formData).toString();
 
-  //const encodedData = new URLSearchParams(postData).toString();
-
-  const postRes = http.post('https://arns-oastub-test.hmpps.service.justice.gov.uk/', JSON.stringify(postData), { headers: headers });
+  const postRes = http.post(testStubUrl,  encodedData, { headers });
 
   // Check that the POST request status is 200
   check(postRes, {

@@ -1,4 +1,5 @@
-import oracledb from 'oracledb';
+// Not used atm and not running
+/*import oracledb from 'oracledb';
 
 export async function getConnection(): Promise<oracledb.Connection> {
   return await oracledb.getConnection({
@@ -15,4 +16,4 @@ export async function runQuery<T = any>(query: string, params: any[] = []): Prom
   } finally {
     await connection.close();
   }
-}
+}*/

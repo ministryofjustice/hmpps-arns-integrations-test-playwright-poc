@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test';
+// Not used atm and not running
+/*import { test, expect } from '@playwright/test';
 import { runQuery } from '../utils/oracle';
 
 test('verify Oracle DB connectivity', async () => {
@@ -7,4 +8,4 @@ test('verify Oracle DB connectivity', async () => {
   expect(result.rows).toBeDefined();
   expect(result.rows.length).toBe(1);
   console.log('Oracle DB connection successful.', result.rows)
-});
+});*/

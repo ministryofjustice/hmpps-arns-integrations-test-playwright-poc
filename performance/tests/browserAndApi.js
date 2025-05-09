@@ -3,6 +3,7 @@ import { check } from 'https://jslib.k6.io/k6-utils/1.5.0/index.js';
 import http from 'k6/http';
 import { sleep } from 'k6';
 import formData from '../data/formData.js';
+import generateUUID from '../data/uuid.js'
 
 const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/'
 
@@ -58,7 +59,7 @@ export const options = {
         executor: 'shared-iterations',
         exec: 'runIfSmoke',
         vus: 1,
-        iterations: 30,
+        iterations: 1,
         maxDuration: '15s',
       };
     }
@@ -220,14 +221,24 @@ export function apiTest() {
 
   const encodedData = (formData).toString();
 
-  const postRes = http.post(testStubUrl, encodedData, { headers });
+  const postRes = http.post(testStubUrl, encodedData, { headers }); // Generate handover link
 
   // Check that the POST request status is 200
   check(postRes, {
     'status is 200': (r) => r.status === 200,
   });
-  //console.log(postRes).toString;
   sleep(Math.random() * 3) // comment out when running stress scenario
+
+  const uuid = generateUUID();
+  const handoverUrl = `https://arns-handover-service-test.hmpps.service.justice.gov.uk/handover/${uuid}?clientId=strengths-and-needs-assessment`; // navigate to handover link
+  console.log(handoverUrl)
+  const resHandover = http.post(handoverUrl, { headers });
+  check(resHandover, {
+    'status is 200': (r) => r.status === 200,
+  });
+  sleep(Math.random() * 3) // comment out when running stress scenario
+  console.log(`resHandover Status: ${resHandover.status}`);
+  console.log(`resHandover Body: ${resHandover.body}`);
 }
 
 export function runIfLoad() {

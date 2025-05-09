@@ -31,7 +31,7 @@ Browser + Soak test
 `SCENARIO=browser,soak k6 run performance/tests/browserAndApi.js`
 
 To run the browser tests in head mode and see the browser (HEADLESS:FALSE)
-`K6_BROWSER_HEADLESS=false browser k6 run performance/tests/browserAndApi.js`
+`SCENARIO=browser K6_BROWSER_HEADLESS=false k6 run performance/tests/browserAndApi.js`
 
 NOTE: you may want to adjust the `duration` value in the Browser test to match which API scneario you're running, but not necessarily. The default 2m value gives a reasonable snapshot on UI monitoring for the scenarios.
 

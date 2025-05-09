@@ -4,7 +4,6 @@ import http from 'k6/http';
 import { sleep } from 'k6';
 import formData from '../data/formData.js';
 
-
 const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/'
 
 const SCENARIOS = (__ENV.SCENARIO || 'load').split(',').map(s => s.trim());
@@ -36,9 +35,9 @@ export const options = {
         executor: 'ramping-vus',
         exec: 'runIfLoad',
         stages: [
-          { duration: '2m', target: 100 },   // Ramp up to 500 VUs over 2 minutes
-          { duration: '5m', target: 400 },  // Ramp up to 2000 VUs over 5 minutes
-          { duration: '5m', target: 400 },  // Hold 2000 VUs for 5 minutes
+          { duration: '2m', target: 100 },   // Ramp up to 100 VUs over 2 minutes
+          { duration: '5m', target: 400 },  // Ramp up to 400 VUs over 5 minutes
+          { duration: '5m', target: 400 },  // Hold 400 VUs for 5 minutes
           { duration: '1m', target: 0 },     // Ramp down over 1 minute
         ],
         gracefulRampDown: '1m',
@@ -65,13 +64,20 @@ export const options = {
     }
     if (SCENARIOS.includes('stress')) {
       scenarios.api = {
-        executor: 'constant-arrival-rate',
+        executor: 'ramping-arrival-rate',
         exec: 'runIfStress',
-        rate: 1000,             // 1000 iterations per second
+        startRate: 100,             // Start at 100 iterations/sec
         timeUnit: '1s',
-        duration: '5m',
-        preAllocatedVUs: 500,   // can start here
-        maxVUs: 4000,           // allows scaling up as needed
+        preAllocatedVUs: 500,
+        maxVUs: 4000,
+        stages: [
+          { target: 200, duration: '1m' },   // ramp to 200 RPS
+          { target: 400, duration: '1m' },   // ramp to 400 RPS
+          { target: 600, duration: '1m' },   // ramp to 600 RPS
+          { target: 800, duration: '1m' },   // ramp to 800 RPS
+          { target: 1000, duration: '1m' },  // ramp to 1000 RPS
+          { target: 1000, duration: '2m' },  // hold at 1000 RPS
+        ],
       };
     }
     return scenarios;

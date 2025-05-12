@@ -46,7 +46,7 @@ test('User views sentence plan with view only access', async ({ page }) => {
     const sentencePlanPage = new SentencePlanPage(page);
     const accessibility = new Accessibility(page);
 
-    // Navigate to the stub home page
+    // Navigate to the stub home page test
     await stubHomePage.goto();
 
     // Check the title of the page is correct

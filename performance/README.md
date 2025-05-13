@@ -28,11 +28,14 @@ Before running the api tests
 You need to capture the one-time handover link as  extracted url -
 the 'extract' scenario must be run first to get that value.
 
-1. `k6 run test.js --env SCENARIO=extract`
-2. extract the url:
+1. Get the one-time link url value 
+`SCENARIO=extract k6 run performance/tests/browserAndApi.js`
+2. extract the url
 `EXTRACTED_URL=$(echo "$extracted_output" | grep 'EXTRACTED_URL=' | sed 's/.*EXTRACTED_URL=//' | tr -d '\r' | xargs)`
 3. Now run the api test, example for smoke scenario:
 `k6 run performance/tests/browserAndApi.js --env SCENARIO=smoke --env EXTRACTED_URL=$EXTRACTED_URL`
+
+current workaround: paste the extractedUrl value
 
 ## NOTE: CURRENTLY DOESN'T WORK. 
 To use the run_test.sh file to run the api tests, navigate to the right path and run:

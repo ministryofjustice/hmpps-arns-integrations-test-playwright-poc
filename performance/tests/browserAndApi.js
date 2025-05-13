@@ -2,12 +2,12 @@ import { browser } from 'k6/browser';
 import { check } from 'https://jslib.k6.io/k6-utils/1.5.0/index.js';
 import http from 'k6/http';
 import { sleep } from 'k6';
-import formData from '../data/formData.js';
-import generateUUID from '../data/uuid.js'
+//import formData from '../data/formData.js';
+//import generateUUID from '../data/uuid.js'
 
-const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/'
+const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/';
 
-const SCENARIOS = (__ENV.SCENARIO || 'load').split(',').map(s => s.trim());
+const SCENARIOS = (__ENV.SCENARIO || 'smoke').split(',').map(s => s.trim());
 // splitting scenarios into a list to set which api test to run alongside the browser test
 // refer to the README to pass scenarios in your run commands
 
@@ -15,6 +15,23 @@ const SCENARIOS = (__ENV.SCENARIO || 'load').split(',').map(s => s.trim());
 export const options = {
   scenarios: (function () {
     const scenarios = {};
+
+    if (SCENARIOS.includes('extract')) {
+      scenarios.extract = {
+        executor: 'shared-iterations',
+        exec: 'extractUrl',
+        vus: 1,
+        iterations: 1,
+        maxDuration: '30s',
+        options: {
+          browser: {
+            type: 'chromium',
+            headless: true,
+          },
+        },
+      };
+    }
+
     if (SCENARIOS.includes('browser')) {
       scenarios.browser = {
         executor: 'constant-vus',
@@ -94,6 +111,7 @@ export const options = {
 //#endregion
 
 //#region browser test
+
 export async function browserTest() {
   const page = await browser.newPage();
 
@@ -198,47 +216,42 @@ export async function browserTest() {
 }
 //#endregion
 
+//#region extract handover url
+
+export async function extractUrl() {
+  const page = await browser.newPage();
+  try {
+    await page.goto(testStubUrl, { waitUntil: 'networkidle' });
+
+    await page.locator('//*[@id="target-service"]').selectOption('strengths-and-needs-assessment');
+    await page.locator('//*[@id="form"]/div[1]/div/div/button[1]').click();
+    sleep(1);
+
+    // Get one-time link
+    const element = await page.locator('//*[@id="one-time-link"]');
+    await element.waitFor();
+
+    // Get the value
+    const extractedUrl = await element.getAttribute('value');
+    console.log(`EXTRACTED_URL=${extractedUrl}`);
+    
+  } finally {
+    await page.close();
+  }
+}
+
+//#endregion
+
 //#region api test
-export function apiTest() {
+export async function apiTest() {
 
-  // Send the GET request and retrieve cookies
-  const res = http.get(testStubUrl);
-  sleep(Math.random() * 3) // comment out when running stress scenario
+  const extractedUrl = __ENV.EXTRACTED_URL;
+  console.log(`Using extracted URL: ${extractedUrl}`);
+  const res = http.get(extractedUrl);
 
-  // Check that the response status is 200
   check(res, {
     'status is 200': (r) => r.status === 200,
   });
-
-  // Get cookie from the GET request
-  const sessionCookie = res.cookies['hmpps-assess-risks-and-needs-oastub-ui.session'];
-
-  // Set headers for the POST request
-  const headers = {
-    'Content-Type': 'text/html; charset=utf-8',
-    'Cookie': `hmpps-assess-risks-and-needs-oastub-ui.session=${sessionCookie}`, // Add the session cookie here
-  };
-
-  const encodedData = (formData).toString();
-
-  const postRes = http.post(testStubUrl, encodedData, { headers }); // Generate handover link
-
-  // Check that the POST request status is 200
-  check(postRes, {
-    'status is 200': (r) => r.status === 200,
-  });
-  sleep(Math.random() * 3) // comment out when running stress scenario
-
-  const uuid = generateUUID();
-  const handoverUrl = `https://arns-handover-service-test.hmpps.service.justice.gov.uk/handover/${uuid}?clientId=strengths-and-needs-assessment`; // navigate to handover link
-  console.log(handoverUrl)
-  const resHandover = http.post(handoverUrl, { headers });
-  check(resHandover, {
-    'status is 200': (r) => r.status === 200,
-  });
-  sleep(Math.random() * 3) // comment out when running stress scenario
-  console.log(`resHandover Status: ${resHandover.status}`);
-  console.log(`resHandover Body: ${resHandover.body}`);
 }
 
 export function runIfLoad() {

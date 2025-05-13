@@ -16,7 +16,7 @@ The available runtime scenarios are:
  * load
  * soak
  * smoke
-
+ * stress
 # Running the tests
 To run the tests locally these can be executed from the command line in a terminal. 
 From the route of the project, you can run the following commands
@@ -24,11 +24,20 @@ From the route of the project, you can run the following commands
 Browser test only
 `SCENARIO=browser k6 run performance/tests/browserAndApi.js`
 
-Browser + Load test
-`SCENARIO=browser,load k6 run performance/tests/browserAndApi.js`
+Before running the api tests
+You need to capture the one-time handover link as  extracted url -
+the 'extract' scenario must be run first to get that value.
 
-Browser + Soak test
-`SCENARIO=browser,soak k6 run performance/tests/browserAndApi.js`
+1. `k6 run test.js --env SCENARIO=extract`
+2. extract the url:
+`EXTRACTED_URL=$(echo "$extracted_output" | grep 'EXTRACTED_URL=' | sed 's/.*EXTRACTED_URL=//' | tr -d '\r' | xargs)`
+3. Now run the api test, example for smoke scenario:
+`k6 run performance/tests/browserAndApi.js --env SCENARIO=smoke --env EXTRACTED_URL=$EXTRACTED_URL`
+
+## NOTE: CURRENTLY DOESN'T WORK. 
+To use the run_test.sh file to run the api tests, navigate to the right path and run:
+`chmod +x run_test.sh
+./run_test.sh`
 
 To run the browser tests in head mode and see the browser (HEADLESS:FALSE)
 `SCENARIO=browser K6_BROWSER_HEADLESS=false k6 run performance/tests/browserAndApi.js`

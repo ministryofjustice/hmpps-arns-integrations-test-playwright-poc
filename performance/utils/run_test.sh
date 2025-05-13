@@ -12,7 +12,7 @@ echo "$extracted_output"
 echo "--------------------------"
 
 # Extract the URL from the raw k6 output
-EXTRACTED_URL=$(echo "$extracted_output" | grep -o 'https://[^ ]*' | head -n1 | tr -d '\r"' | xargs)
+EXTRACTED_URL="$(echo "$extracted_output" | grep -o 'https://[^ ]*' | head -n1 | tr -d '\r"' | xargs)"
 
 # Check if the URL was extracted successfully
 if [ -z "$EXTRACTED_URL" ]; then

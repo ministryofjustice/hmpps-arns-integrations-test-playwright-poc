@@ -37,7 +37,7 @@ export const options = {
         executor: 'constant-vus',
         exec: 'browserTest',
         vus: 3,
-        duration: '2m',
+        duration: '10m',
         // adjust the above values as needed if you need to run browser an API scenarios together 
         options: {
           browser: {
@@ -53,10 +53,11 @@ export const options = {
         executor: 'ramping-vus',
         exec: 'runIfLoad',
         stages: [
-          { duration: '2m', target: 100 },   // Ramp up to 100 VUs over 2 minutes
-          { duration: '5m', target: 400 },  // Ramp up to 400 VUs over 5 minutes
-          { duration: '5m', target: 400 },  // Hold 400 VUs for 5 minutes
-          { duration: '1m', target: 0 },     // Ramp down over 1 minute
+          { duration: '2m', target: 1000 },  // Ramp up to 1k VUs in 2 minutes
+          { duration: '3m', target: 2000 },  // Ramp up to 2k VUs in 3 minutes
+          { duration: '2m', target: 3000 },  // Ramp to 3k VUs in 2 minutes
+          { duration: '5m', target: 3000 },  // Hold at 3k VUs for 5 minutes
+          { duration: '2m', target: 0 },     // Ramp down to 0
         ],
         gracefulRampDown: '1m',
       };
@@ -82,20 +83,18 @@ export const options = {
     }
     if (SCENARIOS.includes('stress')) {
       scenarios.api = {
-        executor: 'ramping-arrival-rate',
+        executor: 'ramping-vus',
         exec: 'runIfStress',
-        startRate: 100,             // Start at 100 iterations/sec
-        timeUnit: '1s',
-        preAllocatedVUs: 500,
-        maxVUs: 4000,
+        startVUs: 0,
         stages: [
-          { target: 200, duration: '1m' },   // ramp to 200 RPS
-          { target: 400, duration: '1m' },   // ramp to 400 RPS
-          { target: 600, duration: '1m' },   // ramp to 600 RPS
-          { target: 800, duration: '1m' },   // ramp to 800 RPS
-          { target: 1000, duration: '1m' },  // ramp to 1000 RPS
-          { target: 1000, duration: '2m' },  // hold at 1000 RPS
+          { duration: '1m', target: 1000 },  // ramp to 1k users
+          { duration: '1m', target: 2000 },  // ramp to 2k users
+          { duration: '1m', target: 3000 },  // ramp to 3k users
+          { duration: '2m', target: 3500 },  // push beyond expected peak
+          { duration: '2m', target: 3500 },  // hold to observe system under stress
+          { duration: '1m', target: 0 },     // ramp down
         ],
+        gracefulRampDown: '30s',
       };
     }
     return scenarios;

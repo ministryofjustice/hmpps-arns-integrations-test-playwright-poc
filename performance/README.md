@@ -29,9 +29,9 @@ You need to capture the one-time handover link as  extracted url -
 the 'extract' scenario must be run first to get that value.
 
 1. Get the one-time link url value 
-`SCENARIO=extract k6 run performance/tests/browserAndApi.js`
+`k6 run performance/tests/browserAndApi.js --env SCENARIO=extract`
 2. extract the url
-`EXTRACTED_URL=$(echo "$extracted_output" | grep 'EXTRACTED_URL=' | sed 's/.*EXTRACTED_URL=//' | tr -d '\r' | xargs)`
+`EXTRACTED_URL=$(echo "$extracted_output" | grep -o 'https://[^ ]*' | head -n1 | tr -d '\r"' | xargs)`
 3. Now run the api test, example for smoke scenario:
 `k6 run performance/tests/browserAndApi.js --env SCENARIO=smoke --env EXTRACTED_URL=$EXTRACTED_URL`
 

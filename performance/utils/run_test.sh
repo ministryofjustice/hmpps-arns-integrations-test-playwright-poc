@@ -19,13 +19,13 @@ EXTRACTED_URL=$(echo "$extracted_output" \
 
 # Check if the URL was extracted successfully
 if [ -z "$EXTRACTED_URL" ]; then
-  echo "❌ ERROR: Could not extract URL."
+  echo "ERROR: Could not extract URL."
   exit 1
 fi
 
-echo "✅ Extracted URL: $EXTRACTED_URL"
+echo "Extracted URL: $EXTRACTED_URL"
 
-echo "🚀 Running API test..."
+echo "Running API test..."
 ## Pass the scenarios you want to run in the command below
-## The test setup supports one or more than one. Example: browser, or browser,load or load on its own, etc.
-k6 run "$SCRIPT_PATH" --env SCENARIO=browser,load --env EXTRACTED_URL="$EXTRACTED_URL"
+## The test setup supports the run of API tests on their own, or API test with browser running in parallel.
+k6 run "$SCRIPT_PATH" --env SCENARIO=load --env EXTRACTED_URL="$EXTRACTED_URL"

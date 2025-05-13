@@ -17,41 +17,29 @@ The available runtime scenarios are:
  * soak
  * smoke
  * stress
+
 # Running the tests
 To run the tests locally these can be executed from the command line in a terminal. 
-From the route of the project, you can run the following commands
+From the route of the project, you can run the following commands, or navigate to the directory of the run_test.sh file and run that (you can configure which scenario to run in there too).
 
-Browser test only
+- Browser test only
 `SCENARIO=browser k6 run performance/tests/browserAndApi.js`
 
-Before running the api tests
-You need to capture the one-time handover link as  extracted url -
-the 'extract' scenario must be run first to get that value.
+- API tests
+Before running those, you need to capture the one-time handover link as  extracted url. The extract scenario must be run first to get that value, which is run as part of the execution of the bash script.
 
-1. Get the one-time link url value 
-`k6 run performance/tests/browserAndApi.js --env SCENARIO=extract`
-2. extract the url
-`EXTRACTED_URL=$(echo "$extracted_output" | grep -o 'https://[^ ]*' | head -n1 | tr -d '\r"' | xargs)`
-3. Now run the api test, example for smoke scenario:
-`k6 run performance/tests/browserAndApi.js --env SCENARIO=smoke --env EXTRACTED_URL=$EXTRACTED_URL`
+Technical description:
 
-current workaround: paste the extractedUrl value within " "
+The run_test.sh script is a Bash automation wrapper designed to run a two-phase performance testing workflow using k6. It first executes a browser-based extraction step to retrieve a dynamic URL, then passes that URL as an environment variable to run following API-based performance tests.
 
-NOTE: following running the extract function and having retrieved the extracted url, you can also run more than one scenario at a time. Example:
-
-Run the browser and smoke scnearios together:
-`k6 run performance/tests/browserAndApi.js --env SCENARIO=browser,smoke --env EXTRACTED_URL="$EXTRACTED_URL"`
-Or copy the actual url as a workaround for now
-
-## NOTE: CURRENTLY DOESN'T WORK. 
-To use the run_test.sh file to run the api tests, navigate to the right path and run:
+To use the run_test.sh file to run the api tests, navigate to the `utils` directory and run:
 `chmod +x run_test.sh
 ./run_test.sh`
 
 To run the browser tests in head mode and see the browser (HEADLESS:FALSE)
 `SCENARIO=browser K6_BROWSER_HEADLESS=false k6 run performance/tests/browserAndApi.js`
 
-NOTE: you may want to adjust the `duration` value in the Browser test to match which API scneario you're running, but not necessarily. The default 2m value gives a reasonable snapshot on UI monitoring for the scenarios.
+NOTE: you may want to adjust the `duration` value in the Browser test to match which API scneario you're running, but not necessarily.
 
 
 # The report

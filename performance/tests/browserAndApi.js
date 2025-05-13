@@ -245,7 +245,7 @@ export async function extractUrl() {
 export async function apiTest() {
 
   const extractedUrl = __ENV.EXTRACTED_URL;
-  console.log(`Using extracted URL: ${extractedUrl}`);
+  //console.log(`Using extracted URL: ${extractedUrl}`);
   const res = http.get(extractedUrl);
 
   check(res, {

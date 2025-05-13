@@ -35,7 +35,7 @@ the 'extract' scenario must be run first to get that value.
 3. Now run the api test, example for smoke scenario:
 `k6 run performance/tests/browserAndApi.js --env SCENARIO=smoke --env EXTRACTED_URL=$EXTRACTED_URL`
 
-current workaround: paste the extractedUrl value
+current workaround: paste the extractedUrl value within " "
 
 ## NOTE: CURRENTLY DOESN'T WORK. 
 To use the run_test.sh file to run the api tests, navigate to the right path and run:

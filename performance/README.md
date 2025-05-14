@@ -6,7 +6,7 @@ To run the tests head/headless you will need chromium installed - to install chr
 `brew install --force chromium --no-quarantine ` 
 
 # Configure the tests
-The tests are configured so the browser and api tests can be run independently or in parallel with one selected API scenario (like "load" or "soak"), to monitor the UI whilst the API is being subjected to various loads. The logic is as follows:
+The tests are configured so the browser and api tests can be run independently or in parallel with one selected API scenario (like "load","soak", etc), to monitor the UI whilst the API is being subjected to various loads. The logic is as follows:
 * The SCENARIO env var controls the scenarios
  
 The available runtime scenarios are:

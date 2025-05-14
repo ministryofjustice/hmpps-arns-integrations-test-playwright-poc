@@ -535,4 +535,12 @@ export class SentencePlanPage {
     async checkPlanHistoryPageTitle() {
         await expect(newTabGlobal!).toHaveTitle('Plan history - Sentence plan')
     }
+
+    async checkUpdateButtonAppears() {
+        await expect(newTabGlobal!.getByRole('link', { name: 'Update   (test)' })).toBeVisible();
+    }
+
+    async checkUpdateButtonHidden() {
+        await expect(newTabGlobal!.getByRole('link', { name: 'Update   (test)' })).toBeHidden();
+    }
 }

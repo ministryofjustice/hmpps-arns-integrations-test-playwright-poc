@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { DEFAULT_CLICK_OPTIONS, PK_WITH_COMPLETED_SAN } from './pages-common'
+import { DEFAULT_CLICK_OPTIONS, PK_WITH_COMPLETED_SAN, PK_FOR_ACCESS_MODE } from './pages-common'
 
 export class StubHomePage {
   constructor(
@@ -9,6 +9,8 @@ export class StubHomePage {
     private pasteConfigurationButton: Locator = page.getByRole('button', { name: 'Paste configuration' }),
     private openbutton: Locator = page.getByRole('button', { name: 'Open' }),
     private criminogenicNeedsTab: Locator = page.locator('#tab_criminogenicNeeds'),
+    private practionerDetailsTab: Locator = page.locator ('#tab_practioner-details'),
+    private accessModeDropdown: Locator = page.locator ('#access-mode'),
     private accLinkedToHarmDropdown: Locator = page.locator('#accLinkedToHarm'),
     private accLinkedToReoffending: Locator = page.locator('#accLinkedToReoffending'),
     private accStrengths: Locator = page.locator('#accStrengths'),
@@ -43,6 +45,17 @@ export class StubHomePage {
 
   async clickOpenButton() {
     await this.openbutton.click(DEFAULT_CLICK_OPTIONS);
+  }
+
+  async clickPractionerDetailsTab() {
+    await this.practionerDetailsTab.click();
+  }
+
+  async selectViewOnlyAccessMode() {
+    await this.accessModeDropdown.selectOption('View only');
+  }
+  async selectViewAndEditAccessMode() {
+    await this.accessModeDropdown.selectOption('View and edit');
   }
 
   async clickCriminogenicNeedsTab() {
@@ -95,5 +108,9 @@ export class StubHomePage {
 
   async fillInPkNumberOfCompletedAssessment() {
     await this.pkField.fill(PK_WITH_COMPLETED_SAN);
+  }
+
+  async fillInPkNumberForAccessMode() {
+    await this.pkField.fill(PK_FOR_ACCESS_MODE);
   }
 }

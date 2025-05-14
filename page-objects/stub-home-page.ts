@@ -109,4 +109,8 @@ export class StubHomePage {
   async fillInPkNumberOfCompletedAssessment() {
     await this.pkField.fill(PK_WITH_COMPLETED_SAN);
   }
+
+  async fillInPkNumberForAccessMode() {
+    await this.pkField.fill(PK_FOR_ACCESS_MODE);
+  }
 }

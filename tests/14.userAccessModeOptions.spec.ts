@@ -7,7 +7,6 @@ test('User views sentence plan with view and edit access', async ({ page }) => {
 
     const stubHomePage = new StubHomePage(page);
     const sentencePlanPage = new SentencePlanPage(page);
-    const accessibility = new Accessibility(page);
 
     // Navigate to the stub home page
     await stubHomePage.goto();
@@ -16,7 +15,7 @@ test('User views sentence plan with view and edit access', async ({ page }) => {
     await stubHomePage.checkPageTitle();
 
     // Paste PK of existing user
-    await stubHomePage.fillInPkNumberOfCompletedAssessment()
+    await stubHomePage.fillInPkNumberForAccessMode()
 
     // Select view and edit level of access
     await stubHomePage.clickPractionerDetailsTab();
@@ -44,7 +43,6 @@ test('User views sentence plan with view only access', async ({ page }) => {
 
     const stubHomePage = new StubHomePage(page);
     const sentencePlanPage = new SentencePlanPage(page);
-    const accessibility = new Accessibility(page);
 
     // Navigate to the stub home page
     await stubHomePage.goto();
@@ -53,7 +51,7 @@ test('User views sentence plan with view only access', async ({ page }) => {
     await stubHomePage.checkPageTitle();
 
     // Paste PK of existing user
-    await stubHomePage.fillInPkNumberOfCompletedAssessment()
+    await stubHomePage.fillInPkNumberForAccessMode()
 
     // Select view only level of access
     await stubHomePage.clickPractionerDetailsTab();

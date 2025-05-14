@@ -537,10 +537,10 @@ export class SentencePlanPage {
     }
 
     async checkUpdateButtonAppears() {
-        await expect(newTabGlobal!.getByRole('link', { name: 'Update   (test goal)' })).toBeVisible();
+        await expect(newTabGlobal!.getByRole('link', { name: 'Update   (test)' })).toBeVisible();
     }
 
     async checkUpdateButtonHidden() {
-        await expect(newTabGlobal!.getByRole('link', { name: 'Update   (test goal)' })).toBeHidden();
+        await expect(newTabGlobal!.getByRole('link', { name: 'Update   (test)' })).toBeHidden();
     }
 }

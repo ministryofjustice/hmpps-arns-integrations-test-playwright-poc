@@ -2,14 +2,11 @@ import { browser } from 'k6/browser';
 import { check } from 'https://jslib.k6.io/k6-utils/1.5.0/index.js';
 import http from 'k6/http';
 import { sleep } from 'k6';
-//import formData from '../data/formData.js';
-//import generateUUID from '../data/uuid.js'
 
 const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/';
 
 const SCENARIOS = (__ENV.SCENARIO || 'smoke').split(',').map(s => s.trim());
 // splitting scenarios into a list to set which api test to run alongside the browser test
-// refer to the README to pass scenarios in your run commands
 
 //#region options
 export const options = {
@@ -37,8 +34,8 @@ export const options = {
         executor: 'constant-vus',
         exec: 'browserTest',
         vus: 3,
-        duration: '10m',
-        // adjust the above values as needed if you need to run browser an API scenarios together 
+        duration: '2m',
+        // adjust the above value as needed if you need to run browser an API scenarios together 
         options: {
           browser: {
             type: 'chromium',
@@ -52,6 +49,7 @@ export const options = {
       scenarios.api = {
         executor: 'ramping-vus',
         exec: 'runIfLoad',
+        // High load
         stages: [
           { duration: '2m', target: 1000 },  // Ramp up to 1k VUs in 2 minutes
           { duration: '3m', target: 2000 },  // Ramp up to 2k VUs in 3 minutes
@@ -59,6 +57,14 @@ export const options = {
           { duration: '5m', target: 3000 },  // Hold at 3k VUs for 5 minutes
           { duration: '2m', target: 0 },     // Ramp down to 0
         ],
+         // Lower load
+         /*stages: [
+          { duration: '1m', target: 50 },   // ramp to 50 users
+          { duration: '2m', target: 150 },  // ramp to 150 users
+          { duration: '2m', target: 300 },  // ramp to 300 users
+          { duration: '2m', target: 300 },  // hold at 300
+          { duration: '1m', target: 0 },    // ramp down
+        ],*/
         gracefulRampDown: '1m',
       };
     }
@@ -233,7 +239,7 @@ export async function extractUrl() {
     // Get the value
     const extractedUrl = await element.getAttribute('value');
     console.log(`EXTRACTED_URL=${extractedUrl}`);
-    
+
   } finally {
     await page.close();
   }

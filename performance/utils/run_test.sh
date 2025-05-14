@@ -25,7 +25,7 @@ fi
 
 echo "Extracted URL: $EXTRACTED_URL"
 
-echo "Running API test..."
-## Pass the scenarios you want to run in the command below
-## The test setup supports the run of API tests on their own, or API test with browser running in parallel.
-k6 run "$SCRIPT_PATH" --env SCENARIO=load --env EXTRACTED_URL="$EXTRACTED_URL"
+echo "Running test..."
+## Pass the scenario(s) you want to run in the command below after "--env Scenario=", separated by a comma. Eg: browser,load
+## The test setup supports the run of browser and API tests in isolation, or API test with browser running in parallel.
+k6 run "$SCRIPT_PATH" --env SCENARIO=browser --env EXTRACTED_URL="$EXTRACTED_URL"

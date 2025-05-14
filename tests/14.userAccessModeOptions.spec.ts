@@ -1,7 +1,6 @@
 import { test } from '@playwright/test';
 import { StubHomePage } from '../page-objects/stub-home-page';
 import { SentencePlanPage } from '../page-objects/sentence-plan-pages';
-import {Accessibility} from "../page-objects/accessibility";
 
 test('User views sentence plan with view and edit access', async ({ page }) => {
 

@@ -34,7 +34,7 @@ export const options = {
         executor: 'constant-vus',
         exec: 'browserTest',
         vus: 3,
-        duration: '2m',
+        duration: '5m',
         // adjust the above value as needed if you need to run browser an API scenarios together 
         options: {
           browser: {
@@ -257,6 +257,7 @@ export async function apiTest() {
   check(res, {
     'status is 200': (r) => r.status === 200,
   });
+  sleep(1); // can comment out when running stress scenario
 }
 
 export function runIfLoad() {

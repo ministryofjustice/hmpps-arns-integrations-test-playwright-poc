@@ -4,6 +4,12 @@ import http from 'k6/http';
 import { sleep } from 'k6';
 
 const testStubUrl = 'https://arns-oastub-test.hmpps.service.justice.gov.uk/';
+const TARGET_URL = __ENV.TARGET_URL || testStubUrl;
+
+function simulateThinkingTime() {
+  sleep(1 + Math.random() * 3);
+}
+
 
 const SCENARIOS = (__ENV.SCENARIO || 'smoke').split(',').map(s => s.trim());
 // splitting scenarios into a list to set which api test to run alongside the browser test
@@ -118,101 +124,105 @@ export const options = {
 //#region browser test
 
 export async function browserTest() {
-  const page = await browser.newPage();
+  const stubPage = await browser.newPage();
 
   try {
-    await page.goto(testStubUrl, { waitUntil: 'networkidle' });
+    await stubPage.goto(TARGET_URL, { waitUntil: 'networkidle' });
 
     // Access SAN assessment
-    await page.locator('//*[@id="target-service"]').selectOption('strengths-and-needs-assessment');
-    await page.locator('//*[@id="form"]/div[1]/div/div/button[1]').click();
-    sleep(1 + Math.random() * 3); // simulate thinking time
-    await page.locator('//*[@id="main-content"]/div[3]/div/div/div[2]/a').click();
-    sleep(1 + Math.random() * 3);
+    await stubPage.locator('//*[@id="target-service"]').selectOption('strengths-and-needs-assessment');
+    await stubPage.locator('//*[@id="form"]/div[1]/div/div/button[1]').click();
+    simulateThinkingTime(); // simulate thinking time
+    await stubPage.locator('//*[@id="main-content"]/div[3]/div/div/div[2]/a').click();
+    simulateThinkingTime();
 
     // Move driver
     const pages = browser.context().pages();
-    const page2 = pages[pages.length - 1];
+    const sanPage = pages[pages.length - 1];
 
-    await page2.bringToFront();
-    console.log('Current URL after switching: ', page2.url())
-    console.log(page2.title());
+    await sanPage.bringToFront();
+    console.log('Current URL after switching: ', sanPage.url())
+    console.log(sanPage.title());
     console.log("=========================");
 
     // Select No accomodation
-    await page2.locator('#current_accommodation-3').check();
-    sleep(1 + Math.random() * 3);
+    await sanPage.locator('#current_accommodation-3').check();
+    simulateThinkingTime();
 
     // Select emergency hostel
-    await page2.locator('#type_of_no_accommodation-2').check();
-    sleep(1 + Math.random() * 3);
+    await sanPage.locator('#type_of_no_accommodation-2').check();
+    simulateThinkingTime();
 
     // Submit form
-    await page2.locator('//*[@id="form"]/div[2]/button').click();
-    sleep(1 + Math.random() * 3);
+    await sanPage.locator('//*[@id="form"]/div[2]/button').click();
+    simulateThinkingTime();
 
     // Submit no accomodation form
-    await page2.locator('//*[@id="no_accommodation_reason-6"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="suitable_housing_planned-3"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="accommodation_changes-4"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="form"]/div[5]/button').click();
+    await sanPage.locator('//*[@id="no_accommodation_reason-6"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="suitable_housing_planned-3"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="accommodation_changes-4"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="form"]/div[5]/button').click();
 
     // Submit practitioner analysis
-    await page2.locator('//*[@id="tab_practitioner-analysis"]').click();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="accommodation_practitioner_analysis_strengths_or_protective_factors-2"]').check();
-    await page2.locator('//*[@id="accommodation_practitioner_analysis_risk_of_serious_harm-2"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="accommodation_practitioner_analysis_risk_of_reoffending"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="accommodation_practitioner_analysis_risk_of_reoffending_yes_details"]').type('Performance test');
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="form"]/div[4]/button').click();
+    await sanPage.locator('//*[@id="tab_practitioner-analysis"]').click();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="accommodation_practitioner_analysis_strengths_or_protective_factors-2"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="accommodation_practitioner_analysis_risk_of_serious_harm-2"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="accommodation_practitioner_analysis_risk_of_reoffending"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="accommodation_practitioner_analysis_risk_of_reoffending_yes_details"]').type('Performance test');
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="form"]/div[4]/button').click();
     sleep(3);
 
     // Move onto Employment and education section
-    await page2.locator('//*[@id="main-content"]/div/div[3]/div[1]/nav/ul/li[2]/a/span').click();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="employment_status-2"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="form"]/div[2]/button').click();
-    sleep(1 + Math.random() * 3);
+    await sanPage.locator('//*[@id="main-content"]/div/div[3]/div[1]/nav/ul/li[2]/a/span').click();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="employment_status-2"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="form"]/div[2]/button').click();
+    simulateThinkingTime();
 
-    await page2.locator('//*[@id="employment_other_responsibilities"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="employment_history"]').click();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="education_highest_level_completed-8"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="education_professional_or_vocational_qualifications-4"]').check();
-    await page2.locator('//*[@id="education_transferable_skills-2"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="education_difficulties-5"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="employment_experience"]').check();
-    await page2.locator('//*[@id="education_experience"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="employment_education_changes-3"]').check();
-    sleep(1 + Math.random() * 3);
+    await sanPage.locator('//*[@id="employment_other_responsibilities"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="employment_history"]').click();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="education_highest_level_completed-8"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="education_professional_or_vocational_qualifications-4"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="education_transferable_skills-2"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="education_difficulties-5"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="employment_experience"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="education_experience"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="employment_education_changes-3"]').check();
+    simulateThinkingTime();
 
     // Submit form
     await page2.locator('//*[@id="form"]/div[11]/button').click();
-    sleep(1 + Math.random() * 3);
+    simulateThinkingTime();
 
     // Submit practitioner analysis
-    await page2.locator('//*[@id="tab_practitioner-analysis"]').click();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="employment_education_practitioner_analysis_strengths_or_protective_factors-2"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="employment_education_practitioner_analysis_risk_of_serious_harm-2"]').check();
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="employment_education_practitioner_analysis_risk_of_reoffending"]').check();
-    await page2.locator('//*[@id="employment_education_practitioner_analysis_risk_of_reoffending_yes_details"]').type('Performance test');
-    sleep(1 + Math.random() * 3);
-    await page2.locator('//*[@id="form"]/div[4]/button').click();
+    await sanPage.locator('//*[@id="tab_practitioner-analysis"]').click();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="employment_education_practitioner_analysis_strengths_or_protective_factors-2"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="employment_education_practitioner_analysis_risk_of_serious_harm-2"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="employment_education_practitioner_analysis_risk_of_reoffending"]').check();
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="employment_education_practitioner_analysis_risk_of_reoffending_yes_details"]').type('Performance test');
+    simulateThinkingTime();
+    await sanPage.locator('//*[@id="form"]/div[4]/button').click();
     sleep(3);
 
   } finally {
@@ -226,7 +236,7 @@ export async function browserTest() {
 export async function extractUrl() {
   const page = await browser.newPage();
   try {
-    await page.goto(testStubUrl, { waitUntil: 'networkidle' });
+    await page.goto(TARGET_URL, { waitUntil: 'networkidle' });
 
     await page.locator('//*[@id="target-service"]').selectOption('strengths-and-needs-assessment');
     await page.locator('//*[@id="form"]/div[1]/div/div/button[1]').click();

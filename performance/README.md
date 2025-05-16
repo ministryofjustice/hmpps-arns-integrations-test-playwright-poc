@@ -7,6 +7,7 @@ To run the tests head/headless you will need chromium installed - to install chr
 
 # Configure the tests
 The tests are configured so the browser and api tests can be run independently or in parallel with one selected API scenario (like "load","soak", etc), to monitor the UI whilst the API is being subjected to various loads. The logic is as follows:
+
 * The SCENARIO env var controls the scenarios
  
 The available runtime scenarios are:
@@ -46,8 +47,8 @@ NOTE: you may want to adjust the `duration` value in the Browser test to match w
 
 At the end of the test a report is generated with an array of different metrics that have been captured during the tests. 
 There have been thresholds set on a selection of metrics that have been specified in the load model 
-* Server response time is lower than 2000 milliseconds in 90% of requests and lower than
-5000 milliseconds in 100% of requests
+* Server response time is lower than 200 milliseconds in 90% of requests and lower than
+500 milliseconds in 100% of requests
 This is captured in `browser_http_req_duration` && `browser_http_req_failed`
 * The API test metrics are also monitored 
 This is captured in `http_req_duration` && `http_req_failed`

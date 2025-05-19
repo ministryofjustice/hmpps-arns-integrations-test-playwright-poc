@@ -37,8 +37,7 @@ The run_test.sh script is a Bash automation wrapper designed to run a two-phase 
 
 To use the run_test.sh file to run the api tests, navigate to the `utils` directory and run:
 
-<pre> ``` chmod +x run_test.sh ./run_test.sh ``` </pre>
-
+<pre> ```bash chmod +x run_test.sh ./run_test.sh ``` </pre>
 
 To run the browser tests in head mode and see the browser (HEADLESS:FALSE)
 `SCENARIO=browser K6_BROWSER_HEADLESS=false k6 run performance/tests/browserAndApi.js`

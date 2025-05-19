@@ -1,5 +1,5 @@
 import { browser } from 'k6/browser';
-import { check } from 'https://jslib.k6.io/k6-utils/1.5.0/index.js';
+import { check } from 'k6';
 import http from 'k6/http';
 import { sleep } from 'k6';
 
@@ -63,14 +63,14 @@ export const options = {
           { duration: '5m', target: 3000 },  // Hold at 3k VUs for 5 minutes
           { duration: '2m', target: 0 },     // Ramp down to 0
         ],
-         // Lower load
-         /*stages: [
-          { duration: '1m', target: 50 },   // ramp to 50 users
-          { duration: '2m', target: 150 },  // ramp to 150 users
-          { duration: '2m', target: 300 },  // ramp to 300 users
-          { duration: '2m', target: 300 },  // hold at 300
-          { duration: '1m', target: 0 },    // ramp down
-        ],*/
+        // Lower load
+        /*stages: [
+         { duration: '1m', target: 50 },   // ramp to 50 users
+         { duration: '2m', target: 150 },  // ramp to 150 users
+         { duration: '2m', target: 300 },  // ramp to 300 users
+         { duration: '2m', target: 300 },  // hold at 300
+         { duration: '1m', target: 0 },    // ramp down
+       ],*/
         gracefulRampDown: '1m',
       };
     }
@@ -258,10 +258,9 @@ export async function extractUrl() {
 //#endregion
 
 //#region api test
-export async function apiTest() {
+export function apiTest() {
 
   const extractedUrl = __ENV.EXTRACTED_URL;
-  //console.log(`Using extracted URL: ${extractedUrl}`);
   const res = http.get(extractedUrl);
 
   check(res, {
@@ -270,17 +269,9 @@ export async function apiTest() {
   sleep(1); // can comment out when running stress scenario
 }
 
-export function runIfLoad() {
-  if (SCENARIOS.includes('load')) apiTest();
-}
-export function runIfSoak() {
-  if (SCENARIOS.includes('soak')) apiTest();
-}
-export function runIfSmoke() {
-  if (SCENARIOS.includes('smoke')) apiTest();
-}
-export function runIfStress() {
-  if (SCENARIOS.includes('stress')) apiTest();
-}
+export function runIfLoad() { apiTest(); }
+export function runIfSoak() { apiTest(); }
+export function runIfSmoke() { apiTest(); }
+export function runIfStress() { apiTest(); }
 
 //#endregion

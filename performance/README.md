@@ -1,5 +1,5 @@
 ## Setup
-To run locally first install k6. The browser module is now included in the default install(https://github.com/grafana/k6)
+To run locally first install [k6](https://github.com/grafana/k6). The browser module is now included in the default install.
 `brew install k6`
 
 To run the tests head/headless you will need chromium installed - to install chromium run
@@ -36,14 +36,14 @@ Before running those, you need to capture the one-time handover link as  extract
 The run_test.sh script is a Bash automation wrapper designed to run a two-phase performance testing workflow using k6. It first executes a browser-based extraction step to retrieve a dynamic URL, then passes that URL as an environment variable to run following API-based performance tests.
 
 To use the run_test.sh file to run the api tests, navigate to the `utils` directory and run:
-```chmod +x run_test.sh
-./run_test.sh```
+
+<pre> ``` chmod +x run_test.sh ./run_test.sh ``` </pre>
 
 
 To run the browser tests in head mode and see the browser (HEADLESS:FALSE)
 `SCENARIO=browser K6_BROWSER_HEADLESS=false k6 run performance/tests/browserAndApi.js`
 
-NOTE: you may want to adjust the `duration` value in the Browser test to match which API scneario you're running, but not necessarily.
+NOTE: you may want to adjust the `duration` value in the Browser test to match which API scenario you're running, but not necessarily.
 
 
 ## The report

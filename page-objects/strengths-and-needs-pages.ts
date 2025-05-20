@@ -231,6 +231,15 @@ export class StrengthsAndNeedsLandingPage {
         await newTabGlobal!.locator('#drug_use-2').check();
     }
 
+    async tickDrugNoMotivationToStop() {
+        await newTabGlobal!.locator('#drugs_practitioner_analysis_motivated_to_stop').check();
+    }
+
+    async checkDrugMotivationErrorDisplays() {
+    await expect(newTabGlobal!.locator('#main-content div').filter({ hasText: 'There is a problem Select if' }).nth(3)).toBeVisible();
+    await expect(newTabGlobal!.locator('#drugs_practitioner_analysis_motivated_to_stop-error')).toBeVisible();
+    }
+
     async tickDrugFactors() {
         await newTabGlobal!.locator('#drug_use_practitioner_analysis_strengths_or_protective_factors-2').check();
     }

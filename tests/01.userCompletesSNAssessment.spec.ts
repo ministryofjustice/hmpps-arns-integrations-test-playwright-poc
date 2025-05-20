@@ -106,6 +106,9 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   await strengthsAndNeedsLandingPage.tickDrugRiskOfHarm();
   await strengthsAndNeedsLandingPage.tickDrugRiskOfReoffending();
   await strengthsAndNeedsLandingPage.clickMarkAsComplete();
+  await strengthsAndNeedsLandingPage.checkDrugMotivationErrorDisplays();
+  await strengthsAndNeedsLandingPage.tickDrugNoMotivationToStop();
+  await strengthsAndNeedsLandingPage.clickMarkAsComplete();
   await strengthsAndNeedsLandingPage.checkDrugSectionCompleteIconDisplays();
   console.log('Drug use assessment completed');
 

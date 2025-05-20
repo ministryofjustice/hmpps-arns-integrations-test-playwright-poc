@@ -3,10 +3,10 @@ import { StubHomePage } from '../page-objects/stub-home-page';
 import { StrengthsAndNeedsLandingPage } from '../page-objects/strengths-and-needs-pages';
 
 test('user completes a strengths and needs assessments', async ({ page }) => {
-  
+
   const stubHomePage = new StubHomePage(page);
   const strengthsAndNeedsLandingPage = new StrengthsAndNeedsLandingPage(page);
-  
+
   // Navigate to the stub home page
   await stubHomePage.goto();
 
@@ -17,7 +17,7 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   await stubHomePage.selectStrenghtsAndNeeds();
 
   // Click create handover button
-  await stubHomePage.clickCreateHandoverButton(); 
+  await stubHomePage.clickCreateHandoverButton();
 
   // Click open button
   await stubHomePage.clickOpenButton();
@@ -106,6 +106,9 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   await strengthsAndNeedsLandingPage.tickDrugRiskOfHarm();
   await strengthsAndNeedsLandingPage.tickDrugRiskOfReoffending();
   await strengthsAndNeedsLandingPage.clickMarkAsComplete();
+  await strengthsAndNeedsLandingPage.checkDrugMotivationErrorDisplays();
+  await strengthsAndNeedsLandingPage.tickDrugNoMotivationToStop();
+  await strengthsAndNeedsLandingPage.clickMarkAsComplete();
   await strengthsAndNeedsLandingPage.checkDrugSectionCompleteIconDisplays();
   console.log('Drug use assessment completed');
 
@@ -122,7 +125,7 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   await strengthsAndNeedsLandingPage.clickMarkAsComplete();
   await strengthsAndNeedsLandingPage.checkAlcoholSectionCompleteIconDisplays();
   console.log('Alcohol use assessment completed');
-  
+
   // Fill in health and wellbeing assessment
   await strengthsAndNeedsLandingPage.clickHealthAndWellbeingLeftNavLink();
   await strengthsAndNeedsLandingPage.tickHealthPhysicalHealthCondition();

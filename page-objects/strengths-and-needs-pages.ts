@@ -236,8 +236,8 @@ export class StrengthsAndNeedsLandingPage {
     }
 
     async checkDrugMotivationErrorDisplays() {
-    await expect(newTabGlobal!.locator('#main-content div').filter({ hasText: 'There is a problem Select if' }).nth(3)).toBeVisible();
-    await expect(newTabGlobal!.locator('#drugs_practitioner_analysis_motivated_to_stop-error')).toBeVisible();
+        await expect(newTabGlobal!.locator('#main-content div').filter({ hasText: 'There is a problem Select if' }).nth(3)).toBeVisible();
+        await expect(newTabGlobal!.locator('#drugs_practitioner_analysis_motivated_to_stop-error')).toBeVisible();
     }
 
     async tickDrugFactors() {

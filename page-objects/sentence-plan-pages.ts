@@ -196,6 +196,14 @@ export class SentencePlanPage {
         await newTabGlobal!.locator('summary').click();
     }
 
+    async checkViewStepsExpandsWhenClicked() {
+        await expect(newTabGlobal!.getByRole('columnheader', { name: 'Who will do this' })).toBeVisible();
+    }
+
+    async checkViewStepsIsNotExpanded() {
+        await expect(newTabGlobal!.getByRole('columnheader', { name: 'Who will do this' })).toBeHidden();
+    }
+
     async checkExpectedStepIsListedWhenViewStepsElementIsToggled() {
         await expect(newTabGlobal!.locator('#goal-summary-card-1 > div > div.govuk-summary-card__content > details > div > table > tbody > tr:nth-child(1) > td:nth-child(2)'))
             .toHaveText('Accomodation step title');
@@ -281,6 +289,10 @@ export class SentencePlanPage {
         await expect(newTabGlobal!.getByLabel('Success')).toBeVisible();
     }
 
+    async clickGoalsToWorkOnTab() {
+        await newTabGlobal!.locator('#main-content > div > div > nav > ul > li:nth-child(1) > a').click();
+    }
+
     async checkNumberOfGoalsToWorkOnNowIsCorrect() {
         await expect(newTabGlobal!.getByRole('link', { name: 'Goals to work on now (2)' }))
             .toBeVisible();
@@ -299,8 +311,19 @@ export class SentencePlanPage {
         await newTabGlobal!.getByRole('link', { name: 'Plan history', exact: true }).click();
     }
 
+    async clickEmbeddedViewPlanHistoryLink() {
+        await newTabGlobal!.locator('#main-content > p > a').click();
+    }
+
+    async checkPlanHistoryTabOpens() {
+        await expect(newTabGlobal!.getByRole('heading', { name: 'Plan history' })).toBeVisible();
+    }
     async clickAboutTopNavLink() {
         await newTabGlobal!.getByRole('link', { name: 'About', exact: false }).click();
+    }
+
+    async checkAboutTabOpens() {
+        await expect(newTabGlobal!.getByText('Sentence information')).toBeVisible();
     }
 
     async clickUpdateLink() {
@@ -542,5 +565,13 @@ export class SentencePlanPage {
 
     async checkUpdateButtonHidden() {
         await expect(newTabGlobal!.getByRole('link', { name: 'Update   (test)' })).toBeHidden();
+    }
+
+    async clickRemovedGoalsButton() {
+        await newTabGlobal!.locator('#main-content > div > div > nav > ul > li:nth-child(3) > a').click();
+    }
+
+    async checkRemovedGoalsTabIsThere(){
+        await expect(newTabGlobal!.locator('#goal-summary-card-1 div').filter({ hasText: 'test' }).nth(1)).toBeVisible();
     }
 }

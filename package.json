@@ -10,7 +10,8 @@
   "devDependencies": {
     "@playwright/test": "^1.52.0",
     "@types/node": "^22.15.18",
-    "@types/oracledb": "^6.6.0"
+    "@types/oracledb": "^6.6.0",
+    "audit-ci": "^7.1.0"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.10.1",

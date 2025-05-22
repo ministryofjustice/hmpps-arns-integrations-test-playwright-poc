@@ -1,7 +1,7 @@
-# hmpps-arns-integrations-test-playwright-poc
+# hmpps-arns-integrations-test-playwright
 
 ## Introduction
-This proof of concept is built using Playwright and Typescript. The idea is to start with some journeys running across SAN and SP, and use those as smoke tests as and when needed to start with. The tests are configured to run as scheduled jobs using a self-hosted runner on Github Actions.
+This framework is built using Playwright and Typescript. The idea is to start with some journeys running across SAN and SP, and use those as smoke tests as and when needed to start with. The tests are configured to run as scheduled jobs using a self-hosted runner on Github Actions.
 
 ## Pre-requisites
 - Ensure you have node.js installed on your machine. This can be gotten from the self service

@@ -227,8 +227,44 @@ export class StrengthsAndNeedsLandingPage {
         await newTabGlobal!.getByRole('link', { name: 'Drug use' }).click();
     }
 
+    async tickYesToDrugUse() {
+        await newTabGlobal!.locator('#drug_use').check();
+    }
+
     async tickNoDrugUse() {
         await newTabGlobal!.locator('#drug_use-2').check();
+    }
+
+    async tickUsedInTheLast6Months() {
+        await newTabGlobal!.locator('#drug_last_used_amphetamines').check();
+    }
+
+    async tickAmphetamines() {
+        await newTabGlobal!.locator('#select_misused_drugs').check();
+    }
+
+    async tickUsedDaily() {
+        await newTabGlobal!.locator('#how_often_used_last_six_months_amphetamines').check();
+    }
+
+    async tickNoneInjected() {
+        await newTabGlobal!.locator('#drugs_injected').check();
+    }
+
+    async tickNoToReceivingTreatment() {
+        await newTabGlobal!.locator('#drugs_is_receiving_treatment-2').check();
+    }
+
+    async tickCulturalPractice() {
+        await newTabGlobal!.locator('#drugs_reasons_for_use').check();
+    }
+
+    async tickAffectedBehaviour() {
+        await newTabGlobal!.locator('#drugs_affected_their_life').check();
+    }
+
+    async tickWantToMakeChangesDrugUseNotApplicable() { 
+        await newTabGlobal!.locator('#drugs_want_to_make_changes_to_drug_use-9').check();
     }
 
     async tickDrugNoMotivationToStop() {

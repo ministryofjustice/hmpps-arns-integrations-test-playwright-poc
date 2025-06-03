@@ -97,7 +97,21 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
 
   // Fill in drug use assessment
   await strengthsAndNeedsLandingPage.clickDrugUseLeftNavLink();
-  await strengthsAndNeedsLandingPage.tickNoDrugUse();
+  await strengthsAndNeedsLandingPage.tickYesToDrugUse();
+  await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
+
+  await strengthsAndNeedsLandingPage.tickAmphetamines();
+  await strengthsAndNeedsLandingPage.tickUsedInTheLast6Months();
+  await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
+
+  await strengthsAndNeedsLandingPage.tickUsedDaily();
+  await strengthsAndNeedsLandingPage.tickNoneInjected();
+  await strengthsAndNeedsLandingPage.tickNoToReceivingTreatment();
+  await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
+
+  await strengthsAndNeedsLandingPage.tickCulturalPractice();
+  await strengthsAndNeedsLandingPage.tickAffectedBehaviour();
+  await strengthsAndNeedsLandingPage.tickWantToMakeChangesDrugUseNotApplicable();
   await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
 
   // Fill in practicioner analysis 

@@ -131,7 +131,7 @@ export async function browserTest() {
 
     // Access SAN assessment
     await stubPage.locator('//*[@id="target-service"]').selectOption('strengths-and-needs-assessment');
-    await stubPage.locator('//*[@id="form"]/div[1]/div/div/button[1]').click();
+    await stubPage.locator('//*[@id="form"]/div[1]/div/div[1]/button').click();
     simulateThinkingTime(); // simulate thinking time
     await stubPage.locator('//*[@id="main-content"]/div[3]/div/div/div[2]/a').click();
     simulateThinkingTime();
@@ -231,7 +231,7 @@ export async function browserTest() {
 }
 //#endregion
 
-//#region extract handover url
+//#region extract handover url 
 
 export async function extractUrl() {
   const page = await browser.newPage();
@@ -239,7 +239,7 @@ export async function extractUrl() {
     await page.goto(TARGET_URL, { waitUntil: 'networkidle' });
 
     await page.locator('//*[@id="target-service"]').selectOption('strengths-and-needs-assessment');
-    await page.locator('//*[@id="form"]/div[1]/div/div/button[1]').click();
+    await page.locator('//*[@id="form"]/div[1]/div/div[1]/button').click();
     sleep(1);
 
     // Get one-time link

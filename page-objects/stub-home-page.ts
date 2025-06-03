@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { DEFAULT_CLICK_OPTIONS, PK_WITH_COMPLETED_SAN, PK_FOR_ACCESS_MODE } from './pages-common'
+import {DEFAULT_CLICK_OPTIONS, PK_WITH_COMPLETED_SAN, PK_FOR_ACCESS_MODE, PK_VIEW_ONLY_SAN} from './pages-common'
 
 export class StubHomePage {
   constructor(
@@ -112,5 +112,9 @@ export class StubHomePage {
 
   async fillInPkNumberForAccessMode() {
     await this.pkField.fill(PK_FOR_ACCESS_MODE);
+  }
+
+  async fillInPkViewOnlySan() {
+    await this.pkField.fill(PK_VIEW_ONLY_SAN);
   }
 }

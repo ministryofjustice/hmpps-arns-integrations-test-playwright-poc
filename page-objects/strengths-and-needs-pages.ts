@@ -29,6 +29,10 @@ export class StrengthsAndNeedsLandingPage {
         await newTabGlobal!.getByRole('link', { name: 'Accomodation' }).click();
     }
 
+    async checkAccommodationTypeQuestion() {
+        await expect(newTabGlobal!.getByText('What type of accommodation')).toBeVisible();
+    }
+
     async tickSettled() {
         await newTabGlobal!.locator('#current_accommodation').check();
     }
@@ -55,6 +59,14 @@ export class StrengthsAndNeedsLandingPage {
 
     async clickSaveAndContinueButton() {
         await newTabGlobal!.getByRole('button', { name: 'Save and continue' }).click();
+    }
+
+    async checkSaveAndContinueButtonHidden() {
+        await expect(newTabGlobal!.getByRole('button', { name: 'Save and continue' })).toBeHidden();
+    }
+
+    async clickPracitionerAnalysisButton() {
+        await newTabGlobal!.getByRole('button', { name: 'Go to practitioner analysis' }).click();
     }
 
     async clickPracticionerAnalysisTab() {
@@ -263,7 +275,7 @@ export class StrengthsAndNeedsLandingPage {
         await newTabGlobal!.locator('#drugs_affected_their_life').check();
     }
 
-    async tickWantToMakeChangesDrugUseNotApplicable() { 
+    async tickWantToMakeChangesDrugUseNotApplicable() {
         await newTabGlobal!.locator('#drugs_want_to_make_changes_to_drug_use-9').check();
     }
 
@@ -644,6 +656,14 @@ export class StrengthsAndNeedsLandingPage {
 
     async tickNoToBeingAVictim() {
         await newTabGlobal!.locator('#offence_analysis_victim_of_domestic_abuse-2').check();
+    }
+
+    async checkSectionIsIncomplete() {
+        await expect(newTabGlobal!.getByText('This section is incomplete')).toBeVisible();
+    }
+
+    async checkSectionIsComplete() {
+        await expect(newTabGlobal!.getByText('Complete')).toBeVisible();
     }
 
     async confirmUserIsOnOffenceAnalysisPage() {

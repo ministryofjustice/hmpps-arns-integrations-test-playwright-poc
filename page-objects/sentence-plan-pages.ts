@@ -394,7 +394,7 @@ export class SentencePlanPage {
     }
 
     async clickBackButtonFromCreateGoalPage() {
-        await newTabGlobal!.getByRole('link', { name: 'Back' }).click();
+        await newTabGlobal!.getByRole('link', { name: 'Back', exact: true }).click();
     }
 
     async checkSectionsAreListedAsIncompleteInformation() {

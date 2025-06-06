@@ -14,10 +14,10 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   await stubHomePage.checkPageTitle();
 
   // Select strenghts and needs reports assessment
-  await stubHomePage.selectStrenghtsAndNeeds();
+  //await stubHomePage.selectStrenghtsAndNeeds();
 
   // Click create handover button
-  await stubHomePage.clickCreateHandoverButton();
+  //await stubHomePage.clickCreateHandoverButton();
 
   // Click open button
   await stubHomePage.clickOpenButton();

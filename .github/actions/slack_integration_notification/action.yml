@@ -15,9 +15,11 @@ runs:
   steps:
     - uses: slackapi/slack-github-action@v2.1.0
       with:
-        channel-id: ${{ inputs.channel_id }}
+        token: ${{ inputs.SLACK_BOT_TOKEN }}
+        method: chat.postMessage
         payload: |
           {
+            "channel": "${{ inputs.channel_id }}",
             "text": ":warning: *${{ inputs.title }}* Warning: Workflow *${{ github.workflow }}* failed!",
             "blocks": [
               {

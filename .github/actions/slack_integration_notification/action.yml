@@ -13,12 +13,11 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: slackapi/slack-github-action@v2.1.0
+    - uses: slackapi/slack-github-action@v2
       with:
-        method: chat.postMessage
+        channel-id: ${{ inputs.channel_id }}
         payload: |
           {
-            "channel": "${{ inputs.channel_id }}",
             "text": ":warning: *${{ inputs.title }}* Warning: Workflow *${{ github.workflow }}* failed!",
             "blocks": [
               {

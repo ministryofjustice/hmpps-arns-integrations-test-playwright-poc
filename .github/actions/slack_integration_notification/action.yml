@@ -1,5 +1,5 @@
 name: 'failure Slack message'
-description: 'Sends a Slack message to notify of failure'
+description: 'Sends a slack message to notify of failure'
 inputs:
   title:
     description: "Title of the failed workflow"
@@ -8,26 +8,24 @@ inputs:
     description: "Slack channel to send to"
     required: true
   SLACK_BOT_TOKEN:
-    description: "Slack bot token with chat:write permission"
+    description: "Important slack token"
     required: true
-
 runs:
   using: "composite"
   steps:
     - uses: slackapi/slack-github-action@v2.1.0
       with:
-        token: ${{ inputs.SLACK_BOT_TOKEN }}
         method: chat.postMessage
         payload: |
           {
             "channel": "${{ inputs.channel_id }}",
-            "text": ":no_entry: *${{ inputs.title }}* — Workflow *${{ github.workflow }}* failed!",
+            "text": ":warning: *${{ inputs.title }}* Warning: Workflow *${{ github.workflow }}* failed!",
             "blocks": [
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":no_entry: Github Workflow *${{ github.workflow }}* failed"
+                  "text": "${{ inputs.warningOnly == 'true' && ':warning:' || ':no_entry:' }} Github Workflow ${{ github.workflow }} ${{ inputs.warningOnly == 'true' && 'ran and identified issues' || 'failed' }}"
                 }
               },
               {
@@ -42,13 +40,15 @@ runs:
                 "fields": [
                   {
                     "type": "mrkdwn",
-                    "text": "*Repository:* `${{ github.repository }}`"
+                    "text": "*Repository:* ${{ github.repository }}"
                   },
                   {
                     "type": "mrkdwn",
-                    "text": "*Job:* `${{ github.job }}`"
+                    "text": "*Job:* ${{ github.job }}"
                   }
                 ]
               }
             ]
           }
+      env:
+        SLACK_BOT_TOKEN: ${{ inputs.SLACK_BOT_TOKEN }}

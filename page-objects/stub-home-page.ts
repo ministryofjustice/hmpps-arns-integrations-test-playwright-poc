@@ -24,7 +24,7 @@ export class StubHomePage {
   }
 
   async checkPageTitle() {
-    await expect(this.page).toHaveTitle('ARNS OAStub');
+    await expect(this.page).toHaveTitle('MALMSTEEN ARNS OAStub');
   }
 
   async selectStrenghtsAndNeeds() {

@@ -24,11 +24,47 @@ test('user creates and updates a goal, adds, updates and removes steps and agree
   // Click open button
   await stubHomePage.clickOpenButton();
 
-  // Check the page title is correct
-  await sentencePlanPage.checkPageTitle();
+  // Check the data privacy page title is correct
+  //await sentencePlanPage.checkPageTitle();
+  await sentencePlanPage.checkPageTitleDataPrivacyScreen();
+
+  // Back out
+  await sentencePlanPage.clickBackButtonOnDataPrivacyScreen();
+
+  // Check user has backed out
+  await stubHomePage.checkPageTitle();
+
+  // Select sentence plan
+  await stubHomePage.selectSentencePlan();
+
+  // Click create handover button
+  await stubHomePage.clickCreateHandoverButton(); 
+
+  // Click open button
+  await stubHomePage.clickOpenButton();
+
+  // Check the data privacy page title is correct
+  //await sentencePlanPage.checkPageTitle();
+  await sentencePlanPage.checkPageTitleDataPrivacyScreen();
 
   // Check page has no accessiblity violations
   await accessibility.shouldHaveNoAccessibilityViolations();
+
+  // Submit empty form
+  await sentencePlanPage.clickConfirmButtonOnDataPrivacyScreen();
+
+  // Check validation errors display
+  await sentencePlanPage.validationErrorDisplaysOnDataPrivacyScreen();
+
+  // Check page has no accessiblity violations
+  await accessibility.shouldHaveNoAccessibilityViolations();
+
+  // Tick confirm and submit
+  await sentencePlanPage.tickConfirmBox();
+  await sentencePlanPage.clickConfirmButtonOnDataPrivacyScreen();
+
+  // Check page title
+  await sentencePlanPage.checkPageTitleSentencePlanAfterDataPrivacyScreen();
 
   // Create an accomodation goal from top nav
   await sentencePlanPage.clickCreateGoalButton();

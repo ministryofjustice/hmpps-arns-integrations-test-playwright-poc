@@ -27,8 +27,15 @@ test('User updates their step status and checks plan history', async ({ page }) 
   // Click open button
   await stubHomePage.clickOpenButton();
 
-  // Check the page title is correct
-  await sentencePlanPage.checkPageTitle();
+  // Check the data privacy page title is correct
+  await sentencePlanPage.checkPageTitleDataPrivacyScreen();
+
+  // Tick confirm and submit
+  await sentencePlanPage.tickConfirmBox();
+  await sentencePlanPage.clickConfirmButtonOnDataPrivacyScreen();
+
+  // Check page title
+  await sentencePlanPage.checkPageTitleSentencePlanAfterDataPrivacyScreen()
 
   // Change step status and add notes
   await sentencePlanPage.clickUpdateLink();

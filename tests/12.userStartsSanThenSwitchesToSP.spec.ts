@@ -50,7 +50,7 @@ test('User navigates to their About page from an incomplete San assessment', asy
   // Simulate navigating to SP without going via OASYS
   await strengthsAndNeedsLandingPage.navigateToSPLink();
 
-  // Check user lands on the data priovacy screen
+  // Check user lands on the data privacy screen
   await sentencePlanfromSanPage.checkPageTitle();
 
   // Tick confirm and submit

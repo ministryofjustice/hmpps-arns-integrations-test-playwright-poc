@@ -27,8 +27,15 @@ test('User views assessment info when they have completed SAN assessment', async
   // Click open button
   await stubHomePage.clickOpenButton();
 
-  // Check the page title is correct
-  await sentencePlanPage.checkPageTitle();
+  // Check the data privacy page title is correct
+  await sentencePlanPage.checkPageTitleDataPrivacyScreen();
+
+  // Tick confirm and submit
+  await sentencePlanPage.tickConfirmBox();
+  await sentencePlanPage.clickConfirmButtonOnDataPrivacyScreen();
+
+  // Check page title
+  await sentencePlanPage.checkPageTitleSentencePlanAfterDataPrivacyScreen()
 
   // Check information from accomodation assessment from create a goal page
   await sentencePlanPage.clickCreateGoalButton();

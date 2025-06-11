@@ -24,8 +24,15 @@ test('user updates their goal agreement', async ({ page }) => {
   // Click open button
   await stubHomePage.clickOpenButton();
 
-  // Check the page title is correct
-  await sentencePlanPage.checkPageTitle();
+  // Check the data privacy page title is correct
+  await sentencePlanPage.checkPageTitleDataPrivacyScreen();
+
+  // Tick confirm and submit
+  await sentencePlanPage.tickConfirmBox();
+  await sentencePlanPage.clickConfirmButtonOnDataPrivacyScreen();
+
+  // Check page title
+  await sentencePlanPage.checkPageTitleSentencePlanAfterDataPrivacyScreen()
 
   // Check page has no accessiblity violations
   await accessibility.shouldHaveNoAccessibilityViolations();

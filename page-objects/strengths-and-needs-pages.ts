@@ -276,7 +276,7 @@ export class StrengthsAndNeedsLandingPage {
     }
 
     async tickWantToMakeChangesDrugUseNotApplicable() {
-        await newTabGlobal!.locator('#drugs_want_to_make_changes_to_drug_use-9').check();
+        await newTabGlobal!.locator('#drug_use_changes-10').check();
     }
 
     async tickDrugNoMotivationToStop() {

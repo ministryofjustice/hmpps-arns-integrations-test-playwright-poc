@@ -30,8 +30,15 @@ test('User views about page when they have not completed SAN assessment', async 
   // Click open button
   await stubHomePage.clickOpenButton();
 
-  // Check the page title is correct
-  await sentencePlanPage.checkPageTitle();
+  // Check the data privacy page title is correct
+  await sentencePlanPage.checkPageTitleDataPrivacyScreen();
+
+  // Tick confirm and submit
+  await sentencePlanPage.tickConfirmBox();
+  await sentencePlanPage.clickConfirmButtonOnDataPrivacyScreen();
+
+  // Check page title
+  await sentencePlanPage.checkPageTitleSentencePlanAfterDataPrivacyScreen()
 
   // Access About section
   await sentencePlanPage.clickAboutTopNavLink();

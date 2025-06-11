@@ -44,7 +44,19 @@ export class SentencePlanfromSanPage {
         //wait for Load 
         await latestPage.waitForLoadState();
         newTabGlobal = latestPage;
-        await expect(latestPage).toHaveTitle('Plan - Sentence plan');
+        await expect(latestPage).toHaveTitle('Remember to close anything you do not need before starting an appointment - Sentence plan');
+    }
+
+    async checkPageTitleSentencePlanAfterDataPrivacyScreen() {
+        await expect(newTabGlobal).toHaveTitle('Plan - Sentence plan');
+    }
+
+    async tickConfirmBox() {
+        await newTabGlobal!.locator('#confirm-privacy-checkbox').check();
+    }
+
+    async clickConfirmButtonOnDataPrivacyScreen() {
+        await newTabGlobal!.locator('#confirm-privacy-form > div.govuk-button-group > button').click();
     }
 
     async clickAboutPageAfterNavigatingToSPWithoutOasysStep() {

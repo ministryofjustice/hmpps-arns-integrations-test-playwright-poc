@@ -27,6 +27,40 @@ export class SentencePlanPage {
         await expect(newTab).toHaveTitle('Plan - Sentence plan');
     }
 
+    async checkPageTitleDataPrivacyScreen() {
+        const newTabPromise = this.page.waitForEvent('popup');
+        const newTab = await newTabPromise;
+        //wait for Load 
+        await newTab.waitForLoadState();
+        newTabGlobal = newTab;
+        await expect(newTab).toHaveTitle('Remember to close anything you do not need before starting an appointment - Sentence plan');
+    }
+
+    async checkPageTitleDataPrivacyScreenAfterNavigatingToSP() {
+        await expect(newTabGlobal).toHaveTitle('Remember to close anything you do not need before starting an appointment - Sentence plan');
+    }
+
+    async checkPageTitleSentencePlanAfterDataPrivacyScreen() {
+        await expect(newTabGlobal).toHaveTitle('Plan - Sentence plan');
+    }
+
+    async clickConfirmButtonOnDataPrivacyScreen() {
+        await newTabGlobal!.locator('#confirm-privacy-form > div.govuk-button-group > button').click();
+    }
+
+    async clickBackButtonOnDataPrivacyScreen() {
+        await newTabGlobal!.locator('#main-content > a').click();
+    }
+
+    async validationErrorDisplaysOnDataPrivacyScreen() {
+        await expect(newTabGlobal!.locator('#main-content > div:nth-child(5) > div > div')).toBeVisible();
+        await expect(newTabGlobal!.locator('#confirm-privacy-checkbox-error')).toBeVisible();
+    }
+
+    async tickConfirmBox() {
+        await newTabGlobal!.locator('#confirm-privacy-checkbox').check();
+    }
+
     async validationErrorDisplays() {
         await expect(newTabGlobal!.getByRole('alert')).toBeVisible();
     }

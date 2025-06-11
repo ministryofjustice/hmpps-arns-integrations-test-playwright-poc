@@ -32,7 +32,7 @@ test('User navigates to their About page from an incomplete San assessment', asy
   const jsonData = fs.readFileSync(filePath, 'utf-8');
 
   // Copy json data to clipboard
-  await page.evaluate(async (text) => { await navigator.clipboard.writeText(text);}, jsonData);
+  await page.evaluate(async (text) => { await navigator.clipboard.writeText(text); }, jsonData);
   console.log('incomplete SAN data JSON file copied to clipboard')
 
   // Paste configuration using UI
@@ -50,8 +50,12 @@ test('User navigates to their About page from an incomplete San assessment', asy
   // Simulate navigating to SP without going via OASYS
   await strengthsAndNeedsLandingPage.navigateToSPLink();
 
-  // Check navigation has taken place
-  await sentencePlanfromSanPage.checkPageTitle()
+  // Check user lands on the data privacy screen
+  await sentencePlanfromSanPage.checkPageTitle();
+
+  // Tick confirm and submit
+  await sentencePlanfromSanPage.tickConfirmBox();
+  await sentencePlanfromSanPage.clickConfirmButtonOnDataPrivacyScreen();
 
   // Access About section
   await sentencePlanfromSanPage.clickAboutPageAfterNavigatingToSPWithoutOasysStep();

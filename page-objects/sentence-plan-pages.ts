@@ -36,6 +36,10 @@ export class SentencePlanPage {
         await expect(newTab).toHaveTitle('Remember to close anything you do not need before starting an appointment - Sentence plan');
     }
 
+    async checkPageTitleDataPrivacyScreenAfterNavigatingToSP() {
+        await expect(newTabGlobal).toHaveTitle('Remember to close anything you do not need before starting an appointment - Sentence plan');
+    }
+
     async checkPageTitleSentencePlanAfterDataPrivacyScreen() {
         await expect(newTabGlobal).toHaveTitle('Plan - Sentence plan');
     }

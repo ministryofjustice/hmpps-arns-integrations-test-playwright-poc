@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import { StubHomePage } from '../page-objects/stub-home-page';
 import { SentencePlanPage } from '../page-objects/sentence-plan-pages';
-import {StrengthsAndNeedsLandingPage} from "../page-objects/strengths-and-needs-pages";
+import { StrengthsAndNeedsLandingPage } from "../page-objects/strengths-and-needs-pages";
 
 test('User tries editing capabilities on view only for sentence plan', async ({ page }) => {
 
@@ -92,8 +92,15 @@ test('User tries editing capabilities on view only for strengths and needs asses
     // Click open button
     await stubHomePage.clickOpenButton();
 
-    // Check the page title is correct
-    await strengthsAndNeedsLandingPage.checkPageTitle();
+    // Check the data privacy page title is correct
+    await strengthsAndNeedsLandingPage.checkPageTitleDataPrivacyScreen();
+
+    // Tick confirm and submit
+    await strengthsAndNeedsLandingPage.tickConfirmBox();
+    await strengthsAndNeedsLandingPage.clickConfirmButtonOnDataPrivacyScreen();
+
+    // Check page title
+    await strengthsAndNeedsLandingPage.checkPageTitleStrengthsAndNeedsAfterDataPrivacyScreen();
 
     // Accommodation tab has visible question but no save/continue button
     await strengthsAndNeedsLandingPage.checkSaveAndContinueButtonHidden();

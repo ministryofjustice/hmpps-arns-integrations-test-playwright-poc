@@ -19,6 +19,32 @@ export class StrengthsAndNeedsLandingPage {
         await expect(newTab).toHaveTitle('Strengths and needs');
     }
 
+    async checkPageTitleDataPrivacyScreen() {
+        const newTabPromise = this.page.waitForEvent('popup');
+        const newTab = await newTabPromise;
+        //wait for Load 
+        await newTab.waitForLoadState();
+        newTabGlobal = newTab;
+        await expect(newTab).toHaveTitle('Remember to close anything you do not need before starting an appointment - Sentence plan');
+    }
+
+    async checkPageTitleStrengthsAndNeedsAfterDataPrivacyScreen() {
+        await expect(newTabGlobal).toHaveTitle('Strengths and needs');
+    }
+
+    async clickConfirmButtonOnDataPrivacyScreen() {
+        await newTabGlobal!.locator('#confirm-privacy-form > div.govuk-button-group > button').click();
+    }
+
+    async validationErrorDisplaysOnDataPrivacyScreen() {
+        await expect(newTabGlobal!.locator('#main-content > div:nth-child(5) > div > div')).toBeVisible();
+        await expect(newTabGlobal!.locator('#confirm-privacy-checkbox-error')).toBeVisible();
+    }
+
+    async tickConfirmBox() {
+        await newTabGlobal!.locator('#confirm-privacy-checkbox').check();
+    }
+
     async validationErrorDisplays() {
         await expect(newTabGlobal!.getByRole('alert')).toBeVisible();
     }

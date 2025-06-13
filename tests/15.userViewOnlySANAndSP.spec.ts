@@ -92,15 +92,8 @@ test('User tries editing capabilities on view only for strengths and needs asses
     // Click open button
     await stubHomePage.clickOpenButton();
 
-    // Check the data privacy page title is correct
-    await strengthsAndNeedsLandingPage.checkPageTitleDataPrivacyScreen();
-
-    // Tick confirm and submit
-    await strengthsAndNeedsLandingPage.tickConfirmBox();
-    await strengthsAndNeedsLandingPage.clickConfirmButtonOnDataPrivacyScreen();
-
     // Check page title
-    await strengthsAndNeedsLandingPage.checkPageTitleStrengthsAndNeedsAfterDataPrivacyScreen();
+    await strengthsAndNeedsLandingPage.checkPageTitle();
 
     // Accommodation tab has visible question but no save/continue button
     await strengthsAndNeedsLandingPage.checkSaveAndContinueButtonHidden();

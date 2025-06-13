@@ -92,7 +92,7 @@ test('User tries editing capabilities on view only for strengths and needs asses
     // Click open button
     await stubHomePage.clickOpenButton();
 
-    // Check page title
+    // Check the page title is correct
     await strengthsAndNeedsLandingPage.checkPageTitle();
 
     // Accommodation tab has visible question but no save/continue button

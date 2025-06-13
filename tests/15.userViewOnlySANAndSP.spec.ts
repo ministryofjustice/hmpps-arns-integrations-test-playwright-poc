@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import { StubHomePage } from '../page-objects/stub-home-page';
 import { SentencePlanPage } from '../page-objects/sentence-plan-pages';
-import {StrengthsAndNeedsLandingPage} from "../page-objects/strengths-and-needs-pages";
+import { StrengthsAndNeedsLandingPage } from "../page-objects/strengths-and-needs-pages";
 
 test('User tries editing capabilities on view only for sentence plan', async ({ page }) => {
 

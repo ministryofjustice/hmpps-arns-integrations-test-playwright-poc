@@ -1,11 +1,13 @@
 import { test } from '@playwright/test';
 import { StubHomePage } from '../page-objects/stub-home-page';
 import { StrengthsAndNeedsLandingPage } from '../page-objects/strengths-and-needs-pages';
+import { Accessibility } from '../page-objects/accessibility';
 
 test('user completes a strengths and needs assessments', async ({ page }) => {
 
   const stubHomePage = new StubHomePage(page);
   const strengthsAndNeedsLandingPage = new StrengthsAndNeedsLandingPage(page);
+  const accessibility = new Accessibility(page);
 
   // Navigate to the stub home page
   await stubHomePage.goto();
@@ -22,8 +24,27 @@ test('user completes a strengths and needs assessments', async ({ page }) => {
   // Click open button
   await stubHomePage.clickOpenButton();
 
-  // check the page title is correct
-  await strengthsAndNeedsLandingPage.checkPageTitle();
+  // Check the data privacy page title is correct
+  await strengthsAndNeedsLandingPage.checkPageTitleDataPrivacyScreen();
+
+  // Check page has no accessiblity violations
+  await accessibility.shouldHaveNoAccessibilityViolations();
+
+  // Submit empty form
+  await strengthsAndNeedsLandingPage.clickConfirmButtonOnDataPrivacyScreen();
+
+  // Check validation errors display
+  await strengthsAndNeedsLandingPage.validationErrorDisplaysOnDataPrivacyScreen();
+
+  // Check page has no accessiblity violations
+  await accessibility.shouldHaveNoAccessibilityViolations();
+
+  // Tick confirm and submit
+  await strengthsAndNeedsLandingPage.tickConfirmBox();
+  await strengthsAndNeedsLandingPage.clickConfirmButtonOnDataPrivacyScreen();
+
+  // Check page title
+  await strengthsAndNeedsLandingPage.checkPageTitleStrengthsAndNeedsAfterDataPrivacyScreen();
 
   // Try to submit form - expect validation error
   await strengthsAndNeedsLandingPage.clickSaveAndContinueButton();
